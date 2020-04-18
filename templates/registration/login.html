@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h3>{% trans 'Log in' %}</h3>
+{% include 'core/_form.html' %}
+{% endblock %}
