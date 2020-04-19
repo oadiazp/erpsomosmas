@@ -1,13 +1,11 @@
 from django.urls import reverse
 from django.views.generic import UpdateView
 
-from apps.core.forms import ProfileUpdateForm
-from apps.core.models import Profile
+from apps.core.forms import ProfileUpdateForm, ProfilePaymentMethod
+from apps.core.models import Profile, PaymentMethod
 
 
 class ProfileUpdateView(UpdateView):
-    form_class = ProfileUpdateForm
-
     def get_template_names(self):
         if not self.object.is_complete:
             return [
@@ -53,3 +51,19 @@ class ProfileUpdateView(UpdateView):
     def form_valid(self, form):
         form.save(True)
         return super().form_valid(form)
+
+    def get_form_class(self):
+        if not self.object.is_complete:
+            return ProfileUpdateForm
+
+        return ProfilePaymentMethod
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['payment_methods'] = PaymentMethod.objects.all()
+
+        return context
+
+
+
+

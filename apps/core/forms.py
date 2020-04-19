@@ -1,5 +1,4 @@
 from django import forms
-from django.forms.utils import ErrorList
 
 from apps.core.models import Profile
 
@@ -41,4 +40,13 @@ class ProfileUpdateForm(forms.ModelForm):
         return super().save(commit)
 
 
+class ProfilePaymentMethod(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            'payment_method'
+        ]
 
+    def save(self, commit=True):
+        self.object.payment_method = self.cleaned_data['payment_method']
+        return super().save(commit)

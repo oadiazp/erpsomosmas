@@ -2,5 +2,23 @@
 {% load i18n %}
 
 {% block content %}
-<h3>{% trans 'Select payment method' %}</h3>
+    <h3>{% trans 'Select payment method' %}</h3>
+    <form method="post">
+        {% csrf_token %}
+
+        {% for payment_method in payment_methods %}
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <input type="radio" name="payment_method"
+                           value="{{ payment_method.id }}"
+                           {% if object.payment_method == payment_method %}
+                               checked="checked"
+                           {% endif %}
+                           id="id_payment_method_{{ payment_method.id }}"/>
+                    <label for="id_payment_method_{{ payment_method.id }}">{{ payment_method.name }}</label>
+                </div>
+            </div>
+        {% endfor %}
+        <button class="btn btn-success">{% trans 'Ok' %}</button>
+    </form>
 {% endblock %}
