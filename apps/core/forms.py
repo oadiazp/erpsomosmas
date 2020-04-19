@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.utils import ErrorList
 
 from apps.core.models import Profile
 
@@ -30,3 +31,14 @@ class ProfileUpdateForm(forms.ModelForm):
             'state',
             'country'
         )
+
+    def save(self, commit=True):
+        self.instance.user.first_name = self.cleaned_data['first_name']
+        self.instance.user.last_name = self.cleaned_data['last_name']
+        self.instance.user.email = self.cleaned_data['email']
+        self.instance.user.save()
+
+        return super().save(commit)
+
+
+

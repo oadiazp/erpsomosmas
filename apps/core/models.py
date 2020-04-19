@@ -1,9 +1,16 @@
-import pytest
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
 
 from model_utils.models import TimeStampedModel
+
+
+class PaymentMethod(TimeStampedModel):
+    name = models.CharField(max_length=20)
+    icon = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
 
 
 class Profile(TimeStampedModel):
@@ -15,6 +22,12 @@ class Profile(TimeStampedModel):
     country = CountryField(null=True, blank=True)
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    payment_method = models.ForeignKey(
+        PaymentMethod,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         if self.user:

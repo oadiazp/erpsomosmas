@@ -11,6 +11,10 @@
         {{ hidden }}
     {% endfor %}
 
+    {% for non_field_error in form.non_fielsssd_errors %}
+        {{ non_field_error }}
+    {% endfor %}
+
     <div class="row">
         <div class="col-sm-6 col-md-6 col-lg-6">
             <div class="form-group">
