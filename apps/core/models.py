@@ -22,5 +22,42 @@ class Profile(TimeStampedModel):
         else:
             return ''
 
+    @classmethod
+    def all_properties_defined(cls, obj, attrs):
+        return all(
+            [
+                hasattr(obj, attr) and getattr(obj, attr) for attr in attrs
+            ]
+        )
 
-from .signals import  *  # noqa
+    @property
+    def is_complete(self):
+        profile_attrs = [
+            'phone',
+            'street',
+            'house_number',
+            'zip_code',
+            'state',
+            'country'
+        ]
+
+        all_profile_props_are_defined = self.all_properties_defined(
+            self,
+            profile_attrs
+        )
+
+        user_attrs = [
+            'email',
+            'first_name',
+            'last_name',
+        ]
+
+        all_user_props_are_defined = self.all_properties_defined(
+            self.user,
+            user_attrs
+        )
+
+        return all([all_profile_props_are_defined, all_user_props_are_defined])
+
+
+from .signals import *  # noqa
