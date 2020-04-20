@@ -3,6 +3,7 @@ from json import dumps
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
+from geonamescache import GeonamesCache
 
 from model_utils.models import TimeStampedModel
 
@@ -74,6 +75,18 @@ class Profile(TimeStampedModel):
 
         return all([all_profile_props_are_defined, all_user_props_are_defined])
 
+    @property
+    def paypal_plan(self):
+        gc = GeonamesCache()
+        continent = gc.get_countries()[self.country]['continentcode']
+
+        if continent == 'EU':
+            return Setting.get('PAYPAL_PLAN_EU')
+        elif continent[-1] == 'A' and self.country not in ['US', 'CA']:
+            return Setting.get('PAYPAL_PLAN_LA')
+
+        return Setting.get('PAYPAL_PLAN_US')
+
 
 class Setting(TimeStampedModel):
     key = models.CharField(max_length=200, unique=True)
@@ -83,6 +96,15 @@ class Setting(TimeStampedModel):
         return dumps({
             self.key: self.value
         })
+
+    @staticmethod
+    def get(item, default=None):
+        setting = Setting.objects.filter(key=item)
+
+        if setting:
+            return setting.first().value
+
+        return default
 
 
 from .signals import *  # noqa

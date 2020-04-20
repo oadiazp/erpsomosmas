@@ -45,3 +45,15 @@ class TestProfile:
         obj = Cls(foo=True)
 
         assert not Profile.all_properties_defined(obj, ['bar'])
+
+    def test_get_paypal_plan(self):
+        mixer.blend('core.Setting', key='PAYPAL_PLAN_EU', value='EU')
+        mixer.blend('core.Setting', key='PAYPAL_PLAN_US', value='US')
+        mixer.blend('core.Setting', key='PAYPAL_PLAN_LA', value='LA')
+        mx_profile = mixer.blend('core.Profile', country='MX')
+        us_profile = mixer.blend('core.Profile', country='US')
+        de_profile = mixer.blend('core.Profile', country='DE')
+
+        assert mx_profile.paypal_plan == 'LA'
+        assert us_profile.paypal_plan == 'US'
+        assert de_profile.paypal_plan == 'EU'
