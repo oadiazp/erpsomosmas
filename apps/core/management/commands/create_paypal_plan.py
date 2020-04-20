@@ -31,7 +31,7 @@ class Command(BaseCommand):
         )
 
         setting = Setting.objects.create(
-            key=f'PAYPAL_PRODUCT_{options["name"].upper()}',
+            key=f'PAYPAL_PLAN_{options["name"].upper()}',
             value=plan_id
         )
 
