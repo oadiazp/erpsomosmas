@@ -1,3 +1,5 @@
+from json import dumps
+
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
@@ -71,6 +73,16 @@ class Profile(TimeStampedModel):
         )
 
         return all([all_profile_props_are_defined, all_user_props_are_defined])
+
+
+class Setting(TimeStampedModel):
+    key = models.CharField(max_length=200, unique=True)
+    value = models.CharField(max_length=200)
+
+    def __str__(self):
+        return dumps({
+            self.key: self.value
+        })
 
 
 from .signals import *  # noqa

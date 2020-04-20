@@ -46,7 +46,3 @@ class ProfilePaymentMethod(forms.ModelForm):
         fields = [
             'payment_method'
         ]
-
-    def save(self, commit=True):
-        self.object.payment_method = self.cleaned_data['payment_method']
-        return super().save(commit)

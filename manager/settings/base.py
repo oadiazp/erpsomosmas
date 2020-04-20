@@ -134,3 +134,10 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '1a53c2d1df7afd'
 EMAIL_HOST_PASSWORD = 'b6903e1447c67a'
 EMAIL_PORT = '2525'
+
+PAYPAL_MODE = 'sandbox'
+PAYPAL_CLIENT_ID = 'AR3YR2qBpD7U57L54LwRE9JZ2whWzLilT_iBhCk_fZpSsEbFEilIx_WUvhJW81XN92d5Gqa0WXSDg2aj'
+PAYPAL_CLIENT_SECRET = 'EP4TagPyKcBBUNBNY12OB_c-saaD6rfY0tpkh155s1cZnZIP1hnjg236Xg08xTFmfk7cLvMr6SOTAQqr'
+PAYPAL_CREATE_PRODUCT_URL = 'https://api.sandbox.paypal.com/v1/catalogs/products'
+PAYPAL_CREATE_PLAN_URL = 'https://api.sandbox.paypal.com/v1/billing/plans'
+
