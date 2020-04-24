@@ -22,7 +22,6 @@
                 </div>
             </div>
         {% endfor %}
-        <button class="btn btn-success">{% trans 'Ok' %}</button>
     </form>
 
     <input type="hidden" id="plan_id" value="{{ paypal_plan }}"/>
@@ -30,7 +29,7 @@
 
 {% block js %}
   <script
-       src="https://www.paypal.com/sdk/js?client-id={{ client_id }}&vault=true">
+       src="https://www.paypal.com/sdk/js?client-id={{ client_id }}&vault=true&disable-funding=card">
   </script>
   <script>
     paypal.Buttons({
@@ -40,7 +39,9 @@
             });
         },
         onApprove: function(data, actions) {
-            alert('You have successfully created subscription ' + data.subscriptionID);
+            actions.order.get().then(function (details) {
+                window.location.href = '/accounts/set_paypal_email?email=' + details.payer.email_address;
+            });
         }
     }).render('#button_paypal');
   </script>

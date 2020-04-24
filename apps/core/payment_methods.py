@@ -1,6 +1,6 @@
 from json import dumps
 
-from paypalrestsdk import Api
+from paypalrestsdk import Api, Webhook, Payment
 from requests import post
 
 
@@ -76,3 +76,35 @@ class PayPalPaymentMethod:
                 }
             })
         ).json()['id']
+
+    @staticmethod
+    def create_webhook(events, url, mode, client_id, client_secret):
+        webhook = Webhook(
+            {
+                'url': url,
+                'event_types': [
+                    {'name': event} for event in events
+                ]
+            },
+            api=Api({
+                'mode': mode,
+                'client_id': client_id,
+                'client_secret': client_secret
+            })
+        )
+
+        if webhook.create():
+            print("Webhook[%s] created successfully" % (webhook.id))
+        else:
+            print(webhook.error)
+
+    @staticmethod
+    def get_payment(payment_id, paypal_mode, paypal_client_id, paypal_client_secret):
+        return Payment.find(
+            resource_id=payment_id,
+            api=Api({
+                'mode': paypal_mode,
+                'client_id': paypal_client_id,
+                'client_secret': paypal_client_secret
+            })
+        )

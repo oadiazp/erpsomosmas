@@ -1,9 +1,15 @@
+from json import dumps, loads
+
 from django.conf import settings
+from django.http import HttpResponse
 from django.urls import reverse
+from django.views import View
 from django.views.generic import UpdateView
+from paypalrestsdk import Sale, Api, Payment
 
 from apps.core.forms import ProfileUpdateForm, ProfilePaymentMethod
 from apps.core.models import Profile, PaymentMethod
+from apps.core.services import ReceivePayment
 
 
 class ProfileUpdateView(UpdateView):
@@ -68,5 +74,13 @@ class ProfileUpdateView(UpdateView):
         return context
 
 
+class WebhookView(View):
+    def post(self, request):
+        service = ReceivePayment(request.body.decode('utf-8'))
+        service.execute(
+            settings.PAYPAL_MODE,
+            settings.PAYPAL_CLIENT_ID,
+            settings.PAYPAL_CLIENT_SECRET
+        )
 
-
+        return HttpResponse()

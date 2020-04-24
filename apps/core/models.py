@@ -23,6 +23,7 @@ class Profile(TimeStampedModel):
     zip_code = models.IntegerField(null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
     country = CountryField(null=True, blank=True)
+    paypal_email = models.EmailField(blank=True, null=True)
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     payment_method = models.ForeignKey(
@@ -86,6 +87,15 @@ class Profile(TimeStampedModel):
             return Setting.get('PAYPAL_PLAN_LA')
 
         return Setting.get('PAYPAL_PLAN_US')
+
+    def add_payment(self, amount):
+        Payment.objects.create(profile=self, amount=amount)
+
+
+class Payment(TimeStampedModel):
+    amount = models.FloatField()
+
+    profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
 
 
 class Setting(TimeStampedModel):
