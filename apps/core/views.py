@@ -1,6 +1,8 @@
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import UpdateView, RedirectView, DetailView
 
@@ -11,6 +13,10 @@ from apps.core.services import ReceivePayment
 
 
 class ProfileUpdateView(UpdateView):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
     def get_template_names(self):
         if not self.object.is_complete:
             return [
@@ -85,6 +91,10 @@ class WebhookView(View):
 
 
 class SetPayPalEmailView(RedirectView):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
     def get_redirect_url(self, *args, **kwargs):
         profile = Profile.objects.filter(user__id=self.request.user.id).first()
         profile.paypal_email = self.request.GET.get('email', None)
