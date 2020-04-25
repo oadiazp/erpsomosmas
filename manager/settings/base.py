@@ -37,6 +37,8 @@ INSTALLED_APPS = [
 
     'registration',
     'widget_tweaks',
+    'grappelli',
+
 
     'django.contrib.admin',
     'django.contrib.auth',
