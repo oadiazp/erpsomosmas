@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'grappelli',
 
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -132,7 +131,7 @@ LOGIN_URL = reverse_lazy('auth_login')
 
 REGISTRATION_AUTO_LOGIN = False
 ACCOUNT_AUTHENTICATED_REGISTRATION_REDIRECTS = True
-REGISTRATION_FORM = 'registration.forms.RegistrationFormUniqueEmail'
+REGISTRATION_FORM = 'apps.core.forms.RegistrationForm'
 ACCOUNT_ACTIVATION_DAYS = 3
 
 EMAIL_HOST = 'smtp.mailtrap.io'

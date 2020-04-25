@@ -1,4 +1,7 @@
 from django import forms
+from django.utils.translation import ugettext_lazy as _
+
+from registration.forms import RegistrationFormUniqueEmail
 
 from apps.core.models import Profile
 
@@ -46,3 +49,13 @@ class ProfilePaymentMethod(forms.ModelForm):
         fields = [
             'payment_method'
         ]
+
+
+class RegistrationForm(RegistrationFormUniqueEmail):
+    tos = forms.BooleanField(
+        widget=forms.CheckboxInput,
+        label=_('I have read and agree to the Terms of Service'),
+        error_messages={
+            'required': _("You must agree to the terms to register")
+        }
+    )
