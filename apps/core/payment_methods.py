@@ -63,16 +63,12 @@ class PayPalPaymentMethod:
                 ],
                 "payment_preferences": {
                     "auto_bill_outstanding": True,
-                    "setup_fee": {
-                        "value": str(price),
-                        "currency_code": "USD"
-                    },
                     "setup_fee_failure_action": "CONTINUE",
                     "payment_failure_threshold": 3
                 },
                 "taxes": {
                     "percentage": "3",
-                    "inclusive": 0
+                    "inclusive": 1
                 }
             })
         ).json()['id']
