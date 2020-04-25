@@ -34,5 +34,9 @@ class Command(BaseCommand):
             key=f'PAYPAL_PLAN_{options["name"].upper()}',
             value=plan_id
         )
+        Setting.objects.create(
+            key=f'PAYPAL_MEMBERSHIP_PRICE_{options["name"]}',
+            value=str(options['price'])
+        )
 
         print(setting)

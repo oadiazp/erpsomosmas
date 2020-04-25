@@ -1,14 +1,11 @@
-from json import dumps, loads
-
 from django.conf import settings
 from django.http import HttpResponse
 from django.urls import reverse
 from django.views import View
 from django.views.generic import UpdateView
-from paypalrestsdk import Sale, Api, Payment
 
 from apps.core.forms import ProfileUpdateForm, ProfilePaymentMethod
-from apps.core.models import Profile, PaymentMethod
+from apps.core.models import Profile
 from apps.core.services import ReceivePayment
 
 
@@ -67,9 +64,9 @@ class ProfileUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['payment_methods'] = PaymentMethod.objects.all()
         context['paypal_plan'] = self.object.paypal_plan
         context['client_id'] = settings.PAYPAL_CLIENT_ID
+        context['price'] = self.object.membership_price
 
         return context
 

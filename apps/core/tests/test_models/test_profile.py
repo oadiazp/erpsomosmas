@@ -47,13 +47,32 @@ class TestProfile:
         assert not Profile.all_properties_defined(obj, ['bar'])
 
     def test_get_paypal_plan(self):
-        mixer.blend('core.Setting', key='PAYPAL_PLAN_EU', value='EU')
-        mixer.blend('core.Setting', key='PAYPAL_PLAN_US', value='US')
-        mixer.blend('core.Setting', key='PAYPAL_PLAN_LA', value='LA')
-        mx_profile = mixer.blend('core.Profile', country='MX')
-        us_profile = mixer.blend('core.Profile', country='US')
-        de_profile = mixer.blend('core.Profile', country='DE')
+        self._create_paypal_plan_settings()
+        mx_profile, us_profile, de_profile = self._create_region_profiles()
 
         assert mx_profile.paypal_plan == 'LA'
         assert us_profile.paypal_plan == 'US'
         assert de_profile.paypal_plan == 'EU'
+
+    def test_payment_region(self):
+        self._create_paypal_plan_settings()
+        mx_profile, us_profile, de_profile = self._create_region_profiles()
+
+        assert mx_profile.payment_region == 'LA'
+        assert de_profile.payment_region == 'EU'
+        assert us_profile.payment_region == 'US'
+
+    def _create_region_profiles(self):
+        mx_profile = mixer.blend('core.Profile', country='MX')
+        us_profile = mixer.blend('core.Profile', country='US')
+        de_profile = mixer.blend('core.Profile', country='DE')
+
+        return mx_profile, us_profile, de_profile
+
+    def _create_paypal_plan_settings(self):
+        eu_paypaL_setting = mixer.blend('core.Setting', key='PAYPAL_PLAN_EU', value='EU')
+        us_paypaL_setting = mixer.blend('core.Setting', key='PAYPAL_PLAN_US', value='US')
+        la_paypaL_setting = mixer.blend('core.Setting', key='PAYPAL_PLAN_LA', value='LA')
+
+        return eu_paypaL_setting, us_paypaL_setting, la_paypaL_setting
+

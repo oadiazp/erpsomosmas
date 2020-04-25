@@ -1,48 +1,32 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
-    <h3>{% trans 'Select payment method' %}</h3>
-    <form method="post">
-        {% csrf_token %}
+    <h3>{% trans 'Membership payment' %}</h3>
 
-        {% for payment_method in payment_methods %}
-            <div class="row">
-                <div class="col-sm-8 col-md-8 col-lg-8">
-                    <input type="radio" name="payment_method"
-                           value="{{ payment_method.id }}"
-                           {% if object.payment_method == payment_method %}
-                               checked="checked"
-                           {% endif %}
-                           id="id_payment_method_{{ payment_method.id }}"/>
-                    <label for="id_payment_method_{{ payment_method.id }}">{{ payment_method.name }}</label>
-                </div>
-                <div class="col-sm-4 col-md-4 col-lg-4" id="button_{{ payment_method.name | lower }}">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <p>
+                {% blocktrans %}
+                    S+ is a non-profit organization and its main funding sources, according to your location the monthly membership is ${{ price }}. To become member, please select the payment method:
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
 
-                </div>
-            </div>
-        {% endfor %}
-    </form>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12"
+             id="button_paypal">
+        </div>
+    </div>
 
     <input type="hidden" id="plan_id" value="{{ paypal_plan }}"/>
 {% endblock %}
 
 {% block js %}
-  <script
-       src="https://www.paypal.com/sdk/js?client-id={{ client_id }}&vault=true&disable-funding=card">
-  </script>
-  <script>
-    paypal.Buttons({
-        createSubscription: function (data, actions) {
-            return actions.subscription.create({
-                'plan_id': $('#plan_id').val()
-            });
-        },
-        onApprove: function(data, actions) {
-            actions.order.get().then(function (details) {
-                window.location.href = '/accounts/set_paypal_email?email=' + details.payer.email_address;
-            });
-        }
-    }).render('#button_paypal');
-  </script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id={{ client_id }}&vault=true">
+    </script>
+    <script src="{% static 'js/process_paypal_payment.js' %}"></script>
 {% endblock %}

@@ -78,18 +78,35 @@ class Profile(TimeStampedModel):
 
     @property
     def paypal_plan(self):
+        return Setting.get(f'PAYPAL_PLAN_{self.payment_region}')
+
+    def add_payment(self, amount):
+        Payment.objects.create(profile=self, amount=amount)
+
+    @property
+    def payment_region(self):
         gc = GeonamesCache()
         continent = gc.get_countries()[self.country]['continentcode']
 
         if continent == 'EU':
-            return Setting.get('PAYPAL_PLAN_EU')
+            return 'EU'
         elif continent[-1] == 'A' and self.country not in ['US', 'CA']:
-            return Setting.get('PAYPAL_PLAN_LA')
+            return 'LA'
 
-        return Setting.get('PAYPAL_PLAN_US')
+        return 'US'
 
-    def add_payment(self, amount):
-        Payment.objects.create(profile=self, amount=amount)
+    @property
+    def membership_price(self):
+        setting = Setting.objects.filter(
+            key=f'PAYPAL_MEMBERSHIP_PRICE_{ self.payment_region }'
+        )
+
+        if setting:
+            setting = setting.first()
+
+            return float(setting.value)
+
+        return 0
 
 
 class Payment(TimeStampedModel):
