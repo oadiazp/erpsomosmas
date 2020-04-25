@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-25 15:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/core/_form.html:20 templates/core/_profile_form.html:108
+msgid "Ok"
+msgstr "Aceptar"
+
+#: templates/core/_profile_form.html:18
+msgid "First name"
+msgstr "Primer nombre"
+
+#: templates/core/_profile_form.html:27
+msgid "Last name"
+msgstr "Segundo nombre"
+
+#: templates/core/_profile_form.html:39
+msgid "E-mail"
+msgstr ""
+
+#: templates/core/_profile_form.html:48
+msgid "Phone"
+msgstr "Teléfono"
+
+#: templates/core/_profile_form.html:60
+msgid "Street"
+msgstr "Calle"
+
+#: templates/core/_profile_form.html:69
+msgid "#"
+msgstr ""
+
+#: templates/core/_profile_form.html:78
+msgid "Zip code"
+msgstr "Código postal"
+
+#: templates/core/_profile_form.html:89
+msgid "State"
+msgstr "Estado"
+
+#: templates/core/_profile_form.html:98
+msgid "Country"
+msgstr "País"
+
+#: templates/core/profile_detail.html:5
+msgid "General profile"
+msgstr "Perfil general"
+
+#: templates/core/profile_detail.html:13
+msgid "General information"
+msgstr "Información general"
+
+#: templates/core/profile_detail.html:19
+msgid "Membership payments"
+msgstr "Pagos de membresía"
+
+#: templates/core/profile_detail.html:32
+msgid "Created"
+msgstr "Creado"
+
+#: templates/core/profile_detail.html:33
+msgid "Amount"
+msgstr "Cantidad"
+
+#: templates/core/profile_detail.html:34
+msgid "Reference"
+msgstr "Referencia"
+
+#: templates/core/profile_detail.html:50
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+#: templates/core/profile_select_payment_method.html:6
+msgid "Membership payment"
+msgstr "Pago de membresía"
+
+#: templates/core/profile_select_payment_method.html:11
+#, python-format
+msgid ""
+"\n"
+"                    S+ is a non-profit organization and its main funding "
+"sources, according to your location the monthly membership is $%(price)s. To "
+"become member, please select the payment method:\n"
+"                "
+msgstr ""
+"\n"
+"                    S+ es una organización sin fines de lucro y sus fondos surge "
+"del pago de la membresía que, de acuerdo a su región, es $%(price)s. Para "
+"convertirse en miembro, por favor, seleccione un método de pago:\n"
+"                "
+#: templates/core/profile_update.html:6
+msgid "Update profile"
+msgstr "Actualizar el perfil"
