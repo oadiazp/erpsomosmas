@@ -135,4 +135,17 @@ class Setting(TimeStampedModel):
         return default
 
 
+class Expense(TimeStampedModel):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    amount = models.FloatField()
+    fixed = models.BooleanField()
+
+
+class Donation(TimeStampedModel):
+    name = models.CharField(max_length=200)
+    reference = models.CharField(max_length=200)
+    payer = models.EmailField()
+    amount = models.FloatField()
+
 from .signals import *  # noqa

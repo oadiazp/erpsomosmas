@@ -22,6 +22,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'apps.core',
+    'apps.reports',
 
     'registration',
     'widget_tweaks',

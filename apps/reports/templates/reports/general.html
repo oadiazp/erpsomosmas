@@ -1,0 +1,81 @@
+{% extends 'reports/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    <h1>{% trans 'General report' %}</h1>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h2>{% trans 'Incomes' %}</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h3>${{ incomes|floatformat:2 }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h2>{% trans 'Expenses' %}</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h3>${{ expenses|floatformat:2 }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h3>{% trans 'Detailed incomes' %}</h3>
+                    <table class="table">
+                        <tr>
+                            <th>{% trans 'Concept' %}</th>
+                            <th>{% trans 'Amount' %}</th>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Memberships' %}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Donations' %}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h3>{% trans 'Detailed expenses' %}</h3>
+                    <table class="table">
+                        <tr>
+                            <th>{% trans 'Concept' %}</th>
+                            <th>{% trans 'Amount' %}</th>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Fixed' %}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Variables' %}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
