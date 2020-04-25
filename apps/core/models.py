@@ -80,8 +80,8 @@ class Profile(TimeStampedModel):
     def paypal_plan(self):
         return Setting.get(f'PAYPAL_PLAN_{self.payment_region}')
 
-    def add_payment(self, amount):
-        Payment.objects.create(profile=self, amount=amount)
+    def add_payment(self, amount, reference):
+        Payment.objects.create(profile=self, amount=amount, reference=reference)
 
     @property
     def payment_region(self):
@@ -111,6 +111,7 @@ class Profile(TimeStampedModel):
 
 class Payment(TimeStampedModel):
     amount = models.FloatField()
+    reference = models.CharField(max_length=200)
 
     profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
 

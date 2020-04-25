@@ -20,6 +20,7 @@ class TestReceivePayment:
         })
         with patch('apps.core.payment_methods.PayPalPaymentMethod.get_payment') as mock:
             mock.return_value = {
+                'id': 'TestID',
                 'payer': {
                     'payer_info': {
                         'email': 'foo@paypal.com'
@@ -45,3 +46,4 @@ class TestReceivePayment:
             payment = payment.first()
 
         assert payment.amount == 10
+        assert payment.reference == 'TestID'

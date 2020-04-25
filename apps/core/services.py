@@ -21,5 +21,6 @@ class ReceivePayment:
             profile = profile.first()
 
         profile.add_payment(
-            amount=payment['transactions'][0]['amount']['total']
+            amount=payment['transactions'][0]['amount']['total'],
+            reference=payment['id']
         )

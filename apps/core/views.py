@@ -2,10 +2,11 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.urls import reverse
 from django.views import View
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, RedirectView, DetailView
 
 from apps.core.forms import ProfileUpdateForm, ProfilePaymentMethod
-from apps.core.models import Profile
+from apps.core.models import Profile, Payment
+from apps.core.payment_methods import PayPalPaymentMethod
 from apps.core.services import ReceivePayment
 
 
@@ -64,9 +65,9 @@ class ProfileUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['paypal_plan'] = self.object.paypal_plan
+        context['paypal_plan'] = self.object.paypal_plan if self.object.country else ''
         context['client_id'] = settings.PAYPAL_CLIENT_ID
-        context['price'] = self.object.membership_price
+        context['price'] = self.object.membership_price if self.object.country else ''
 
         return context
 
@@ -81,3 +82,47 @@ class WebhookView(View):
         )
 
         return HttpResponse()
+
+
+class SetPayPalEmailView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        profile = Profile.objects.filter(user__id=self.request.user.id).first()
+        profile.paypal_email = self.request.GET.get('email', None)
+        profile.save()
+
+        profile.add_payment(
+            profile.membership_price,
+            self.request.GET.get('order_id')
+        )
+
+        return reverse('accounts_general_profile')
+
+
+class ProfileDetailView(ProfileUpdateView):
+    def get_template_names(self):
+        return [
+            'core/profile_detail.html'
+        ]
+
+    def get_form_class(self):
+        return ProfileUpdateForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['payments'] = Payment.objects.filter(profile=self.object)
+
+        return context
+
+    def get_object(self, queryset=None):
+        return Profile.objects.filter(user__id=self.request.user.id).first()
+
+    def get_success_url(self):
+        return reverse('accounts_general_profile')
+
+
+class RedirectMainView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        if hasattr(self.request, 'user') and self.request.user.is_authenticated:
+            return reverse('accounts_general_profile')
+
+        return reverse('auth_login')
