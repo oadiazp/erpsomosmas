@@ -28,3 +28,5 @@ class TestFinancesGeneral:
 
         assert FinancesGeneral.expenses() == 1000.0
 
+    def test_fixed_expenses(self):
+        assert FinancesGeneral.fixed_expenses() == 0.0

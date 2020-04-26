@@ -46,11 +46,11 @@
                         </tr>
                         <tr>
                             <td>{% trans 'Memberships' %}</td>
-                            <td></td>
+                            <td>{{ memberships|floatformat:2 }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Donations' %}</td>
-                            <td></td>
+                            <td>{{ donations|floatformat:2 }}</td>
                         </tr>
                     </table>
                 </div>
@@ -67,11 +67,11 @@
                         </tr>
                         <tr>
                             <td>{% trans 'Fixed' %}</td>
-                            <td></td>
+                            <td>{{ fixed|floatformat:2 }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Variables' %}</td>
-                            <td></td>
+                            <td>{{ variables|floatformat:2 }}</td>
                         </tr>
                     </table>
                 </div>

@@ -10,7 +10,10 @@ class FinancesAllView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['incomes'] = FinancesGeneral.incomes()
         context['expenses'] = FinancesGeneral.expenses()
+        context['memberships'] = FinancesGeneral.memberships()
+        context['donations'] = FinancesGeneral.donations()
+        context['fixed'] = FinancesGeneral.fixed_expenses()
+        context['variables'] = FinancesGeneral.variable_expenses()
 
         return context
-
 
