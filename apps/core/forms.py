@@ -31,7 +31,8 @@ class ProfileUpdateForm(forms.ModelForm):
             'house_number',
             'zip_code',
             'state',
-            'country'
+            'country',
+            'photo',
         )
 
     def save(self, commit=True):

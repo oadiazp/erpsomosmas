@@ -1,7 +1,8 @@
 {% load i18n %}
+{% load static %}
 {% load widget_tweaks %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {% for hidden in form.hidden_fields %}
@@ -11,6 +12,16 @@
     {% for non_field_error in form.non_fielsssd_errors %}
         {{ non_field_error }}
     {% endfor %}
+
+    <div class="row justify-content-end">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            {% if profile.photo %}
+                <img src="{{ object.photo.url }}" class="mw-100" alt="{% trans 'Profile pic' %}">
+            {% else %}
+                <img src="{% static 'images/profile.jpg' %}" class="mw-100" alt="{% trans 'Profile pic' %}">
+            {% endif %}
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -98,6 +109,17 @@
                 <label for="id_country">{% trans 'Country' %}</label>
                 {{ form.country|add_class:'form-control' }}
                 {% for error in form.country.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+           <div class="form-group">
+                <label for="id_photo">{% trans 'Photo' %}</label>
+                {{ form.photo|add_class:'form-control' }}
+                {% for error in form.photo.errors %}
                     <span class="help-block">{{ error }}</span>
                 {% endfor %}
             </div>
