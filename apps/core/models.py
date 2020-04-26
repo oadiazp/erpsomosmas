@@ -23,7 +23,8 @@ class Profile(TimeStampedModel):
     zip_code = models.IntegerField(null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
     country = CountryField(null=True, blank=True)
-    paypal_email = models.EmailField(blank=True, null=True)
+    paypal_email = models.EmailField(null=True, blank=True)
+    photo = models.FileField(upload_to='photos/', null=True, blank=True)
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     payment_method = models.ForeignKey(
@@ -43,7 +44,7 @@ class Profile(TimeStampedModel):
     def all_properties_defined(cls, obj, attrs):
         return all(
             [
-                hasattr(obj, attr) and getattr(obj, attr) for attr in attrs
+                hasattr(obj, attr) and getattr(obj, attr) is not None for attr in attrs
             ]
         )
 

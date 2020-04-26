@@ -1,14 +1,13 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import UpdateView, RedirectView, DetailView
+from django.views.generic import UpdateView, RedirectView
 
 from apps.core.forms import ProfileUpdateForm, ProfilePaymentMethod
 from apps.core.models import Profile, Payment
-from apps.core.payment_methods import PayPalPaymentMethod
 from apps.core.services import ReceivePayment
 
 
