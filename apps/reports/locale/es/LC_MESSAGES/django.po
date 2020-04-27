@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-27 23:41+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/reports/base.html:42
+msgid "Reports S+"
+msgstr "Reportes S+"
+
+#: templates/reports/base.html:49
+msgid "Finances - Overview"
+msgstr "Finanzas - Global"
+
+#: templates/reports/base.html:59 templates/reports/members.html:40
+msgid "Members"
+msgstr "Miembros"
+
+#: templates/reports/general.html:7
+msgid "General report"
+msgstr "Reporte general"
+
+#: templates/reports/general.html:12
+msgid "Incomes"
+msgstr "Ingresos"
+
+#: templates/reports/general.html:25
+msgid "Expenses"
+msgstr "Gastos"
+
+#: templates/reports/general.html:41
+msgid "Detailed incomes"
+msgstr "Ingresos detallados"
+
+#: templates/reports/general.html:44 templates/reports/general.html:65
+msgid "Concept"
+msgstr "Concepto"
+
+#: templates/reports/general.html:45 templates/reports/general.html:66
+msgid "Amount"
+msgstr "Cantidad"
+
+#: templates/reports/general.html:48
+msgid "Memberships"
+msgstr "Membresía"
+
+#: templates/reports/general.html:52
+msgid "Donations"
+msgstr "Donaciones"
+
+#: templates/reports/general.html:62
+msgid "Detailed expenses"
+msgstr "Gastos detallados"
+
+#: templates/reports/general.html:69
+msgid "Fixed"
+msgstr "Fijos"
+
+#: templates/reports/general.html:73
+msgid "Variables"
+msgstr "Variables"
+
+#: templates/reports/general.html:83
+msgid "Finances"
+msgstr "Finanzas"
+
+#: templates/reports/members.html:7
+msgid "Members report"
+msgstr "Reporte de los miembros"
+
+#: templates/reports/members.html:8
+msgid "Members amount"
+msgstr "Cantidad de miembros"
+
+#: templates/reports/members.html:15
+msgid "Members by continent"
+msgstr "Miembros por continentes"
+
+#: templates/reports/members.html:22
+msgid "Members by country"
+msgstr "Miembros por país"

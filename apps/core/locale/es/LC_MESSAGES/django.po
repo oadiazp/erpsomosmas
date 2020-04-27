@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 15:28+0200\n"
+"POT-Creation-Date: 2020-04-27 23:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,45 +18,61 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/core/_form.html:20 templates/core/_profile_form.html:108
+#: forms.py:58
+msgid "I have read and agree to the Terms of Service"
+msgstr "Estoy de acuerdo y acepto los términos de servicio"
+
+#: forms.py:60
+msgid "You must agree to the terms to register"
+msgstr "Debe aceptar los términos de servicio para registrarse"
+
+#: templates/core/_form.html:20 templates/core/_profile_form.html:130
 msgid "Ok"
 msgstr "Aceptar"
 
-#: templates/core/_profile_form.html:18
+#: templates/core/_profile_form.html:19 templates/core/_profile_form.html:21
+msgid "Profile pic"
+msgstr "Foto de perfil"
+
+#: templates/core/_profile_form.html:29
 msgid "First name"
 msgstr "Primer nombre"
 
-#: templates/core/_profile_form.html:27
+#: templates/core/_profile_form.html:38
 msgid "Last name"
 msgstr "Segundo nombre"
 
-#: templates/core/_profile_form.html:39
+#: templates/core/_profile_form.html:50
 msgid "E-mail"
 msgstr ""
 
-#: templates/core/_profile_form.html:48
+#: templates/core/_profile_form.html:59
 msgid "Phone"
 msgstr "Teléfono"
 
-#: templates/core/_profile_form.html:60
+#: templates/core/_profile_form.html:71
 msgid "Street"
 msgstr "Calle"
 
-#: templates/core/_profile_form.html:69
+#: templates/core/_profile_form.html:80
 msgid "#"
 msgstr ""
 
-#: templates/core/_profile_form.html:78
+#: templates/core/_profile_form.html:89
 msgid "Zip code"
 msgstr "Código postal"
 
-#: templates/core/_profile_form.html:89
+#: templates/core/_profile_form.html:100
 msgid "State"
 msgstr "Estado"
 
-#: templates/core/_profile_form.html:98
+#: templates/core/_profile_form.html:109
 msgid "Country"
 msgstr "País"
+
+#: templates/core/_profile_form.html:120
+msgid "Photo"
+msgstr "Foto"
 
 #: templates/core/profile_detail.html:5
 msgid "General profile"
@@ -100,10 +116,11 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                    S+ es una organización sin fines de lucro y sus fondos surge "
-"del pago de la membresía que, de acuerdo a su región, es $%(price)s. Para "
-"convertirse en miembro, por favor, seleccione un método de pago:\n"
+"                    S+ es una organización sin fines de lucro y sus fondos "
+"surge del pago de la membresía que, de acuerdo a su región, es $%(price)s. "
+"Para convertirse en miembro, por favor, seleccione un método de pago:\n"
 "                "
+
 #: templates/core/profile_update.html:6
 msgid "Update profile"
 msgstr "Actualizar el perfil"
