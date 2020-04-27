@@ -1,36 +1,55 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import UpdateView, RedirectView
+from django.views.generic import UpdateView, RedirectView, TemplateView
 
 from apps.core.forms import ProfileUpdateForm, ProfilePaymentMethod
 from apps.core.models import Profile, Payment
 from apps.core.services import ReceivePayment
 
 
+class RedirectProfileView(RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        profile = Profile.objects.filter(user__id=self.request.user.id).first()
+
+        if not profile.is_complete:
+            return reverse('accounts_profile')
+
+        if profile.payment_set.count():
+            return reverse('accounts_general_profile')
+
+        return reverse('accounts_payment')
+
+
+class PaymentView(TemplateView):
+    template_name = 'core/profile_select_payment_method.html'
+
+    def get_context_data(self, **kwargs):
+        profile = Profile.objects.filter(user__id=self.request.user.id).first()
+
+        context = super().get_context_data(**kwargs)
+        context['paypal_plan'] = profile.paypal_plan if profile.country else ''
+        context['client_id'] = settings.PAYPAL_CLIENT_ID
+        context['price'] = profile.membership_price if profile.country else ''
+
+        return context
+
+
 class ProfileUpdateView(UpdateView):
+    template_name = 'core/profile_update.html'
+    success_url = reverse_lazy('accounts_payment')
+    form_class = ProfileUpdateForm
+
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def get_template_names(self):
-        if not self.object.is_complete:
-            return [
-                'core/profile_update.html'
-            ]
-
-        return [
-            'core/profile_select_payment_method.html'
-        ]
-
     def get_object(self, queryset=None):
         return Profile.objects.filter(user__id=self.request.user.id).first()
-
-    def get_success_url(self):
-        return reverse('accounts_profile')
 
     def get_form_kwargs(self):
         kw = super().get_form_kwargs()
@@ -57,24 +76,6 @@ class ProfileUpdateView(UpdateView):
             'state': self.object.state,
             'country': self.object.country
         }
-
-    def form_valid(self, form):
-        form.save(True)
-        return super().form_valid(form)
-
-    def get_form_class(self):
-        if not self.object.is_complete:
-            return ProfileUpdateForm
-
-        return ProfilePaymentMethod
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['paypal_plan'] = self.object.paypal_plan if self.object.country else ''
-        context['client_id'] = settings.PAYPAL_CLIENT_ID
-        context['price'] = self.object.membership_price if self.object.country else ''
-
-        return context
 
 
 class WebhookView(View):
