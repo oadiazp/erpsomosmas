@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 23:18+0200\n"
+"POT-Creation-Date: 2020-04-27 23:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,6 +102,10 @@ msgstr "Referencia"
 msgid "Log out"
 msgstr "Cerrar sesión"
 
+#: templates/core/profile_detail.html:58
+msgid "Details"
+msgstr "Detalles"
+
 #: templates/core/profile_select_payment_method.html:6
 msgid "Membership payment"
 msgstr "Pago de membresía"
@@ -121,6 +125,10 @@ msgstr ""
 "Para convertirse en miembro, por favor, seleccione un método de pago:\n"
 "                "
 
-#: templates/core/profile_update.html:6
+#: templates/core/profile_select_payment_method.html:34
+msgid "Select payment method"
+msgstr "Seleccione método de pago"
+
+#: templates/core/profile_update.html:6 templates/core/profile_update.html:10
 msgid "Update profile"
 msgstr "Actualizar el perfil"
