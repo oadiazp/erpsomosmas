@@ -1,6 +1,30 @@
 from django.db.models import Sum
+from geonamescache import GeonamesCache
 
-from apps.core.models import Setting, Payment, Expense, Donation
+from apps.core.models import Setting, Payment, Expense, Donation, Profile
+
+
+class Members:
+    @staticmethod
+    def amount():
+        return Profile.objects.count()
+
+    @staticmethod
+    def grouped_by_continents():
+        gc = GeonamesCache()
+
+        return [
+            {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Polygon',
+                    'coordinates': [
+                        [data['bbox']['e']]
+                    ]
+                }
+            } for continent, data in gc.get_continents().items()
+        ]
+        {k: v['bbox'] for k, v in gc.get_continents().items()}
 
 
 class FinancesGeneral:

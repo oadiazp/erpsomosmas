@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "leaflet": "^1.6.0",
     "startbootstrap-sb-admin-2": "^4.0.7"
   }
 }
