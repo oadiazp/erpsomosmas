@@ -1,3 +1,7 @@
+from json import loads
+from os.path import join
+
+from django.conf import settings
 from django.http import JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
@@ -32,8 +36,29 @@ class MembersView(TemplateView):
 
 class ContinentsView(View):
     def get(self, request):
-        return JsonResponse(Members.grouped_by_continents())
+        return JsonResponse(
+            {
+                'amount': Members.get_members_amount_by_continent(
+                    request.GET.get('name')
+                )
+            }
+        )
 
 
+class GeoCountriesView(View):
+    def get(self, request):
+        path = join(settings.BASE_DIR, 'countries.geo.json')
+        with open(path, 'r') as f:
+            return JsonResponse(loads(f.read()))
 
+
+class CountriesView(View):
+    def get(self, request):
+        return JsonResponse(
+            {
+                'amount': Members.get_members_amount_by_country(
+                    request.GET.get('iso3')
+                )
+            }
+        )
 

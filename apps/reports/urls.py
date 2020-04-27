@@ -1,6 +1,7 @@
 from django.urls import path
 
-from apps.reports.views import FinancesAllView, MembersView, ContinentsView
+from apps.reports.views import FinancesAllView, MembersView, ContinentsView, \
+    GeoCountriesView, CountriesView
 
 urlpatterns = [
     path(
@@ -17,5 +18,15 @@ urlpatterns = [
         'json/continents',
         ContinentsView.as_view(),
         name='json_continents'
+    ),
+    path(
+        'json/geocountries',
+        GeoCountriesView.as_view(),
+        name='json_geocountries'
+    ),
+    path(
+        'json/countries',
+        CountriesView.as_view(),
+        name='json_countries'
     ),
 ]

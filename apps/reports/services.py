@@ -1,5 +1,6 @@
 from django.db.models import Sum
 from geonamescache import GeonamesCache
+from geonamescache.mappers import country
 
 from apps.core.models import Setting, Payment, Expense, Donation, Profile
 
@@ -9,22 +10,33 @@ class Members:
     def amount():
         return Profile.objects.count()
 
-    @staticmethod
-    def grouped_by_continents():
-        gc = GeonamesCache()
+    @classmethod
+    def get_members_amount_by_continent(cls, continent):
+        countries = cls.get_countries_by_continent(continent)
+        return Profile.objects.filter(
+            country__in=countries
+        ).count()
 
-        return [
-            {
-                'type': 'Feature',
-                'geometry': {
-                    'type': 'Polygon',
-                    'coordinates': [
-                        [data['bbox']['e']]
-                    ]
-                }
-            } for continent, data in gc.get_continents().items()
-        ]
-        {k: v['bbox'] for k, v in gc.get_continents().items()}
+    @classmethod
+    def get_countries_by_continent(cls, continent):
+        gc = GeonamesCache()
+        continent = [
+            v for k, v in gc.get_continents().items() if v['toponymName'] == continent
+        ][0]
+
+        return continent['cc2'].split(',')
+
+    @classmethod
+    def get_members_amount_by_country(cls, iso3):
+        iso2 = cls.convert_iso3_to_iso2(iso3)
+
+        return Profile.objects.filter(country=iso2).count()
+
+    @classmethod
+    def convert_iso3_to_iso2(cls, iso3):
+        mapper = country(from_key='iso3', to_key='iso')
+        iso2 = mapper(iso3)
+        return iso2
 
 
 class FinancesGeneral:
