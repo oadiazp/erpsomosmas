@@ -6,3 +6,4 @@ node_modules
 htmlcov
 .coverage
 *.mo
+set_secrets.py
