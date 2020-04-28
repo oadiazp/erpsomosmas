@@ -32,7 +32,8 @@ RUN apt-get install -y  python3-dev \
     git \
     nodejs \
     python3-venv \
-    npm
+    npm \
+    gettext
 
 RUN mkdir -p /home/docker/src
 RUN python3 -m venv /home/docker/venv
@@ -52,11 +53,12 @@ RUN ln -sf $PWD/node_modules apps/core/static
 
 RUN . /home/docker/venv/bin/activate; \
       pip install -r /home/docker/src/requirements-live.txt; \
-      /home/docker/venv/bin/python /home/docker/src/manage.py collectstatic --clear --traceback --noinput;
+      /home/docker/venv/bin/python /home/docker/src/manage.py collectstatic --clear --traceback --noinput; \
+      /home/docker/venv/bin/python /home/docker/src/manage.py compilemessages;
 
 RUN chown www-data:www-data -R /home/docker
 
 CMD DJANGO_SETTINGS_MODULE=manager.settings.live /home/docker/venv/bin/python /home/docker/src/manage.py createcachetable & \
     DJANGO_SETTINGS_MODULE=manager.settings.live /home/docker/venv/bin/python /home/docker/src/manage.py migrate & \
-    sudo -u www-data /home/docker/venv/bin/uwsgi --ini /home/docker/src/uwsgi.ini & \
+    sudo -Eu www-data /home/docker/venv/bin/uwsgi --ini /home/docker/src/uwsgi.ini & \
     sudo nginx
