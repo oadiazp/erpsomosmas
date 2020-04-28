@@ -2,69 +2,49 @@ version: '3.7'
 
 services:
   app:
-    image: registry.gitlab.com/tuerp24/scheduler:prod
-    networks:
-      - scheduler_net
-    ports:
-      - 9010:80
-    depends_on:
-      - db
-    deploy:
-      labels:
-        swarmpit.service.deployment.autoredeploy: 'true'
-
-  worker:
-    image: registry.gitlab.com/tuerp24/scheduler:worker
+    image: registry.gitlab.com/zcool2005/erp:prod
     environment:
-      DJANGO_SETTINGS_MODULE: scheduler.settings.prod
-    command: /home/docker/venv/bin/celery -A scheduler worker -l info
-    networks:
-      - scheduler_net
-    depends_on:
-      - db
-      - redis
+      DJANGO_SETTINGS_MODULE: manager.settings.live
+      MEDIA_URL: https://s3.amazonaws.com/somosmas-management/
+      AWS_REGION: us-east-1
+      AWS_S3_BUCKET_NAME: somosmas-management
+      AWS_ACCESS_KEY_ID: AKIATJZEF4RNS7H4F72A
+      DB_HOST: restored001.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
+      DB_USER: postgres
+      DB_NAME: management
+      EMAIL_HOST: stmp.sendgrid.net
+      EMAIL_HOST_USER: apikey
+      PAYPAL_MODE: live
+      PAYPAL_CLIENT_ID: ''
+      PAYPAL_CREATE_PRODUCT_URL: https://api.paypal.com/v1/catalogs/products
+      PAYPAL_CREATE_PLAN_URL: https://api.paypal.com/v1/billing/plans
     deploy:
+      replicas: 2
       labels:
-        swarmpit.service.deployment.autoredeploy: 'true'
+        traefik.http.routers.app-https.tls: 'true'
+        traefik.http.routers.app-https.entrypoints: https
+        traefik.http.routers.app-https.service: app
+        traefik.http.services.app.loadbalancer.server.port: '80'
+        traefik.http.routers.app-https.rule: Host(`erp.somosmascuba.com`)
+        traefik.http.routers.app-https.tls.certresolver: letsencrypt
+        traefik.http.routers.app-http.service: app
+        traefik.http.routers.app-http.middlewares: app-https-redirect
+        traefik.http.routers.app-http.rule: Host(`erp.somosmascuba.com`)
+        traefik.http.middlewares.app-https-redirect.redirectscheme.scheme: https
+        traefik.enable: 'true'
+        traefik.http.routers.app-http.entrypoints: http
+    secrets:
+      - AWS_SECRET_ACCESS_KEY
+      - DB_PASSWORD
+      - PAYPAL_CLIENT_SECRET
+      - EMAIL_HOST_PASSWORD
 
-  beat:
-    image: registry.gitlab.com/tuerp24/scheduler:worker
-    environment:
-      DJANGO_SETTINGS_MODULE: scheduler.settings.prod
-    command: /home/docker/venv/bin/celery -A scheduler beat -l info
-    networks:
-      - scheduler_net
-    depends_on:
-      - db
-      - redis
-    deploy:
-      labels:
-        swarmpit.service.deployment.autoredeploy: 'true'
-
-  redis:
-    image: redis:alpine
-    volumes:
-      - redis_data:/data
-    command: redis-server
-    networks:
-      - scheduler_net
-
-  db:
-    image: postgres:12
-    environment:
-      POSTGRES_PASSWORD: sch3dul3r
-      POSTGRES_USER: scheduler
-      POSTGRES_DB: scheduler
-      PG_DATA: /data
-    volumes:
-      - scheduler_data:/data
-    networks:
-      - scheduler_net
-
-
-networks:
-  scheduler_net:
-
-volumes:
-  redis_data:
-  scheduler_data:
+secrets:
+ AWS_SECRET_ACCESS_KEY:
+   external: true
+ DB_PASSWORD:
+   external: true
+ PAYPAL_CLIENT_SECRET:
+   external: true
+ EMAIL_HOST_PASSWORD:
+   external: true
