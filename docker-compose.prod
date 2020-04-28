@@ -1,0 +1,70 @@
+version: '3.7'
+
+services:
+  app:
+    image: registry.gitlab.com/tuerp24/scheduler:prod
+    networks:
+      - scheduler_net
+    ports:
+      - 9010:80
+    depends_on:
+      - db
+    deploy:
+      labels:
+        swarmpit.service.deployment.autoredeploy: 'true'
+
+  worker:
+    image: registry.gitlab.com/tuerp24/scheduler:worker
+    environment:
+      DJANGO_SETTINGS_MODULE: scheduler.settings.prod
+    command: /home/docker/venv/bin/celery -A scheduler worker -l info
+    networks:
+      - scheduler_net
+    depends_on:
+      - db
+      - redis
+    deploy:
+      labels:
+        swarmpit.service.deployment.autoredeploy: 'true'
+
+  beat:
+    image: registry.gitlab.com/tuerp24/scheduler:worker
+    environment:
+      DJANGO_SETTINGS_MODULE: scheduler.settings.prod
+    command: /home/docker/venv/bin/celery -A scheduler beat -l info
+    networks:
+      - scheduler_net
+    depends_on:
+      - db
+      - redis
+    deploy:
+      labels:
+        swarmpit.service.deployment.autoredeploy: 'true'
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+    command: redis-server
+    networks:
+      - scheduler_net
+
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: sch3dul3r
+      POSTGRES_USER: scheduler
+      POSTGRES_DB: scheduler
+      PG_DATA: /data
+    volumes:
+      - scheduler_data:/data
+    networks:
+      - scheduler_net
+
+
+networks:
+  scheduler_net:
+
+volumes:
+  redis_data:
+  scheduler_data:

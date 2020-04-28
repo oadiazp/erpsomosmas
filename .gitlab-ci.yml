@@ -1,0 +1,18 @@
+image: gitlab/dind
+
+services:
+  - docker:dind
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+
+stages:
+  - build_image
+
+build_image:
+  stage: build_image
+  script:
+    - docker build -t registry.gitlab.com/zcool2005/erp:prod .
+    - docker push registry.gitlab.com/zcool2005/erp:prod
+  only:
+    - master
