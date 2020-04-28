@@ -133,6 +133,6 @@ class ProfileDetailView(ProfileUpdateView):
 class RedirectMainView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         if hasattr(self.request, 'user') and self.request.user.is_authenticated:
-            return reverse('accounts_general_profile')
+            return reverse('accounts_redirect')
 
         return reverse('auth_login')
