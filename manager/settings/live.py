@@ -45,3 +45,5 @@ sentry_sdk.init(
     dsn="https://d19037ae19ab4dce8371d2bc4a477304@sentry.monitoring.zczoft.com/2",
     integrations=[DjangoIntegration()]
 )
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
