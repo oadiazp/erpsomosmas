@@ -8,7 +8,7 @@ from apps.core.models import Setting, Payment, Expense, Donation, Profile
 class Members:
     @staticmethod
     def amount():
-        return Profile.objects.count()
+        return Profile.objects.filter(payment__isnull=False).count()
 
     @classmethod
     def get_members_amount_by_continent(cls, continent):

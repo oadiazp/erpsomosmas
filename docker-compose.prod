@@ -1,8 +1,10 @@
 version: '3.7'
 
 services:
-  app:
+  erp:
     image: registry.gitlab.com/zcool2005/erp:prod
+    networks:
+      - traefik
     environment:
       DJANGO_SETTINGS_MODULE: manager.settings.live
       MEDIA_URL: https://s3.amazonaws.com/somosmas-management/
@@ -12,27 +14,31 @@ services:
       DB_HOST: restored001.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
       DB_USER: postgres
       DB_NAME: management
-      EMAIL_HOST: stmp.sendgrid.net
+      EMAIL_HOST: smtp.sendgrid.net
       EMAIL_HOST_USER: apikey
+      EMAIL_PORT: 25
       PAYPAL_MODE: live
-      PAYPAL_CLIENT_ID: ''
+      PAYPAL_CLIENT_ID: AXl-doaU57n9t8x1H0E2s05nDu4hFBuFXym8eMdmaRGgcnJXRMOOATsCh6wu3jpahpa0tLS-7XnJVdlD
       PAYPAL_CREATE_PRODUCT_URL: https://api.paypal.com/v1/catalogs/products
       PAYPAL_CREATE_PLAN_URL: https://api.paypal.com/v1/billing/plans
+      REGISTRATION_DEFAULT_FROM_EMAIL: tecnologia@somosmascuba.com
     deploy:
       replicas: 2
       labels:
-        traefik.http.routers.app-https.tls: 'true'
-        traefik.http.routers.app-https.entrypoints: https
-        traefik.http.routers.app-https.service: app
-        traefik.http.services.app.loadbalancer.server.port: '80'
-        traefik.http.routers.app-https.rule: Host(`erp.somosmascuba.com`)
-        traefik.http.routers.app-https.tls.certresolver: letsencrypt
-        traefik.http.routers.app-http.service: app
-        traefik.http.routers.app-http.middlewares: app-https-redirect
-        traefik.http.routers.app-http.rule: Host(`erp.somosmascuba.com`)
-        traefik.http.middlewares.app-https-redirect.redirectscheme.scheme: https
         traefik.enable: 'true'
-        traefik.http.routers.app-http.entrypoints: http
+        traefik.http.services.erp.loadbalancer.server.port: '80'
+
+        traefik.http.routers.erp-https.tls: 'true'
+        traefik.http.routers.erp-https.rule: Host(`erp.somosmascuba.com`)
+        traefik.http.routers.erp-https.entrypoints: https
+        traefik.http.routers.erp-https.service: erp
+        traefik.http.routers.erp-https.tls.certresolver: letsencrypt
+
+        traefik.http.routers.erp-http.entrypoints: http
+        traefik.http.routers.erp-http.rule: Host(`erp.somosmascuba.com`)
+        traefik.http.routers.erp-http.service: erp
+        traefik.http.routers.erp-http.middlewares: erp-https-redirect
+        traefik.http.middlewares.erp-https-redirect.redirectscheme.scheme: https
     secrets:
       - AWS_SECRET_ACCESS_KEY
       - DB_PASSWORD
@@ -48,3 +54,7 @@ secrets:
    external: true
  EMAIL_HOST_PASSWORD:
    external: true
+
+networks:
+  traefik:
+    external: true
