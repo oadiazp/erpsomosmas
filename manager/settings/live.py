@@ -1,6 +1,9 @@
 from apps.utils import get_secret
 from .base import *
 from datetime import timedelta
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 
 MEDIA_URL = get_secret('MEDIA_URL')
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -35,3 +38,8 @@ PAYPAL_MODE = get_secret('PAYPAL_MODE')
 PAYPAL_CLIENT_ID = get_secret('PAYPAL_CLIENT_ID')
 PAYPAL_CREATE_PRODUCT_URL = get_secret('PAYPAL_CREATE_PRODUCT_URL')
 PAYPAL_CREATE_PLAN_URL = get_secret('PAYPAL_CREATE_PLAN_URL')
+
+sentry_sdk.init(
+    dsn="https://d19037ae19ab4dce8371d2bc4a477304@sentry.monitoring.zczoft.com/2",
+    integrations=[DjangoIntegration()]
+)
