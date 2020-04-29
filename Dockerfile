@@ -53,7 +53,7 @@ RUN ln -sf $PWD/node_modules apps/core/static
 
 RUN . /home/docker/venv/bin/activate; \
       pip install -r /home/docker/src/requirements-live.txt; \
-      /home/docker/venv/bin/python /home/docker/src/manage.py collectstatic --clear --traceback --noinput; \
+      /home/docker/venv/bin/python /home/docker/src/manage.py collectstatic --traceback --noinput; \
       /home/docker/venv/bin/python /home/docker/src/manage.py compilemessages;
 
 RUN chown www-data:www-data -R /home/docker
