@@ -14,13 +14,14 @@ services:
       DB_HOST: restored001.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
       DB_USER: postgres
       DB_NAME: management
-      EMAIL_HOST: stmp.sendgrid.net
+      EMAIL_HOST: smtp.sendgrid.net
       EMAIL_HOST_USER: apikey
       EMAIL_PORT: 25
       PAYPAL_MODE: live
       PAYPAL_CLIENT_ID: AXl-doaU57n9t8x1H0E2s05nDu4hFBuFXym8eMdmaRGgcnJXRMOOATsCh6wu3jpahpa0tLS-7XnJVdlD
       PAYPAL_CREATE_PRODUCT_URL: https://api.paypal.com/v1/catalogs/products
       PAYPAL_CREATE_PLAN_URL: https://api.paypal.com/v1/billing/plans
+      REGISTRATION_DEFAULT_FROM_EMAIL: tecnologia@somosmascuba.com
     deploy:
       replicas: 2
       labels:
