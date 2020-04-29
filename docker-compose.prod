@@ -3,6 +3,9 @@ version: '3.7'
 services:
   erp:
     image: registry.gitlab.com/zcool2005/erp:prod
+    dns:
+      - 8.8.8.8
+      - 9.9.9.9
     networks:
       - traefik
     environment:

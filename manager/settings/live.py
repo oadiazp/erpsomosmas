@@ -40,6 +40,7 @@ PAYPAL_MODE = get_secret('PAYPAL_MODE')
 PAYPAL_CLIENT_ID = get_secret('PAYPAL_CLIENT_ID')
 PAYPAL_CREATE_PRODUCT_URL = get_secret('PAYPAL_CREATE_PRODUCT_URL')
 PAYPAL_CREATE_PLAN_URL = get_secret('PAYPAL_CREATE_PLAN_URL')
+AWS_DEFAULT_ACL = 'public-read'
 
 sentry_sdk.init(
     dsn="https://d19037ae19ab4dce8371d2bc4a477304@sentry.monitoring.zczoft.com/2",
