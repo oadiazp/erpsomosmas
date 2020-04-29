@@ -59,7 +59,7 @@ RUN chown www-data:www-data -R /home/docker
 
 
 CMD DJANGO_SETTINGS_MODULE=manager.settings.live /home/docker/venv/bin/python /home/docker/src/manage.py createcachetable & \
-    DJANGO_SETTINGS_MODULE=manager.settings.live /home/docker/venv/bin/python /home/docker/src/manage.py collectstatic --traceback --noinput & \
+    DJANGO_SETTINGS_MODULE=manager.settings.live /home/docker/venv/bin/python /home/docker/src/manage.py collectstatic --clear --traceback --noinput -v=3 & \
     DJANGO_SETTINGS_MODULE=manager.settings.live /home/docker/venv/bin/python /home/docker/src/manage.py migrate & \
     sudo -Eu www-data /home/docker/venv/bin/uwsgi --ini /home/docker/src/uwsgi.ini & \
     sudo nginx
