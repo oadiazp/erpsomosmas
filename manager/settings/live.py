@@ -14,7 +14,7 @@ AWS_S3_MAX_AGE_SECONDS = int(timedelta(days=7).total_seconds())
 AWS_STORAGE_BUCKET_NAME = 'somosmas-management'
 AWS_ACCESS_KEY_ID = get_secret('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_secret('AWS_SECRET_ACCESS_KEY')
-AWS_S3_SIGNATURE_VERSION = 's3'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 DATABASES = {
     'default': {
