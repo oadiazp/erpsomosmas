@@ -35,7 +35,7 @@ ln -sf $PWD/node_modules apps/core/static
 ```
 * Create webhooks
 ```
-./manage.py subscribe_to_webhooks https://<url>/accounts/webhook/ PAYMENT_SALE_COMPLETED
+./manage.py subscribe_to_webhooks https://<url>/accounts/webhook/ PAYMENT.SALE.COMPLETED
 ```
 * Run the web server
 ```
