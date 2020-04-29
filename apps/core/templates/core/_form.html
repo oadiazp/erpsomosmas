@@ -10,8 +10,19 @@
 
     {% for field in form.visible_fields %}
         <div class="form-group">
-            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {{ field|add_class:'form-control' }}
+            {% if field.field.widget.input_type != 'checkbox' %}
+                <label for="{{ field.field }}">{{ field.label }}</label>
+                {{ field|add_class:'form-control' }}
+            {% else %}
+                <div class="row">
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        {{ field|add_class:'form-control' }}
+                    </div>
+                    <div class="col-sm-11 col-md-11 col-lg-11">
+                        <label for="{{ field.field }}">{{ field.label }}</label>
+                    </div>
+                </div>
+            {% endif %}
             {% for error in field.errors %}
                 <span class="help-block">{{ error }}</span>
             {% endfor %}
