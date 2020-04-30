@@ -1,3 +1,5 @@
+from json import loads
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -80,7 +82,7 @@ class ProfileUpdateView(UpdateView):
 
 class WebhookView(View):
     def post(self, request):
-        service = ReceivePayment(request.body.decode('utf-8'))
+        service = ReceivePayment(loads(request.body.decode('utf-8')))
         service.execute(
             settings.PAYPAL_MODE,
             settings.PAYPAL_CLIENT_ID,
