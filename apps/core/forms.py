@@ -55,7 +55,6 @@ class ProfilePaymentMethod(forms.ModelForm):
 
 
 class RegistrationForm(RegistrationFormUniqueEmail):
-    captcha = ReCaptchaField(ReCaptchaV2Invisible)
     tos = forms.BooleanField(
         widget=forms.CheckboxInput,
         label=_('I have read and agree to the Terms of Service'),
