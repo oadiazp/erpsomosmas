@@ -1,3 +1,5 @@
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Invisible
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -53,6 +55,7 @@ class ProfilePaymentMethod(forms.ModelForm):
 
 
 class RegistrationForm(RegistrationFormUniqueEmail):
+    captcha = ReCaptchaField(ReCaptchaV2Invisible)
     tos = forms.BooleanField(
         widget=forms.CheckboxInput,
         label=_('I have read and agree to the Terms of Service'),

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'registration',
     'widget_tweaks',
     'grappelli',
+    'captcha',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,3 +126,6 @@ PAYPAL_CLIENT_ID = 'AR3YR2qBpD7U57L54LwRE9JZ2whWzLilT_iBhCk_fZpSsEbFEilIx_WUvhJW
 PAYPAL_CLIENT_SECRET = 'EP4TagPyKcBBUNBNY12OB_c-saaD6rfY0tpkh155s1cZnZIP1hnjg236Xg08xTFmfk7cLvMr6SOTAQqr'
 PAYPAL_CREATE_PRODUCT_URL = 'https://api.sandbox.paypal.com/v1/catalogs/products'
 PAYPAL_CREATE_PLAN_URL = 'https://api.sandbox.paypal.com/v1/billing/plans'
+
+RECAPTCHA_PUBLIC_KEY = '6Lf5R8oUAAAAAA88lILpeSMhy_izcCUKAUH0f1zA'
+RECAPTCHA_PRIVATE_KEY = '6Lf5R8oUAAAAAFFLJytyE1M--Oz5qgllG0Hk6rqy'
