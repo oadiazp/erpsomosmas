@@ -11,10 +11,10 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_REGION_NAME = get_secret('AWS_REGION')
 AWS_S3_BUCKET_AUTH = False
 AWS_S3_MAX_AGE_SECONDS = int(timedelta(days=7).total_seconds())
-AWS_STORAGE_BUCKET_NAME = get_secret('AWS_S3_BUCKET_NAME')
+AWS_STORAGE_BUCKET_NAME = 'somosmas-management'
 AWS_ACCESS_KEY_ID = get_secret('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_secret('AWS_SECRET_ACCESS_KEY')
-AWS_S3_SIGNATURE_VERSION = 's3'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 DATABASES = {
     'default': {
@@ -40,6 +40,7 @@ PAYPAL_MODE = get_secret('PAYPAL_MODE')
 PAYPAL_CLIENT_ID = get_secret('PAYPAL_CLIENT_ID')
 PAYPAL_CREATE_PRODUCT_URL = get_secret('PAYPAL_CREATE_PRODUCT_URL')
 PAYPAL_CREATE_PLAN_URL = get_secret('PAYPAL_CREATE_PLAN_URL')
+AWS_DEFAULT_ACL = 'public-read'
 
 sentry_sdk.init(
     dsn="https://d19037ae19ab4dce8371d2bc4a477304@sentry.monitoring.zczoft.com/2",

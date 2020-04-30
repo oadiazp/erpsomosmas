@@ -7,13 +7,13 @@ class ReceivePayment:
         self.payload = payload
 
     def execute(self, paypal_mode, paypal_client_id, paypal_secret_id):
-        payment = PayPalPaymentMethod.get_payment(
-            self.payload['resource']['parent_payment'],
+        billing_agreement = PayPalPaymentMethod.get_billing_agreement(
+            self.payload['resource']['billing_agreement_id'],
             paypal_mode,
             paypal_client_id,
             paypal_secret_id
         )
-        payer_email = payment['payer']['payer_info']['email']
+        payer_email = billing_agreement['payer']['payer_info']['email']
 
         profile = Profile.objects.filter(paypal_email=payer_email)
 
@@ -21,6 +21,6 @@ class ReceivePayment:
             profile = profile.first()
 
         profile.add_payment(
-            amount=payment['transactions'][0]['amount']['total'],
-            reference=payment['id']
+            amount=self.payload['resource']['amount']['total'],
+            reference=self.payload['resource']['id']
         )

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 23:48+0200\n"
+"POT-Creation-Date: 2020-04-30 00:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,10 +99,14 @@ msgid "Reference"
 msgstr "Referencia"
 
 #: templates/core/profile_detail.html:50
+msgid "Reports"
+msgstr "Reportes"
+
+#: templates/core/profile_detail.html:54
 msgid "Log out"
 msgstr "Cerrar sesión"
 
-#: templates/core/profile_detail.html:58
+#: templates/core/profile_detail.html:62
 msgid "Details"
 msgstr "Detalles"
 
