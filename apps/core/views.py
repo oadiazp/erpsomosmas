@@ -102,10 +102,10 @@ class SetPayPalEmailView(RedirectView):
         profile.paypal_email = self.request.GET.get('email', None)
         profile.save()
 
-        profile.add_payment(
-            profile.membership_price,
-            self.request.GET.get('order_id')
-        )
+        # profile.add_payment(
+        #     profile.membership_price,
+        #     self.request.GET.get('order_id')
+        # )
 
         return reverse('accounts_general_profile')
 
