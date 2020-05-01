@@ -20,7 +20,7 @@ class ReceivePayment:
         if profile:
             profile = profile.first()
 
-        profile.add_payment(
-            amount=self.payload['resource']['amount']['total'],
-            reference=self.payload['resource']['id']
-        )
+            profile.add_payment(
+                amount=self.payload['resource']['amount']['total'],
+                reference=self.payload['resource']['id']
+            )
