@@ -48,3 +48,5 @@ sentry_sdk.init(
 )
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+DEFAULT_FROM_EMAIL = 'tecnologia@somosmascuba.com'
