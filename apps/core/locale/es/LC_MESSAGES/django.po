@@ -133,7 +133,7 @@ msgid ""
 msgstr ""
 "\n"
 "                    S+ es una organización sin fines de lucro y sus fondos "
-"surge del pago de la membresía que, de acuerdo a su región, es $%(price)s. "
+"surgen del pago de la membresía que, de acuerdo a su región, es $%(price)s. "
 "Para convertirse en miembro, por favor, seleccione un método de pago:\n"
 "                "
 
