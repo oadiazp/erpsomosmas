@@ -51,7 +51,7 @@ msgstr "Cambiar contraseña"
 #: registration/password_reset_form.html:4
 #: registration/password_reset_form.html:12
 msgid "Reset password"
-msgstr "Cambiar contraseña"
+msgstr "¿Olvidó su contraseña?"
 
 #: registration/password_reset_form.html:8
 msgid ""
