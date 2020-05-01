@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-28 19:13+0200\n"
+"POT-Creation-Date: 2020-05-01 05:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: registration/login.html:6
-msgid "Log in"
-msgstr "Inicio de sesión"
+#: registration/activation_complete.html:4
+msgid "Account Activated"
+msgstr "Cuenta activada"
 
-#: registration/login.html:11
-#: registration/registration_form.html:7
+#: registration/activation_complete.html:8
+msgid "Your account is now activated."
+msgstr "Su cuenta ha sido activda satisfactoriamente"
+
+#: registration/activation_complete.html:10
+msgid "You can log in."
+msgstr "Ya puede iniciar la sesión"
+
+#: registration/activation_complete.html:13 registration/login.html:6
+#: registration/login.html:18
+msgid "Log in"
+msgstr "Iniciar la sesión"
+
+#: registration/login.html:11 registration/registration_form.html:7
+#: registration/registration_form.html:46
 msgid "Sign up"
-msgstr "Registro"
+msgstr "Nuevo miembro"
 
 #: registration/password_change_form.html:4
 msgid "Change password"
-msgstr "Cambiar la contraseña"
+msgstr "Cambiar contraseña"
 
 #: registration/password_change_form.html:7
 msgid "Password change"
-msgstr "Cambio de contraseña"
+msgstr "Cambiar contraseña"
 
 #: registration/password_reset_form.html:4
 #: registration/password_reset_form.html:12
 msgid "Reset password"
-msgstr "Cambiar la contraseña"
+msgstr "Cambiar contraseña"
 
 #: registration/password_reset_form.html:8
 msgid ""
@@ -51,3 +64,6 @@ msgstr ""
 "¿Ha olvidado la contraseña? "
 "Pon tu correo electrónico en el formulario y le enviaremos las instrucciones para obtener la nueva. \n"
 "    "
+#: registration/registration_form.html:41
+msgid "Ok"
+msgstr "Aceptar"

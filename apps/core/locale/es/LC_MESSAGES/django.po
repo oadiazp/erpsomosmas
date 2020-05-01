@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-30 00:39+0200\n"
+"POT-Creation-Date: 2020-05-01 06:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:58
-msgid "I have read and agree to the Terms of Service"
-msgstr "Estoy de acuerdo y acepto los términos de servicio"
+#: forms.py:12
+msgid "Surname"
+msgstr ""
 
-#: forms.py:60
-msgid "You must agree to the terms to register"
+#: forms.py:45
+msgid "Verification code"
+msgstr "Código de verificación"
+
+#: forms.py:48
+msgid "I have read and agree to the S+'s basis and principals"
+msgstr "Estoy de acuerdo y acepto las bases y principios de S+"
+
+#: forms.py:51
+msgid "You must agree to the basis and principals to register"
 msgstr "Debe aceptar los términos de servicio para registrarse"
 
-#: templates/core/_form.html:20 templates/core/_profile_form.html:130
+#: templates/core/_form.html:31 templates/core/_profile_form.html:130
 msgid "Ok"
 msgstr "Aceptar"
 
@@ -40,7 +48,7 @@ msgstr "Primer nombre"
 
 #: templates/core/_profile_form.html:38
 msgid "Last name"
-msgstr "Segundo nombre"
+msgstr "Apellido"
 
 #: templates/core/_profile_form.html:50
 msgid "E-mail"

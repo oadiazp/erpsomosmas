@@ -42,11 +42,13 @@ class ProfilePaymentMethod(forms.ModelForm):
 
 
 class RegistrationForm(RegistrationFormUniqueEmail):
-    captcha = CaptchaField()
+    captcha = CaptchaField(label=_('Verification code'))
     tos = forms.BooleanField(
         widget=forms.CheckboxInput,
-        label=_('I have read and agree to the Terms of Service'),
+        label=_("I have read and agree to the S+'s basis and principals"),
         error_messages={
-            'required': _("You must agree to the terms to register")
+            'required': _(
+                "You must agree to the basis and principals to register"
+            )
         }
     )

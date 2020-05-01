@@ -5,9 +5,43 @@
 
 {% block content %}
     <h3>{% trans 'Sign up' %}</h3>
-    {% include 'core/_form.html' %}
+    {% load widget_tweaks %}
+    {% load i18n %}
+
+    <form method="post" class="user">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+            <div class="form-group">
+                {% if field.field.widget.input_type != 'checkbox' %}
+                    <label for="{{ field.field }}">{{ field.label }}</label>
+                    {{ field|add_class:'form-control' }}
+                {% else %}
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group form-check">
+                                {{ field|add_class:'form-check-input' }}
+                                <a href="https://www.somosmascuba.com/bases-y-principios-2015/" target="_blank">
+                                    <label class="form-check-label"
+                                       for="{{ field.field }}">{{ field.label }}</label>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button class="btn btn-success">{% trans 'Ok' %}</button>
+    </form>
 {% endblock %}
 
 {% block title %}
-{% trans 'Sign up' %}
+    {% trans 'Sign up' %}
 {% endblock %}
