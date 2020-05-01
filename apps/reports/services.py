@@ -14,7 +14,8 @@ class Members:
     def get_members_amount_by_continent(cls, continent):
         countries = cls.get_countries_by_continent(continent)
         return Profile.objects.filter(
-            country__in=countries
+            country__in=countries,
+            payment__isnull=False
         ).count()
 
     @classmethod
@@ -30,7 +31,10 @@ class Members:
     def get_members_amount_by_country(cls, iso3):
         iso2 = cls.convert_iso3_to_iso2(iso3)
 
-        return Profile.objects.filter(country=iso2).count()
+        return Profile.objects.filter(
+            country=iso2,
+            payment__isnull=False
+        ).count()
 
     @classmethod
     def convert_iso3_to_iso2(cls, iso3):
