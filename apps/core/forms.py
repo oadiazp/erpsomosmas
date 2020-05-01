@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -8,20 +9,8 @@ from apps.core.models import Profile
 
 class ProfileUpdateForm(forms.ModelForm):
     first_name = forms.CharField()
-    last_name = forms.CharField()
+    last_name = forms.CharField(label=_('Surname'))
     email = forms.EmailField()
-
-    field_order = [
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'street',
-        'house_number',
-        'zip_code',
-        'state',
-        'country',
-    ]
 
     class Meta:
         model = Profile
@@ -53,6 +42,7 @@ class ProfilePaymentMethod(forms.ModelForm):
 
 
 class RegistrationForm(RegistrationFormUniqueEmail):
+    captcha = CaptchaField()
     tos = forms.BooleanField(
         widget=forms.CheckboxInput,
         label=_('I have read and agree to the Terms of Service'),

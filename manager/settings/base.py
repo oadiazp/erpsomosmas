@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'registration',
     'widget_tweaks',
     'grappelli',
+    'captcha',
 
     'django.contrib.admin',
     'django.contrib.auth',

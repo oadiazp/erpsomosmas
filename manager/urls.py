@@ -12,4 +12,5 @@ urlpatterns = [
     path('reports/', include('apps.reports.urls')),
     path('accounts/', include('apps.core.urls')),
     path('accounts/', include('registration.backends.default.urls')),
+    path('captcha/', include('captcha.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
