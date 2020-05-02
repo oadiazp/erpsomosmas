@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-01 05:57+0200\n"
+"POT-Creation-Date: 2020-05-02 12:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,34 +24,48 @@ msgstr "Cuenta activada"
 
 #: registration/activation_complete.html:8
 msgid "Your account is now activated."
-msgstr "Su cuenta ha sido activda satisfactoriamente"
+msgstr "Su cuenta ha sido activada"
 
 #: registration/activation_complete.html:10
 msgid "You can log in."
 msgstr "Ya puede iniciar la sesión"
 
-#: registration/activation_complete.html:13 registration/login.html:6
-#: registration/login.html:18
+#: registration/activation_complete.html:13 registration/login.html:7
+#: registration/login.html:34
 msgid "Log in"
 msgstr "Iniciar la sesión"
 
-#: registration/login.html:11 registration/registration_form.html:7
+#: registration/login.html:11
+msgid ""
+"\n"
+"        We're having technical issues with the activation e-mails process. "
+"If you have already signed up but you haven't received it, please, click\n"
+"        <a href=\"/accounts/activate/resend/\">here</a> to re-send it.\n"
+"    "
+msgstr ""
+"\n"
+"        Hemos presentado problemas con el proceso de envío de los correos de confirmación. "
+"Si ya se ha registrado pero no ha recibido su correo, por favor, haga clic \n"
+"        <a href=\"/accounts/activate/resend/\">aquí</a> para enviarlo nuevamente. Gracias.\n"
+"    "
+
+#: registration/login.html:22 registration/registration_form.html:7
 #: registration/registration_form.html:46
 msgid "Sign up"
 msgstr "Nuevo miembro"
 
-#: registration/password_change_form.html:4
-msgid "Change password"
-msgstr "Cambiar contraseña"
-
-#: registration/password_change_form.html:7
-msgid "Password change"
-msgstr "Cambiar contraseña"
-
-#: registration/password_reset_form.html:4
+#: registration/login.html:28 registration/password_reset_form.html:4
 #: registration/password_reset_form.html:12
 msgid "Reset password"
 msgstr "¿Olvidó su contraseña?"
+
+#: registration/password_change_form.html:4
+msgid "Change password"
+msgstr "Cambiar su contraseña"
+
+#: registration/password_change_form.html:7
+msgid "Password change"
+msgstr "Cambiar su contraseña"
 
 #: registration/password_reset_form.html:8
 msgid ""
@@ -64,6 +78,15 @@ msgstr ""
 "¿Ha olvidado la contraseña? "
 "Pon tu correo electrónico en el formulario y le enviaremos las instrucciones para obtener la nueva. \n"
 "    "
+
 #: registration/registration_form.html:41
 msgid "Ok"
 msgstr "Aceptar"
+
+#: registration/resend_activation_form.html:4
+msgid "Resend Activation Email"
+msgstr "Renvío del correo de activación"
+
+#: registration/resend_activation_form.html:7
+msgid "Re-send activation link"
+msgstr "Reenviar el correo de activación"
