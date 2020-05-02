@@ -1,0 +1,2 @@
+- name: Detroy stack
+  command: "docker stack rm {{ stack_name }}"

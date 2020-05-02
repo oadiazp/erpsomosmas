@@ -1,0 +1,11 @@
+---
+- hosts: ds-master
+  become: true
+  gather_facts: no
+  become_method: sudo
+
+  roles:
+    - destroy_stack
+    - destroy_secrets
+    - setup_secrets
+    - setup_stack

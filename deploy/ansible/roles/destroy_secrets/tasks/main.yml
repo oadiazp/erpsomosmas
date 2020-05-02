@@ -1,0 +1,3 @@
+- name: Destroy secrets
+  command: "docker secret rm {{ item }}"
+  with_items: secrets
