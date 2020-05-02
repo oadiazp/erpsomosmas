@@ -110,11 +110,6 @@ class SetPayPalEmailView(RedirectView):
         profile.paypal_email = self.request.GET.get('email', None)
         profile.save()
 
-        # profile.add_payment(
-        #     profile.membership_price,
-        #     self.request.GET.get('order_id')
-        # )
-
         return reverse('accounts_general_profile')
 
 
@@ -152,6 +147,6 @@ class CustomResendActivationView(ResendActivationView):
     form_class = CustomResendActivationForm
 
 
-# class CustomPasswordResetView(PasswordResetView):
-#     form_class = CustomPasswordResetForm
-#     success_url = reverse_lazy('auth_password_reset_done')
+class CustomPasswordResetView(PasswordResetView):
+    form_class = CustomPasswordResetForm
+    success_url = reverse_lazy('auth_password_reset_done')

@@ -1,6 +1,8 @@
 from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.tokens import default_token_generator
+
 from django.utils.translation import ugettext_lazy as _
 
 from registration.forms import RegistrationFormUniqueEmail, ResendActivationForm
@@ -53,3 +55,16 @@ class CustomResendActivationForm(ResendActivationForm):
 
 class CustomPasswordResetForm(PasswordResetForm):
     captcha = CaptchaField(label=_('Verification code'))
+
+    def save(self, domain_override=None,
+             subject_template_name='registration/password_reset_subject.txt',
+             email_template_name='registration/password_reset_email.html',
+             use_https=False, token_generator=default_token_generator,
+             from_email=None, request=None, html_email_template_name=None,
+             extra_email_context=None):
+        super().save(domain_override, subject_template_name,
+                     email_template_name, use_https, token_generator,
+                     from_email, request, 'registration/password_reset_email.html',
+                     extra_email_context)
+
+
