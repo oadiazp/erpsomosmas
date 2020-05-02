@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from mixer.backend.django import mixer
 
 from apps.core.forms import ProfileUpdateForm
-from apps.core.models import Profile
 
 pytestmark = pytest.mark.django_db
 

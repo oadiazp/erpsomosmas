@@ -7,6 +7,8 @@ from geonamescache import GeonamesCache
 
 from model_utils.models import TimeStampedModel
 
+from .querysets import ProfileQS
+
 
 class PaymentMethod(TimeStampedModel):
     name = models.CharField(max_length=20)
@@ -33,6 +35,7 @@ class Profile(TimeStampedModel):
         null=True,
         blank=True
     )
+    objects = ProfileQS.as_manager()
 
     def __str__(self):
         if self.user:

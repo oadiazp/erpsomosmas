@@ -15,24 +15,21 @@ class TestReceivePayment:
 
         receive_payment_service = ReceivePayment({
             'resource': {
-                'parent_payment': 123
+                'id': 'TestID',
+                'billing_agreement_id': 123,
+                'amount': {
+                    'total': 10
+                }
             }
         })
-        with patch('apps.core.payment_methods.PayPalPaymentMethod.get_payment') as mock:
+        with patch('apps.core.payment_methods.PayPalPaymentMethod.get_billing_agreement') as mock:
             mock.return_value = {
                 'id': 'TestID',
                 'payer': {
                     'payer_info': {
                         'email': 'foo@paypal.com'
-                    }
-                },
-                'transactions': [
-                    {
-                        'amount': {
-                            'total': 10
-                        }
-                    }
-                ]
+                    },
+                }
             }
             receive_payment_service.execute(
                 'sandbox',

@@ -31,9 +31,8 @@ class Members:
     def get_members_amount_by_country(cls, iso3):
         iso2 = cls.convert_iso3_to_iso2(iso3)
 
-        return Profile.objects.filter(
-            country=iso2,
-            payment__isnull=False
+        return Profile.objects.members().filter(
+            country=iso2
         ).count()
 
     @classmethod

@@ -21,7 +21,7 @@ class RedirectProfileView(RedirectView):
         if not profile.is_complete:
             return reverse('accounts_profile')
 
-        if profile.payment_set.count():
+        if profile.payment_set.count() or profile.country == 'CU':
             return reverse('accounts_general_profile')
 
         return reverse('accounts_payment')
@@ -43,8 +43,13 @@ class PaymentView(TemplateView):
 
 class ProfileUpdateView(UpdateView):
     template_name = 'core/profile_update.html'
-    success_url = reverse_lazy('accounts_payment')
     form_class = ProfileUpdateForm
+
+    def get_success_url(self):
+        if self.object.country == 'CU':
+            return reverse_lazy('accounts_general_profile')
+
+        return reverse_lazy('accounts_payment')
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
