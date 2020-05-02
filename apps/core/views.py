@@ -154,3 +154,4 @@ class CustomResendActivationView(ResendActivationView):
 
 class CustomPasswordResetView(PasswordResetView):
     form_class = CustomPasswordResetForm
+    success_url = reverse_lazy('auth_password_reset_done')
