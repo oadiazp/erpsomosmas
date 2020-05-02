@@ -1,3 +1,8 @@
 - name: Destroy secrets
   command: "docker secret rm {{ item }}"
-  with_items: secrets
+  with_items:
+    - EMAIL_HOST_PASSWORD
+    - AWS_SECRET_ACCESS_KEY
+    - PAYPAL_CLIENT_SECRET
+    - DB_PASSWORD
+  ignore_errors: yes

@@ -3,6 +3,6 @@
     src: docker-compose.tmpl
     dest: /root/erp.yml
 
-- name: Deploy portainer
+- name: Deploy stack
   command: docker stack deploy --compose-file=/root/erp.yml erp
 

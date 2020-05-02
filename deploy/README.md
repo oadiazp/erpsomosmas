@@ -60,10 +60,25 @@ docker stack deploy --compose-file=<docker-compose-file>.yml <service>
 
 ## Add a site to the load balancer
 ```
-ansible-playbook -i inventories/do -e domain_name=<domain_name> -e site_kind=<site_kind> -e project_port=<port> playbook_add_site_to_loadbalancer.yaml
+ansible-playbook -i inventories/do -e domain_name=<domain_name> -e project_port=<port> playbook_add_site_to_loadbalancer.yaml
 ```
 
-Where site_kind can be:
-- django
-- odoo
-- proxy
+## Clean up the docker system
+```
+ansible-playbook -i <inventory> playbook-cleanup.yml
+
+```
+
+## Set up the secret vaults
+```
+ansible-playbook -i <inventory> playbook-setup-secret-vaults.yml
+
+```
+
+## Change the email server
+```
+ansible-playbook -i <inventory> -e email_server_id=[1-3] playbook-change-email-account.yml
+
+```
+
+

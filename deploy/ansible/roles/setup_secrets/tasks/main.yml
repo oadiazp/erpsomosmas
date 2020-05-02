@@ -1,9 +1,9 @@
 - name: Set up set_secrets script
   copy:
-    src: /opt/secret_vaults/set_secrets_{{ email_server_id }}.py
+    src: /opt/secret_vaults/{{ email_server_id }}.py
     dest: /tmp/set_secrets.py
     remote_src: yes
 
 - name: Set up new secrets
-  command: python set_secrets.py
+  command: python3 /tmp/set_secrets.py
 

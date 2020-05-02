@@ -1,0 +1,13 @@
+- name: Create the secret vaults folder
+  file:
+    path: /opt/secret_vaults
+    state: directory
+
+- name: Create the secret files
+  template:
+    src: "set_secrets_{{ item }}.tmpl"
+    dest: "/opt/secret_vaults/{{ item }}.py"
+  with_items:
+    - 1
+    - 2
+    - 3
