@@ -1,0 +1,7 @@
+ip: 192.168.33.100
+client_ips:
+  - 192.168.33.101
+  - 192.168.33.102
+
+basic_auth_username: test
+basic_auth_password: test

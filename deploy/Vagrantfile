@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.gui = false
+    vb.memory = "1024"
+  end
+
+  config.vm.define "vm1" do |vm|
+    vm.vm.box = "ubuntu/bionic64"
+    vm.vm.hostname = "vm1"
+    vm.vm.network "private_network", ip: "192.168.0.2"
+  end
+
+  config.vm.define "vm2" do |vm|
+    vm.vm.box = "ubuntu/bionic64"
+    vm.vm.hostname = "vm2"
+    vm.vm.network "private_network", ip: "192.168.0.3"
+  end
+
+  config.vm.define "vm3" do |vm|
+    vm.vm.box = "ubuntu/bionic64"
+    vm.vm.hostname = "vm3"
+    vm.vm.network "private_network", ip: "192.168.0.4"
+  end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "v"
+    ansible.playbook = "ansible/playbook-master.yml"
+    ansible.inventory_path = "ansible/inventories/vagrant"
+  end
+end

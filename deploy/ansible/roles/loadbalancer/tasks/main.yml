@@ -1,0 +1,13 @@
+- name: Install nginx
+  apt:
+    name: nginx
+
+- name: Configure nginx
+  template:
+    src: loadbalancer.tmpl
+    dest: /etc/nginx/sites-enabled/loadbalancer.conf
+
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted

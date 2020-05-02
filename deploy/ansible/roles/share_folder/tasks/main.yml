@@ -1,0 +1,18 @@
+- name: APT over HTTPS
+  apt: name=nfs-kernel-server update_cache=yes
+
+- name: Create the folder to be shared
+  file:
+    state: directory
+    path: /opt/shared
+    mode: 0777
+
+- name: Authorize the clients to connect
+  template:
+    src: export.tmpl
+    dest: /etc/exports
+
+- name: Restart service
+  systemd:
+    name: nfs-kernel-server
+    state: restarted

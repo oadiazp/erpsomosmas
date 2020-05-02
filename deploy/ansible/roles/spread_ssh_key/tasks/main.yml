@@ -1,0 +1,5 @@
+- name: Set Javier key
+  authorized_key:
+    user: charlie
+    state: present
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAkVh3xZRt63xRkxKxVNvU0Lk3PQfc9cOOuevpBHFNc00BYYkOopT2kR/EVkuVv54Pq+b3U3ozMLNKSfiBDqNQOF7EIXpKd5KrySn5DwKzGyPYbwc2LfYg28BCuBWxN2xz4T0mei8UCcn+oxpA/0Fg4PfvoTWFBGkyUYLqSKQsnssP+oFYOlLE0G5GNLO5TXTg9X9CdCWD08gVLZA3iVhOx3iabZo9iAy0w1Y8eKNhRugd7fIQTYd1mqZOV3iIXqLJW50XTWzRAY0KDLE5NyDUlQVOcT8p/6NcvWKXOf/2xm3JJz/+Oqgx1cc24Ik16LWlKPUE5+7qnayShjHJz2KMZQ=="

@@ -1,0 +1,8 @@
+- name: Is the swarm active?
+  shell: 'docker info | grep "Swarm: active"'
+  register: swarm_active
+  ignore_errors: yes
+
+- name: Join to the cluster
+  command: docker swarm join --token {{ token }} {{ master_ip }}:2377
+  when: swarm_active.stdout|count == 0

@@ -1,0 +1,108 @@
+version: '3.3'
+
+services:
+  app:
+    image: swarmpit/swarmpit:latest
+    environment:
+      - SWARMPIT_DB=http://db:5984
+      - SWARMPIT_INFLUXDB=http://influxdb:8086
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - net
+      - traefik
+    dns:
+      - 8.8.8.8
+      - 9.9.9.9
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1024M
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+      placement:
+        constraints:
+          - node.role == manager
+      mode: replicated
+      replicas: 1
+      labels:
+        traefik.enable: 'true'
+        #traefik.docker.lbmode: 'true'
+        traefik.docker.network: traefik
+        traefik.http.services.swarmpit.loadbalancer.server.port: '8080'
+
+        traefik.http.routers.swarmpit-http.service: swarmpit
+        traefik.http.routers.swarmpit-http.rule: Host(`swarm.{{ domain_name }}`)
+        traefik.http.routers.swarmpit-http.entrypoints: http
+        #traefik.http.routers.swarmpit-http.middlewares: swarmpit-https-redirect
+        #traefik.http.middlewares.swarmpit-https-redirect.redirectscheme.scheme: https
+
+        #traefik.http.routers.swarmpit-https.service: swarmpit
+        #traefik.http.routers.swarmpit-https.tls: 'false'
+        #traefik.http.routers.swarmpit-https.tls.certresolver: letsencrypt
+        #traefik.http.routers.swarmpit-https.rule: Host(`swarm.{{ domain_name }}`)
+        #traefik.http.routers.swarmpit-https.entrypoints: https
+  db:
+    image: couchdb:2.3.0
+    volumes:
+      - db-data:/opt/couchdb/data
+    networks:
+      - net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.30'
+          memory: 256M
+        reservations:
+          cpus: '0.15'
+          memory: 128M
+
+  influxdb:
+    image: influxdb:1.7
+    volumes:
+      - influx-data:/var/lib/influxdb
+    networks:
+      - net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.30'
+          memory: 256M
+        reservations:
+          cpus: '0.15'
+          memory: 128M
+
+  agent:
+    image: swarmpit/agent:latest
+    environment:
+      - DOCKER_API_VERSION=1.35
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - net
+    deploy:
+      mode: global
+      labels:
+        swarmpit.agent: 'true'
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 64M
+        reservations:
+          cpus: '0.05'
+          memory: 32M
+
+networks:
+  net:
+    driver: overlay
+    attachable: true
+  traefik:
+    external: true
+
+volumes:
+  db-data:
+    driver: local
+  influx-data:
+    driver: local

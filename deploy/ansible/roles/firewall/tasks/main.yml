@@ -1,0 +1,25 @@
+- name: Install ufw
+  apt:
+    name: ufw
+    update_cache: yes
+
+- name: Set up the firewall
+  command: "ufw {{ item }}"
+  with_items:
+    - default deny incoming
+    - default allow outgoing
+    - allow ssh
+    - allow http
+    - allow https
+    - allow nfs
+    - allow 2376
+    - allow 2377
+    - allow 7946
+    - allow 4789
+    - allow 9000
+    - allow 9001
+    - allow 2000:2099/tcp
+
+- name: Enable ufw
+  ufw:
+    state: enabled

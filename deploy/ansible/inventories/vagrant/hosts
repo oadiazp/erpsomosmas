@@ -1,0 +1,6 @@
+[ds_master]
+vm1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_user=vagrant ansible_ssh_private_key_file=~/src/playbooks/swarm/.vagrant/machines/ds-master/virtualbox/private_key
+
+[ds_workers]
+vm2 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200 ansible_user=vagrant ~/src/playbooks/swarm/.vagrant/machines/ds-slave01/virtualbox/private_key
+vm3 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201 ansible_user=vagrant ~/src/playbooks/swarm/.vagrant/machines/ds-slave02/virtualbox/private_key

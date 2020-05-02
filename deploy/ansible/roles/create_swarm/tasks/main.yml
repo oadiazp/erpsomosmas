@@ -1,0 +1,16 @@
+- name: Is the swarm active?
+  shell: 'docker info | grep "Swarm: active"'
+  register: swarm_active
+  ignore_errors: yes
+
+- name: Create swarm
+  command: docker swarm init --advertise-addr {{ ip }}
+  when: swarm_active.stdout|count == 0
+
+- name: Get token
+  command: docker swarm join-token -q manager
+  register: token
+
+- name: Debug
+  debug:
+    var: token

@@ -1,0 +1,11 @@
+environment       = "staging2"
+cidr_vpc          = "10.9.0.0/16"
+cidrs_private     = ["10.9.1.0/24", "10.9.2.0/24", "10.9.3.0/24"]
+cidrs_public      = ["10.9.4.0/24", "10.9.5.0/24", "10.9.6.0/24"]
+region            = "us-east-1"
+ssl_cert_arn      = "arn:aws:acm:us-east-1:227172279387:certificate/d4df632e-7bb8-4bf1-a43c-5b92e763659a"
+instance_type     = "t2.medium"
+nodes_amount      = 1
+redis_subnet_cidr = "10.9.7.0/24"
+create_db         = false
+create_redis      = false

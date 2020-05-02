@@ -1,0 +1,7 @@
+- name: Generate docker-compose
+  template:
+    src: swarmpit.tmpl
+    dest: /root/swarmpit.yml
+
+- name: Deploy swarmpit
+  command: docker stack deploy -c /root/swarmpit.yml swarmpit

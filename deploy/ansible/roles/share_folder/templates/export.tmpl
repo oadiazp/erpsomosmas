@@ -1,0 +1,3 @@
+{% for client_ip in client_ips %}
+/opt/shared    {{ client_ip }}(rw,sync,no_subtree_check,insecure)
+{% endfor %}

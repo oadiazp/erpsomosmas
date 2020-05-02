@@ -1,0 +1,9 @@
+---
+- hosts: ds-workers
+  become: true
+  gather_facts: no
+  become_method: sudo
+
+  roles:
+    - docker
+    - join_to_the_swarm

@@ -1,0 +1,7 @@
+[ds-master]
+165.22.39.169 ansible_user=root ansible_python_interpreter=/usr/bin/python3
+[ds-workers]
+167.71.162.135 ansible_user=root ansible_python_interpreter=/usr/bin/python3
+45.55.37.200 ansible_user=root ansible_python_interpreter=/usr/bin/python3
+
+    

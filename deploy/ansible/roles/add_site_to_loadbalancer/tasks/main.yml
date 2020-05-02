@@ -1,0 +1,24 @@
+- name: Create the conf directory
+  file:
+    path: /etc/nginx/loadbalancer-sites/
+    state: directory
+
+- name: Configure proxy site
+  template:
+    src: proxy.tmpl
+    dest: /etc/nginx/loadbalancer-sites/{{ domain_name }}.conf
+
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: Create the certificate renew crontab
+  cron:
+    name: "renew the certificates"
+    day: '1'
+    hour: '12'
+    minute: '0'
+    job: certbot renew --pre-hook "service nginx stop" --post-hook "service nginx start"
+
+

@@ -1,0 +1,9 @@
+---
+- hosts: ds-master
+  become: true
+  gather_facts: no
+  become_method: sudo
+
+  roles:
+    - generate_ssl_certificate
+    - add_site_to_loadbalancer

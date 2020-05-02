@@ -1,0 +1,6 @@
+ip: 10.0.4.164
+client_ips:
+  - 10.0.4.221
+  - 10.0.4.166
+basic_auth_username: bajanda
+basic_auth_password: b4j4nd4

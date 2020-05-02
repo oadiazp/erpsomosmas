@@ -1,0 +1,6 @@
+ip: 10.1.1.222
+client_ips:
+  - 10.1.1.53
+  - 10.1.1.146
+basic_auth_username: bajanda
+basic_auth_apache_encrypted_password: $$apr1$$Wp.ILxeJ$$en87Xxy7A.xaCNpKdvDEN0

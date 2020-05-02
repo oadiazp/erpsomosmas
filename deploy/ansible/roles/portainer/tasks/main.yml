@@ -1,0 +1,13 @@
+- name: Create the network and the volume
+  command: "{{ item }}"
+  with_items:
+    - docker network create --driver overlay --attachable portainer_network
+    - docker volume create portainer_data
+
+- name: Generate the docker compose
+  template:
+    src: docker-compose.tmpl
+    dest: /root/portainer.yml
+
+- name: Deploy portainer
+  command: docker stack deploy --compose-file=/root/portainer.yml portainer

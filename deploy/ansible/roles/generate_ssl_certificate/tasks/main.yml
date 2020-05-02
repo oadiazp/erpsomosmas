@@ -1,0 +1,40 @@
+- name: Add certbot repository
+  apt_repository:
+    repo: ppa:certbot/certbot
+
+- name: Install certbot
+  apt:
+    name: certbot
+    update_cache: yes
+
+- name: Certificate exists?
+  stat:
+    path: "/etc/letsencrypt/live/{{ domain_name }}/"
+  register: cert_exists
+
+- name: Stop nginx
+  service:
+    name: nginx
+    state: stopped
+
+- name: Debug
+  debug:
+    var: cert_exists
+
+- name: Generate certificate
+  command: "certbot certonly --standalone --preferred-challenges http --email mail@gmail.com --agree-tos --no-eff-email -d {{ domain_name }}"
+  when:
+    - not cert_exists.stat.exists
+
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+
+#- name: Create the certificate renew crontab
+#  cron:
+#    name: "renew the certificates"
+#    day: 1
+#    hour: 12
+#    minute: 0
+#    job: certbot renew --pre-hook "service nginx stop" --post-hook "service nginx start"

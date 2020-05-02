@@ -1,0 +1,11 @@
+---
+- hosts: ds-master
+  become: true
+  gather_facts: no
+  become_method: sudo
+
+  roles:
+    - docker
+    - create_swarm
+    - traefik
+    - swarmpit

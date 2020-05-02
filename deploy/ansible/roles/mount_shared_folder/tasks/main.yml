@@ -1,0 +1,18 @@
+- name: Install nfs-client
+  apt:
+    name: nfs-common
+
+- name: Create mount directory
+  file:
+    path: /opt/shared
+    state: directory
+    mode: 777
+
+- name: Mount the remove volume
+  blockinfile:
+    dest: /etc/fstab
+    block: |
+      {{ master_ip }}:/opt/shared    /opt/shared   nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
+
+- name: Mount the fstab volumes
+  command: mount -a

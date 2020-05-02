@@ -1,0 +1,3 @@
+.terraform
+kubeconfig_*
+config-map-aws-*

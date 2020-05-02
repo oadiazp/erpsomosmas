@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  become_method: sudo
+
+  roles:
+    - cleanup

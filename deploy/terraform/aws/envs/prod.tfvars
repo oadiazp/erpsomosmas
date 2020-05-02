@@ -1,0 +1,11 @@
+environment       = "prod"
+cidr_vpc          = "10.1.0.0/16"
+cidrs_private     = ["10.1.1.0/24", "10.1.20.0/24", "10.1.30.0/24"]
+cidrs_public      = ["10.1.40.0/24", "10.1.50.0/24", "10.1.60.0/24"]
+region            = "us-east-1"
+ssl_cert_arn      = "arn:aws:acm:us-east-1:227172279387:certificate/b9eb1186-7fac-4ff4-b7e7-30224777e03c"
+instance_type     = "t2.small"
+nodes_amount      = 3
+redis_subnet_cidr = "10.1.100.0/24"
+create_db         = true
+create_redis      = true

@@ -1,0 +1,33 @@
+- name: Traefik network exists?
+  shell: docker network ls | grep traefik
+  register: traefik_net_exists
+  ignore_errors: yes
+
+- name: Debug
+  debug:
+    var: traefik_net_exists
+
+- name: Create the network
+  command: docker network create --driver overlay --attachable traefik
+  when: traefik_net_exists.stdout|count == 0
+
+
+- name: Install the Apache utils
+  apt:
+    name: apache2-utils
+
+- name: Encode the HTTP password
+  shell: echo $(htpasswd -nb {{ basic_auth_username }} {{ basic_auth_password }}) | sed -e s/\\$/\\$\\$/g
+  register: basic_auth_encrypted_password
+
+- name: Debug
+  debug:
+    var: basic_auth_encrypted_password
+
+- name: Generate the docker compose
+  template:
+    src: docker-compose.tmpl
+    dest: /root/traefik.yml
+
+- name: Deploy
+  command: docker stack deploy --compose-file=/root/traefik.yml traefik
