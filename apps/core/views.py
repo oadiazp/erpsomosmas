@@ -155,3 +155,10 @@ class CustomResendActivationView(ResendActivationView):
 class CustomPasswordResetView(PasswordResetView):
     form_class = CustomPasswordResetForm
     success_url = reverse_lazy('auth_password_reset_done')
+
+    def form_valid(self, form):
+        form.save(domain_override=True)
+
+        return super().form_valid(form)
+
+
