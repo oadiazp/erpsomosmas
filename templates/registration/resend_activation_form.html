@@ -1,0 +1,9 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Resend Activation Email" %}{% endblock %}
+
+{% block content %}
+    <h3>{% trans 'Re-send activation link' %}</h3>
+    {% include 'core/_form.html' %}
+{% endblock %}

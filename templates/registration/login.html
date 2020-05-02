@@ -3,7 +3,18 @@
 {% load widget_tweaks %}
 
 {% block content %}
+
 <h3>{% trans 'Log in' %}</h3>
+
+<div class="alert alert-primary" role="alert">
+  <p>
+    {% blocktrans %}
+        We're having technical issues with the activation e-mails process. If you have already signed up but you haven't received it, please, click
+        <a href="/accounts/activate/resend/">here</a> to re-send it.
+    {% endblocktrans %}
+  </p>
+</div>
+
 {% include 'core/_form.html' %}
     <div class="row justify-content-end">
         <div class="col-sm-4 col-md-4 col-lg-4">

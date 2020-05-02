@@ -1,8 +1,9 @@
 from captcha.fields import CaptchaField
 from django import forms
+from django.contrib.auth.forms import PasswordResetForm
 from django.utils.translation import ugettext_lazy as _
 
-from registration.forms import RegistrationFormUniqueEmail
+from registration.forms import RegistrationFormUniqueEmail, ResendActivationForm
 
 from apps.core.models import Profile
 
@@ -44,3 +45,11 @@ class RegistrationForm(RegistrationFormUniqueEmail):
             )
         }
     )
+
+
+class CustomResendActivationForm(ResendActivationForm):
+    captcha = CaptchaField(label=_('Verification code'))
+
+
+class CustomPasswordResetForm(PasswordResetForm):
+    captcha = CaptchaField(label=_('Verification code'))

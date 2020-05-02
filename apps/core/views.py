@@ -2,13 +2,16 @@ from json import loads
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordResetView
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import UpdateView, RedirectView, TemplateView
+from registration.backends.default.views import ResendActivationView
 
-from apps.core.forms import ProfileUpdateForm
+from apps.core.forms import ProfileUpdateForm, CustomResendActivationForm, \
+    CustomPasswordResetForm
 from apps.core.models import Profile, Payment
 from apps.core.services import ReceivePayment
 
@@ -143,3 +146,11 @@ class RedirectMainView(RedirectView):
             return reverse('accounts_redirect')
 
         return reverse('auth_login')
+
+
+class CustomResendActivationView(ResendActivationView):
+    form_class = CustomResendActivationForm
+
+
+class CustomPasswordResetView(PasswordResetView):
+    form_class = CustomPasswordResetForm
