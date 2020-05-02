@@ -24,7 +24,7 @@ class RedirectProfileView(RedirectView):
         if not profile.is_complete:
             return reverse('accounts_profile')
 
-        if profile.payment_set.count() or profile.country == 'CU':
+        if profile.has_payments or profile.country == 'CU':
             return reverse('accounts_general_profile')
 
         return reverse('accounts_payment')
@@ -152,13 +152,6 @@ class CustomResendActivationView(ResendActivationView):
     form_class = CustomResendActivationForm
 
 
-class CustomPasswordResetView(PasswordResetView):
-    form_class = CustomPasswordResetForm
-    success_url = reverse_lazy('auth_password_reset_done')
-
-    def form_valid(self, form):
-        form.save(domain_override=True)
-
-        return super().form_valid(form)
-
-
+# class CustomPasswordResetView(PasswordResetView):
+#     form_class = CustomPasswordResetForm
+#     success_url = reverse_lazy('auth_password_reset_done')

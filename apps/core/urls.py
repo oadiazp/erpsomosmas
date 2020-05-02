@@ -8,15 +8,14 @@ from apps.core.views import (
     SetPayPalEmailView,
     PaymentView, RedirectProfileView,
     CustomResendActivationView,
-    CustomPasswordResetView,
 )
 
 urlpatterns = [
-    path(
-        'password/reset/',
-        CustomPasswordResetView.as_view(),
-        name='auth_password_reset'
-    ),
+    # path(
+    #     'password/reset/',
+    #     CustomPasswordResetView.as_view(),
+    #     name='auth_password_reset'
+    # ),
     path(
         'activate/resend/',
         CustomResendActivationView.as_view(),

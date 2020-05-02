@@ -90,6 +90,10 @@ class Profile(TimeStampedModel):
         Payment.objects.create(profile=self, amount=amount, reference=reference)
 
     @property
+    def has_payments(self):
+        return Payment.objects.filter(profile=self).count() > 0
+
+    @property
     def payment_region(self):
         gc = GeonamesCache()
         continent = gc.get_countries()[self.country]['continentcode']

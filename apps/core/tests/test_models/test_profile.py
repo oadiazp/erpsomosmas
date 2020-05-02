@@ -73,6 +73,15 @@ class TestProfile:
         assert profile_cuban in Profile.objects.members()
         assert profile_unpaid not in Profile.objects.members()
 
+    def test_has_payments(self):
+        payments_profile = mixer.blend('core.Profile')
+        mixer.blend('core.Payment', profile=payments_profile)
+
+        wo_payments_profile = mixer.blend('core.Profile')
+
+        assert payments_profile.has_payments
+        assert not wo_payments_profile.has_payments
+
     def _create_region_profiles(self):
         mx_profile = mixer.blend('core.Profile', country='MX')
         us_profile = mixer.blend('core.Profile', country='US')
