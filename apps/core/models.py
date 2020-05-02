@@ -10,14 +10,6 @@ from model_utils.models import TimeStampedModel
 from .querysets import ProfileQS
 
 
-class PaymentMethod(TimeStampedModel):
-    name = models.CharField(max_length=20)
-    icon = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.name
-
-
 class Profile(TimeStampedModel):
     phone = models.CharField(max_length=20, null=True, blank=True)
     street = models.CharField(max_length=100, null=True, blank=True)
@@ -29,19 +21,29 @@ class Profile(TimeStampedModel):
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    payment_method = models.ForeignKey(
-        PaymentMethod,
-        on_delete=models.DO_NOTHING,
-        null=True,
-        blank=True
-    )
+
     objects = ProfileQS.as_manager()
 
     def __str__(self):
         if self.user:
-            return f'{self.user.first_name} {self.user.last_name}'
+            if self.user.first_name and self.user.last_name:
+                return f'{self.user.first_name} {self.user.last_name}'
+
+            return self.user.username
         else:
             return ''
+
+    @property
+    def first_name(self):
+        return self.user.first_name
+
+    @property
+    def last_name(self):
+        return self.user.last_name
+
+    @property
+    def email(self):
+        return self.user.email
 
     @classmethod
     def all_properties_defined(cls, obj, attrs):

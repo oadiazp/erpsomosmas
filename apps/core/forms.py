@@ -33,14 +33,6 @@ class ProfileUpdateForm(forms.ModelForm):
         return super().save(commit)
 
 
-class ProfilePaymentMethod(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = [
-            'payment_method'
-        ]
-
-
 class RegistrationForm(RegistrationFormUniqueEmail):
     captcha = CaptchaField(label=_('Verification code'))
     tos = forms.BooleanField(

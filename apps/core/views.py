@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import UpdateView, RedirectView, TemplateView
 
-from apps.core.forms import ProfileUpdateForm, ProfilePaymentMethod
+from apps.core.forms import ProfileUpdateForm
 from apps.core.models import Profile, Payment
 from apps.core.services import ReceivePayment
 
