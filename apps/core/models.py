@@ -14,7 +14,7 @@ class Profile(TimeStampedModel):
     phone = models.CharField(max_length=20, null=True, blank=True)
     street = models.CharField(max_length=100, null=True, blank=True)
     house_number = models.CharField(max_length=5, null=True, blank=True)
-    zip_code = models.IntegerField(null=True, blank=True)
+    zip_code = models.CharField(max_length=10, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
     country = CountryField(null=True, blank=True)
     paypal_email = models.EmailField(null=True, blank=True)
