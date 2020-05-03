@@ -53,6 +53,7 @@ class PayPalPaymentMethod:
                         },
                         "tenure_type": "REGULAR",
                         "sequence": 1,
+                        'total_cycles': 0,
                         "pricing_scheme": {
                             "fixed_price": {
                                 "value": str(price),
