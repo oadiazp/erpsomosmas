@@ -24,10 +24,10 @@ class RedirectProfileView(RedirectView):
         if not profile.is_complete:
             return reverse('accounts_profile')
 
-        if profile.has_payments or profile.country == 'CU':
-            return reverse('accounts_general_profile')
+        if not profile.has_payments or not profile.country == 'CU':
+            return reverse('accounts_payment')
 
-        return reverse('accounts_payment')
+        return reverse('accounts_general_profile')
 
 
 class PaymentView(TemplateView):

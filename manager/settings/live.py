@@ -50,3 +50,7 @@ sentry_sdk.init(
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FROM_EMAIL = 'tecnologia@somosmascuba.com'
+SENDGRID_API_KEY = get_secret('SENDGRID_API_KEY')
+
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+

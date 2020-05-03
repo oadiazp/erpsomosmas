@@ -5,3 +5,4 @@ psycopg2-binary==2.8.5
 uwsgi==2.0.18
 sentry-sdk==0.10.2
 boto3==1.12.48
+django-sendgrid-v5==0.8.1
