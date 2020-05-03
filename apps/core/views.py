@@ -1,6 +1,5 @@
 from json import loads
 
-import pytest
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
@@ -11,8 +10,11 @@ from django.views import View
 from django.views.generic import UpdateView, RedirectView, TemplateView
 from registration.backends.default.views import ResendActivationView
 
-from apps.core.forms import ProfileUpdateForm, CustomResendActivationForm, \
+from apps.core.forms import (
+    ProfileUpdateForm,
+    CustomResendActivationForm,
     CustomPasswordResetForm
+)
 from apps.core.models import Profile, Payment
 from apps.core.services import ReceivePayment
 
