@@ -22,7 +22,8 @@ urlpatterns = [
         name='registration_resend_activation'
     ),
     path('profile/', RedirectProfileView.as_view(), name='accounts_redirect'),
-    path('profile/update', ProfileUpdateView.as_view(), name='accounts_profile'),
+    path('profile/update', ProfileUpdateView.as_view(),
+         name='accounts_profile'),
     path(
         'profile/general',
         ProfileDetailView.as_view(),
@@ -30,5 +31,9 @@ urlpatterns = [
     ),
     path('payment/', PaymentView.as_view(), name='accounts_payment'),
     path('webhook/', csrf_exempt(WebhookView.as_view()), name='webhook'),
-    path('set_paypal_email', SetPayPalEmailView.as_view(), name='payment'),
+    path(
+        'set_paypal_email',
+        SetPayPalEmailView.as_view(),
+        name='set_paypal_email'
+     ),
 ]

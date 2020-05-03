@@ -1,9 +1,10 @@
 from json import loads
 
+import pytest
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -33,13 +34,37 @@ class RedirectProfileView(RedirectView):
 class PaymentView(TemplateView):
     template_name = 'core/profile_select_payment_method.html'
 
-    def get_context_data(self, **kwargs):
-        profile = Profile.objects.filter(user__id=self.request.user.id).first()
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.filter(user__id=request.user.id)
 
+        if not profile:
+            return super().dispatch(request, *args, **kwargs)
+
+        profile = profile.last()
+
+        if not profile.has_payments:
+            return super().dispatch(request, *args, **kwargs)
+
+        return HttpResponseRedirect(
+            redirect_to=reverse('accounts_general_profile')
+        )
+
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['paypal_plan'] = profile.paypal_plan if profile.country else ''
+        profile = Profile.objects.filter(user__id=self.request.user.id)\
+
+        if profile:
+            profile = profile.first()
+
+            if profile.country:
+                context['paypal_plan'] = profile.paypal_plan
+                context['price'] = profile.membership_price
+            else:
+                context['paypal_plan'] = ''
+                context['price'] = ''
+
         context['client_id'] = settings.PAYPAL_CLIENT_ID
-        context['price'] = profile.membership_price if profile.country else ''
 
         return context
 
@@ -49,7 +74,7 @@ class ProfileUpdateView(UpdateView):
     form_class = ProfileUpdateForm
 
     def get_success_url(self):
-        if self.object.country == 'CU':
+        if self.object.country == 'CU' or self.object.has_payments:
             return reverse_lazy('accounts_general_profile')
 
         return reverse_lazy('accounts_payment')

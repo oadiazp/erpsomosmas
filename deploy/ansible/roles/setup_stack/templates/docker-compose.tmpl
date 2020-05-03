@@ -46,7 +46,7 @@ services:
       - AWS_SECRET_ACCESS_KEY
       - DB_PASSWORD
       - PAYPAL_CLIENT_SECRET
-      - EMAIL_HOST_PASSWORD
+      - SENDGRID_API_KEY
 
 secrets:
  AWS_SECRET_ACCESS_KEY:
@@ -55,7 +55,7 @@ secrets:
    external: true
  PAYPAL_CLIENT_SECRET:
    external: true
- EMAIL_HOST_PASSWORD:
+ SENDGRID_API_KEY:
    external: true
 
 networks:
