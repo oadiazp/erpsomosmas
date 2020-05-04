@@ -11,4 +11,5 @@ requests==2.23.0
 paypalrestsdk==1.13.1
 geonamescache==1.1.0
 django-grappelli==2.14.1
-django-simple-captcha==0.5.12
+# django-simple-captcha==0.5.12
+django-recaptcha==2.0.6

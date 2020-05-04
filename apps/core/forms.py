@@ -1,4 +1,7 @@
-from captcha.fields import CaptchaField
+# from captcha.fields import CaptchaField
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Invisible
+
 from django import forms
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
@@ -37,7 +40,8 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
 class RegistrationForm(RegistrationFormUniqueEmail):
-    captcha = CaptchaField(label=_('Verification code'))
+    captcha = ReCaptchaField(widget=ReCaptchaV2Invisible, label='')
+    # captcha = CaptchaField(label=_('Verification code'))
     tos = forms.BooleanField(
         widget=forms.CheckboxInput,
         label=_("I have read and agree to the S+'s basis and principals"),
@@ -50,11 +54,11 @@ class RegistrationForm(RegistrationFormUniqueEmail):
 
 
 class CustomResendActivationForm(ResendActivationForm):
-    captcha = CaptchaField(label=_('Verification code'))
+    captcha = ReCaptchaField(widget=ReCaptchaV2Invisible, label='')
 
 
 class CustomPasswordResetForm(PasswordResetForm):
-    captcha = CaptchaField(label=_('Verification code'))
+    captcha = ReCaptchaField(widget=ReCaptchaV2Invisible, label='')
 
     def save(self, domain_override=None,
              subject_template_name='registration/password_reset_subject.txt',
@@ -66,5 +70,3 @@ class CustomPasswordResetForm(PasswordResetForm):
                      email_template_name, use_https, token_generator,
                      from_email, request, 'registration/password_reset_email.html',
                      extra_email_context)
-
-

@@ -127,3 +127,6 @@ PAYPAL_CLIENT_SECRET = 'EP4TagPyKcBBUNBNY12OB_c-saaD6rfY0tpkh155s1cZnZIP1hnjg236
 PAYPAL_CREATE_PRODUCT_URL = 'https://api.sandbox.paypal.com/v1/catalogs/products'
 PAYPAL_CREATE_PLAN_URL = 'https://api.sandbox.paypal.com/v1/billing/plans'
 
+RECAPTCHA_PUBLIC_KEY = '6LdJNvIUAAAAAI0QcjHMItzwlPJr75El75cDYVla'
+RECAPTCHA_PRIVATE_KEY = '6LdJNvIUAAAAAMSQqxy2tBVXosFk1XIMXtMnMmlp'
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
