@@ -1,9 +1,9 @@
 from os import getenv
 
 
-def get_secret(secret):
+def get_secret(secret, default):
     try:
         with open(f'/run/secrets/{secret}', 'r') as f:
             return f.read()
     except:
-        return getenv(secret)
+        return default if default else getenv(secret)
