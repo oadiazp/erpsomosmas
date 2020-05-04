@@ -47,6 +47,8 @@ services:
       - DB_PASSWORD
       - PAYPAL_CLIENT_SECRET
       - SENDGRID_API_KEY
+      - RECAPTCHA_PUBLIC_KEY
+      - RECAPTCHA_PRIVATE_KEY
 
 secrets:
  AWS_SECRET_ACCESS_KEY:
@@ -56,6 +58,10 @@ secrets:
  PAYPAL_CLIENT_SECRET:
    external: true
  SENDGRID_API_KEY:
+   external: true
+ RECAPTCHA_PUBLIC_KEY:
+   external: true
+ RECAPTCHA_PRIVATE_KEY:
    external: true
 
 networks:

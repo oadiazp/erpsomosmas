@@ -3,7 +3,7 @@ from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Invisible
 
 from django import forms
-from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.forms import PasswordResetForm, AuthenticationForm
 from django.contrib.auth.tokens import default_token_generator
 
 from django.utils.translation import gettext_lazy as _
@@ -41,7 +41,6 @@ class ProfileUpdateForm(forms.ModelForm):
 
 class RegistrationForm(RegistrationFormUniqueEmail):
     captcha = ReCaptchaField(widget=ReCaptchaV2Invisible, label='')
-    # captcha = CaptchaField(label=_('Verification code'))
     tos = forms.BooleanField(
         widget=forms.CheckboxInput,
         label=_("I have read and agree to the S+'s basis and principals"),
@@ -70,3 +69,7 @@ class CustomPasswordResetForm(PasswordResetForm):
                      email_template_name, use_https, token_generator,
                      from_email, request, 'registration/password_reset_email.html',
                      extra_email_context)
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Invisible, label='')

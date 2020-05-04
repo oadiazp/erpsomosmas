@@ -7,10 +7,17 @@ from apps.core.views import (
     ProfileDetailView,
     SetPayPalEmailView,
     PaymentView, RedirectProfileView,
-    CustomResendActivationView, CustomPasswordResetView,
+    CustomResendActivationView,
+    CustomPasswordResetView,
+    CustomLoginView,
 )
 
 urlpatterns = [
+    path(
+        'login/',
+        CustomLoginView.as_view(template_name='registration/login.html'),
+         name='auth_login'
+    ),
     path(
         'password/reset/',
         CustomPasswordResetView.as_view(),
@@ -35,5 +42,5 @@ urlpatterns = [
         'set_paypal_email',
         SetPayPalEmailView.as_view(),
         name='set_paypal_email'
-     ),
+    ),
 ]

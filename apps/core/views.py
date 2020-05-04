@@ -2,7 +2,7 @@ from json import loads
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.views import PasswordResetView, LoginView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
@@ -13,13 +13,16 @@ from registration.backends.default.views import ResendActivationView
 from apps.core.forms import (
     ProfileUpdateForm,
     CustomResendActivationForm,
-    CustomPasswordResetForm
+    CustomPasswordResetForm, CustomAuthenticationForm
 )
 from apps.core.models import Profile, Payment
 from apps.core.services import ReceivePayment
 
 
 class RedirectProfileView(RedirectView):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
         profile = Profile.objects.filter(user__id=self.request.user.id).first()
@@ -141,6 +144,10 @@ class SetPayPalEmailView(RedirectView):
 
 
 class ProfileDetailView(ProfileUpdateView):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
     def get_template_names(self):
         return [
             'core/profile_detail.html'
@@ -177,3 +184,7 @@ class CustomResendActivationView(ResendActivationView):
 class CustomPasswordResetView(PasswordResetView):
     form_class = CustomPasswordResetForm
     success_url = reverse_lazy('auth_password_reset_done')
+
+
+class CustomLoginView(LoginView):
+    form_class = CustomAuthenticationForm
