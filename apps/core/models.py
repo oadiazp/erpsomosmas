@@ -2,11 +2,14 @@ from ast import literal_eval
 from json import dumps
 
 from django.conf import settings
+
+if settings.AWS_ACCESS_KEY_ID:
+    from ckeditor.fields import RichTextField
+
 from django.contrib.auth.models import User
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives
 from django.db import models
 
-from ckeditor.fields import RichTextField
 from django_countries.fields import CountryField
 from geonamescache import GeonamesCache
 
