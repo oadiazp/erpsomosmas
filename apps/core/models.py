@@ -1,7 +1,12 @@
+from ast import literal_eval
 from json import dumps
 
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.db import models
+
+from ckeditor.fields import RichTextField
 from django_countries.fields import CountryField
 from geonamescache import GeonamesCache
 
@@ -145,11 +150,20 @@ class Setting(TimeStampedModel):
         return default
 
 
+class ExpenseKind(TimeStampedModel):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Expense(TimeStampedModel):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     amount = models.FloatField()
     fixed = models.BooleanField()
+
+    kind = models.ForeignKey(ExpenseKind, on_delete=models.DO_NOTHING)
 
 
 class Donation(TimeStampedModel):
@@ -157,5 +171,57 @@ class Donation(TimeStampedModel):
     reference = models.CharField(max_length=200)
     payer = models.EmailField()
     amount = models.FloatField()
+
+
+class MassMail(TimeStampedModel):
+    name = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100)
+    message = RichTextField()
+
+    @property
+    def filters(self):
+        result = {}
+
+        for criteria in self.massmailcriteria_set.all():
+            if 'in' in criteria.field:
+                value = literal_eval(criteria.value)
+            elif criteria.value.isdigit():
+                value = int(criteria.value)
+
+                value = True if ('null' in criteria.field and value) or ('is' in criteria.field and value) else False
+            else:
+                value = criteria.value
+
+            result[criteria.field] = value
+
+        return result
+
+    @property
+    def recipients(self):
+        return Profile.objects.filter(**self.filters)
+
+    def send_message(self):
+        email = EmailMultiAlternatives(
+            subject=self.subject,
+            body=self.message,
+            bcc=[r.user.email for r in self.recipients],
+            from_email=settings.DEFAULT_FROM_EMAIL,
+        )
+        email.content_subtype = 'html'
+        email.send()
+
+
+class MassMailCriteria(TimeStampedModel):
+    field = models.CharField(max_length=100)
+    value = models.CharField(max_length=100)
+
+    mass_mail = models.ForeignKey(MassMail, on_delete=models.CASCADE)
+
+    @property
+    def filter_dict(self):
+        return {
+            self.field: self.value
+        }
+
 
 from .signals import *  # noqa

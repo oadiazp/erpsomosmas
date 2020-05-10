@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from apps.core.models import Profile, Setting, Payment
+from apps.core.models import Profile, Setting, Payment, Expense, ExpenseKind, \
+    MassMail, MassMailCriteria
 
 
 class PaymentInline(admin.TabularInline):
@@ -25,19 +26,45 @@ class ProfileAdmin(admin.ModelAdmin):
         PaymentInline,
     ]
 
-    # def export(self, request, queryset):
-    #     csv = CSVMaker(queryset)
-    #
-    #     with open(csv, 'rb') as fh:
-    #         response = HttpResponse(
-    #             fh.read(),
-    #             content_type="application/vnd.ms-excel"
-    #         )
-    #
-    #         response['Content-Disposition'] = 'inline; filename=miembros.csv'
-    #         return response
-
 
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
     list_display = ('key', 'value',)
+
+
+@admin.register(Expense)
+class ExpenseAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'kind',
+        'amount',
+        'fixed',
+    )
+
+
+@admin.register(ExpenseKind)
+class ExpenseKindAdmin(admin.ModelAdmin):
+    pass
+
+
+class MassMailCriteriaInline(admin.TabularInline):
+    model = MassMailCriteria
+
+
+@admin.register(MassMail)
+class MassMailAdmin(admin.ModelAdmin):
+    inlines = [
+        MassMailCriteriaInline,
+    ]
+    list_display = [
+        'name',
+        'subject',
+        'created',
+    ]
+    actions = [
+        'send_mails',
+    ]
+
+    def send_mails(self, request, queryset):
+        for mass_mail in queryset:
+            mass_mail.send_message()

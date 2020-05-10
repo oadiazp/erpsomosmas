@@ -16,7 +16,7 @@ urlpatterns = [
     path(
         'login/',
         CustomLoginView.as_view(template_name='registration/login.html'),
-         name='auth_login'
+        name='auth_login'
     ),
     path(
         'password/reset/',

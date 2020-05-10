@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'grappelli',
     'captcha',
+    'ckeditor',
 
     'django.contrib.admin',
     'django.contrib.auth',
