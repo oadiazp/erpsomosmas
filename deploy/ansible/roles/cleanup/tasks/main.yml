@@ -1,2 +1,2 @@
 - name: Docker prune
-  command: docker system prune -f
+  command: docker system prune -af --volumes
