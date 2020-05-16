@@ -23,3 +23,11 @@ build_image_prod:
     - docker push registry.gitlab.com/zcool2005/erp:prod
   only:
     - master
+
+build_image_staging:
+  stage: build_image_and_deploy
+  script:
+    - docker build -t registry.gitlab.com/zcool2005/erp:develop .
+    - docker push registry.gitlab.com/zcool2005/erp:develop
+  only:
+    - develop
