@@ -7,10 +7,17 @@ before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 
 stages:
-  - build_image
+  - test
+  - build_image_and_deploy
 
-build_image:
-  stage: build_image
+test:
+  stage: test
+  script:
+    - docker build -t api-test -f Dockerfile.test .
+    - docker run api-test
+
+build_image_prod:
+  stage: build_image_and_deploy
   script:
     - docker build -t registry.gitlab.com/zcool2005/erp:prod .
     - docker push registry.gitlab.com/zcool2005/erp:prod
