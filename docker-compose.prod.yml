@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   erp:
-    image: registry.gitlab.com/zcool2005/erp:prod
+    image: registry.gitlab.com/bajanda/erp:prod
     dns:
       - 8.8.8.8
       - 9.9.9.9

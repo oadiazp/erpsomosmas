@@ -20,14 +20,14 @@ build_image_prod:
   stage: build_image_and_deploy
   script:
     - docker build -t registry.gitlab.com/bajanda/erp:prod .
-    - docker push registry.gitlab.com/somosmascuba/erp:prod
+    - docker push registry.gitlab.com/bajanda/erp:prod
   only:
     - master
 
 build_image_staging:
   stage: build_image_and_deploy
   script:
-    - docker build -t registry.gitlab.com/somosmascuba/erp:develop .
-    - docker push registry.gitlab.com/somosmascuba/erp:develop
+    - docker build -t registry.gitlab.com/bajanda/erp:develop .
+    - docker push registry.gitlab.com/bajanda/erp:develop
   only:
     - develop
