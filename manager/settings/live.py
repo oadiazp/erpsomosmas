@@ -60,3 +60,4 @@ SILENCED_SYSTEM_CHECKS = []
 
 
 CKEDITOR_BASEPATH = '/ckeditor/ckeditor'
+AWS_QUERYSTRING_AUTH = False
