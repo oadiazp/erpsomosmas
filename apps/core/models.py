@@ -200,14 +200,15 @@ class MassMail(TimeStampedModel):
         return Profile.objects.filter(**self.filters)
 
     def send_message(self):
-        email = EmailMultiAlternatives(
-            subject=self.subject,
-            body=self.message,
-            bcc=[r.user.email for r in self.recipients],
-            from_email=settings.DEFAULT_FROM_EMAIL,
-        )
-        email.content_subtype = 'html'
-        email.send()
+        for recipient in self.recipients:
+            email = EmailMultiAlternatives(
+                subject=self.subject,
+                body=self.message,
+                to=[recipient.user.email],
+                from_email=settings.DEFAULT_FROM_EMAIL,
+            )
+            email.content_subtype = 'html'
+            email.send()
 
 
 class MassMailCriteria(TimeStampedModel):
