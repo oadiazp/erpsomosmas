@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-01 06:07+0200\n"
+"POT-Creation-Date: 2020-06-02 22:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:12
+#: forms.py:18
 msgid "Surname"
-msgstr ""
+msgstr "Apellidos"
 
-#: forms.py:45
-msgid "Verification code"
-msgstr "Código de verificación"
-
-#: forms.py:48
+#: forms.py:46
 msgid "I have read and agree to the S+'s basis and principals"
 msgstr "Estoy de acuerdo y acepto las bases y principios de S+"
 
-#: forms.py:51
+#: forms.py:49
 msgid "You must agree to the basis and principals to register"
 msgstr "Debe aceptar los términos de servicio para registrarse"
 
-#: templates/core/_form.html:31 templates/core/_profile_form.html:130
+#: templates/core/_form.html:35 templates/core/_profile_form.html:131
 msgid "Ok"
 msgstr "Aceptar"
 
@@ -54,31 +50,31 @@ msgstr "Apellido"
 msgid "E-mail"
 msgstr ""
 
-#: templates/core/_profile_form.html:59
+#: templates/core/_profile_form.html:60
 msgid "Phone"
 msgstr "Teléfono"
 
-#: templates/core/_profile_form.html:71
+#: templates/core/_profile_form.html:72
 msgid "Street"
 msgstr "Calle"
 
-#: templates/core/_profile_form.html:80
+#: templates/core/_profile_form.html:81
 msgid "#"
 msgstr ""
 
-#: templates/core/_profile_form.html:89
+#: templates/core/_profile_form.html:90
 msgid "Zip code"
 msgstr "Código postal"
 
-#: templates/core/_profile_form.html:100
+#: templates/core/_profile_form.html:101
 msgid "State"
 msgstr "Estado"
 
-#: templates/core/_profile_form.html:109
+#: templates/core/_profile_form.html:110
 msgid "Country"
 msgstr "País"
 
-#: templates/core/_profile_form.html:120
+#: templates/core/_profile_form.html:121
 msgid "Photo"
 msgstr "Foto"
 
@@ -111,10 +107,14 @@ msgid "Reports"
 msgstr "Reportes"
 
 #: templates/core/profile_detail.html:54
+msgid "Re-enable automatic payments"
+msgstr "Reactivar los pagos automáticos"
+
+#: templates/core/profile_detail.html:58
 msgid "Log out"
 msgstr "Cerrar sesión"
 
-#: templates/core/profile_detail.html:62
+#: templates/core/profile_detail.html:66
 msgid "Details"
 msgstr "Detalles"
 
@@ -144,3 +144,6 @@ msgstr "Seleccione método de pago"
 #: templates/core/profile_update.html:6 templates/core/profile_update.html:10
 msgid "Update profile"
 msgstr "Actualizar el perfil"
+
+#~ msgid "Verification code"
+#~ msgstr "Código de verificación"

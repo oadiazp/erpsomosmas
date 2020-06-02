@@ -188,3 +188,9 @@ class CustomPasswordResetView(PasswordResetView):
 
 class CustomLoginView(LoginView):
     form_class = CustomAuthenticationForm
+
+
+class ResubscribeView(PaymentView):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(TemplateView, self).dispatch(request, *args, **kwargs)

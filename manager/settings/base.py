@@ -130,5 +130,3 @@ PAYPAL_CREATE_PLAN_URL = 'https://api.sandbox.paypal.com/v1/billing/plans'
 RECAPTCHA_PUBLIC_KEY = '6LdJNvIUAAAAAI0QcjHMItzwlPJr75El75cDYVla'
 RECAPTCHA_PRIVATE_KEY = '6LdJNvIUAAAAAMSQqxy2tBVXosFk1XIMXtMnMmlp'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
-
-CKEDITOR_UPLOAD_PATH = 'uploads/'

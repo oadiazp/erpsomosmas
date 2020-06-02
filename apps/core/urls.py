@@ -9,7 +9,7 @@ from apps.core.views import (
     PaymentView, RedirectProfileView,
     CustomResendActivationView,
     CustomPasswordResetView,
-    CustomLoginView,
+    CustomLoginView, ResubscribeView,
 )
 
 urlpatterns = [
@@ -43,4 +43,9 @@ urlpatterns = [
         SetPayPalEmailView.as_view(),
         name='set_paypal_email'
     ),
+    path(
+        'resubscribe/',
+        ResubscribeView.as_view(),
+        name='resubscribe'
+    )
 ]
