@@ -10,6 +10,5 @@ django-widget-tweaks==1.4.8
 requests==2.23.0
 paypalrestsdk==1.13.1
 geonamescache==1.1.0
-django-grappelli==2.14.1
+django-grappelli==2.14.2
 django-recaptcha==2.0.6
-django-ckeditor==5.9.0

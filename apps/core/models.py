@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 from django.db import models
 
-from ckeditor.fields import RichTextField
 from django_countries.fields import CountryField
 from geonamescache import GeonamesCache
 
@@ -176,7 +175,7 @@ class Donation(TimeStampedModel):
 class MassMail(TimeStampedModel):
     name = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
-    message = RichTextField()
+    message = models.TextField()
 
     @property
     def filters(self):
