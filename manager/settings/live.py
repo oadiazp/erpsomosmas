@@ -57,3 +57,6 @@ EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 RECAPTCHA_PUBLIC_KEY = get_secret('RECAPTCHA_PUBLIC_KEY', 'fake')
 RECAPTCHA_PRIVATE_KEY = get_secret('RECAPTCHA_PRIVATE_KEY', 'fake')
 SILENCED_SYSTEM_CHECKS = []
+
+
+CKEDITOR_BASEPATH = '/ckeditor/ckeditor'
