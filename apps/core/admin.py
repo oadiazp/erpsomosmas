@@ -1,7 +1,15 @@
 from django.contrib import admin
+from django.shortcuts import render
 
-from apps.core.models import Profile, Setting, Payment, Expense, ExpenseKind, \
-    MassMail, MassMailCriteria
+from apps.core.models import (
+    Profile,
+    Setting,
+    Payment,
+    Expense,
+    ExpenseKind,
+    MassMail,
+    MassMailCriteria
+)
 
 
 class PaymentInline(admin.TabularInline):
@@ -25,6 +33,14 @@ class ProfileAdmin(admin.ModelAdmin):
     inlines = [
         PaymentInline,
     ]
+    actions = [
+        'export_to_pdf',
+    ]
+
+    def export_to_pdf(self, request, queryset):
+        return render(request, {
+            'profiles': queryset
+        })
 
 
 @admin.register(Setting)

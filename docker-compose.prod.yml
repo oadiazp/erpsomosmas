@@ -8,13 +8,14 @@ services:
       - 9.9.9.9
     networks:
       - traefik
+      - erp_net
     environment:
       DJANGO_SETTINGS_MODULE: manager.settings.live
       MEDIA_URL: https://s3.amazonaws.com/somosmas-management/
       AWS_REGION: us-east-1
       AWS_S3_BUCKET_NAME: somosmas-management
       AWS_ACCESS_KEY_ID: AKIATJZEF4RNS7H4F72A
-      DB_HOST: restored001.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
+      DB_HOST: db
       DB_USER: postgres
       DB_NAME: management
       EMAIL_HOST: smtp.sendgrid.net
@@ -43,27 +44,45 @@ services:
         traefik.http.routers.erp-http.middlewares: erp-https-redirect
         traefik.http.middlewares.erp-https-redirect.redirectscheme.scheme: https
     secrets:
-      - AWS_SECRET_ACCESS_KEY
-      - DB_PASSWORD
-      - PAYPAL_CLIENT_SECRET
-      - SENDGRID_API_KEY
-      - RECAPTCHA_PUBLIC_KEY
-      - RECAPTCHA_PRIVATE_KEY
+      - ERP_AWS_SECRET_ACCESS_KEY
+      - ERP_DB_PASSWORD
+      - ERP_PAYPAL_CLIENT_SECRET
+      - ERP_SENDGRID_API_KEY
+      - ERP_RECAPTCHA_PUBLIC_KEY
+      - ERP_RECAPTCHA_PRIVATE_KEY
+
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/ERP_DB_PASSWORD
+      POSTGRES_USER: postgres
+      POSTGRES_DB: management
+      PG_DATA: /data
+    networks:
+      - erp_net
+    volumes:
+      - management-data:/data
+    secrets:
+      - ERP_DB_PASSWORD
 
 secrets:
- AWS_SECRET_ACCESS_KEY:
+ ERP_AWS_SECRET_ACCESS_KEY:
    external: true
- DB_PASSWORD:
+ ERP_DB_PASSWORD:
    external: true
- PAYPAL_CLIENT_SECRET:
+ ERP_PAYPAL_CLIENT_SECRET:
    external: true
- SENDGRID_API_KEY:
+ ERP_SENDGRID_API_KEY:
    external: true
- RECAPTCHA_PUBLIC_KEY:
+ ERP_RECAPTCHA_PUBLIC_KEY:
    external: true
- RECAPTCHA_PRIVATE_KEY:
+ ERP_RECAPTCHA_PRIVATE_KEY:
    external: true
 
 networks:
+  erp_net:
   traefik:
     external: true
+
+volumes:
+  management-data:
