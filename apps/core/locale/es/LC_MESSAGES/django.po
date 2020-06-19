@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-02 22:01+0200\n"
+"POT-Creation-Date: 2020-06-19 16:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,15 +38,15 @@ msgstr "Aceptar"
 msgid "Profile pic"
 msgstr "Foto de perfil"
 
-#: templates/core/_profile_form.html:29
+#: templates/core/_profile_form.html:29 templates/core/export.html:14
 msgid "First name"
 msgstr "Primer nombre"
 
-#: templates/core/_profile_form.html:38
+#: templates/core/_profile_form.html:38 templates/core/export.html:15
 msgid "Last name"
 msgstr "Apellido"
 
-#: templates/core/_profile_form.html:50
+#: templates/core/_profile_form.html:50 templates/core/export.html:16
 msgid "E-mail"
 msgstr ""
 
@@ -70,13 +70,17 @@ msgstr "Código postal"
 msgid "State"
 msgstr "Estado"
 
-#: templates/core/_profile_form.html:110
+#: templates/core/_profile_form.html:110 templates/core/export.html:17
 msgid "Country"
 msgstr "País"
 
 #: templates/core/_profile_form.html:121
 msgid "Photo"
 msgstr "Foto"
+
+#: templates/core/export.html:13
+msgid "User"
+msgstr "Usuario"
 
 #: templates/core/profile_detail.html:5
 msgid "General profile"

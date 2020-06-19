@@ -38,7 +38,7 @@ class ProfileAdmin(admin.ModelAdmin):
     ]
 
     def export_to_pdf(self, request, queryset):
-        return render(request, {
+        return render(request, 'core/export.html', {
             'profiles': queryset
         })
 
