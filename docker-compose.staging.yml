@@ -8,13 +8,14 @@ services:
       - 9.9.9.9
     networks:
       - traefik
+      - erp
     environment:
       DJANGO_SETTINGS_MODULE: manager.settings.live
       MEDIA_URL: https://s3.amazonaws.com/somosmas-management/
       AWS_REGION: us-east-1
       AWS_S3_BUCKET_NAME: somosmas-management
       AWS_ACCESS_KEY_ID: AKIATJZEF4RNS7H4F72A
-      DB_HOST: restored001.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
+      DB_HOST: db
       DB_USER: postgres
       DB_NAME: management
       EMAIL_HOST: smtp.sendgrid.net
@@ -22,8 +23,8 @@ services:
       EMAIL_PORT: 25
       PAYPAL_MODE: live
       PAYPAL_CLIENT_ID: AXl-doaU57n9t8x1H0E2s05nDu4hFBuFXym8eMdmaRGgcnJXRMOOATsCh6wu3jpahpa0tLS-7XnJVdlD
-      PAYPAL_CREATE_PRODUCT_URL: https://api.paypal.com/v1/catalogs/products
-      PAYPAL_CREATE_PLAN_URL: https://api.paypal.com/v1/billing/plans
+      PAYPAL_CREATE_PRODUCT_URL: https://api.sandbox.paypal.com/v1/catalogs/products
+      PAYPAL_CREATE_PLAN_URL: https://api.sandbox.paypal.com/v1/billing/plans
       REGISTRATION_DEFAULT_FROM_EMAIL: tecnologia@somosmascuba.com
     deploy:
       replicas: 2
@@ -32,13 +33,13 @@ services:
         traefik.http.services.erp.loadbalancer.server.port: '80'
 
         traefik.http.routers.erp-https.tls: 'true'
-        traefik.http.routers.erp-https.rule: Host(`erp.somosmascuba.com`)
+        traefik.http.routers.erp-https.rule: Host(`erp.bajanda.live`)
         traefik.http.routers.erp-https.entrypoints: https
         traefik.http.routers.erp-https.service: erp
         traefik.http.routers.erp-https.tls.certresolver: letsencrypt
 
         traefik.http.routers.erp-http.entrypoints: http
-        traefik.http.routers.erp-http.rule: Host(`erp.somosmascuba.com`)
+        traefik.http.routers.erp-http.rule: Host(`erp.bajanda.live`)
         traefik.http.routers.erp-http.service: erp
         traefik.http.routers.erp-http.middlewares: erp-https-redirect
         traefik.http.middlewares.erp-https-redirect.redirectscheme.scheme: https
@@ -49,6 +50,19 @@ services:
       - ERP_SENDGRID_API_KEY
       - ERP_RECAPTCHA_PUBLIC_KEY
       - ERP_RECAPTCHA_PRIVATE_KEY
+
+  db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/ERP_DB_PASSWORD
+      POSTGRES_DB: management
+    networks:
+      - erp_net
+    volumes:
+      - erp_data:/var/lib/postgresql/data
+    secrets:
+      - ERP_DB_PASSWORD
+
 
 secrets:
  ERP_AWS_SECRET_ACCESS_KEY:
@@ -65,5 +79,9 @@ secrets:
    external: true
 
 networks:
+  erp_net:
   traefik:
     external: true
+
+volumes:
+  erp_data:

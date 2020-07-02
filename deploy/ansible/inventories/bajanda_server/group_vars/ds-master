@@ -1,0 +1,6 @@
+ip: 207.244.244.24
+client_ips:
+  - 207.244.244.24
+basic_auth_username: bajanda
+basic_auth_password: b4j4nd4
+stack_name: staging-bajanda

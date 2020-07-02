@@ -1,0 +1,2 @@
+[ds-master]
+207.244.244.24 ansible_user=root ansible_python_interpreter=/usr/bin/python3
