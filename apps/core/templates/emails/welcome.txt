@@ -1,0 +1,10 @@
+{% load i18n %}
+
+{% trans 'Hello' %}
+
+{% trans 'By this email we want to give you the warmest welcome to the political movement S+, this is a confirmation email.' %}
+
+{% trans 'Welcome' %}
+
+{% trans 'Greetings' %}
+{% trans 'S+ council' %}

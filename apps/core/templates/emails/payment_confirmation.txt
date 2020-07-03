@@ -1,0 +1,8 @@
+{% load i18n %}
+
+{% trans 'Hello' %}
+
+{% trans 'The membership payment for the this month has been arrived successfuly' %}
+
+{% trans 'Greetings' %}
+{% trans 'S+ council' %}

@@ -10,13 +10,14 @@ from django.views import View
 from django.views.generic import UpdateView, RedirectView, TemplateView
 from registration.backends.default.views import ResendActivationView
 
+from apps.core.emails import WelcomeEmail, PaymentConfirmationEmail
 from apps.core.forms import (
     ProfileUpdateForm,
     CustomResendActivationForm,
     CustomPasswordResetForm, CustomAuthenticationForm
 )
 from apps.core.models import Profile, Payment
-from apps.core.services import ReceivePayment
+from apps.core.services import ReceivePayment, PaymentCounter
 
 
 class RedirectProfileView(RedirectView):
@@ -126,6 +127,12 @@ class WebhookView(View):
             settings.PAYPAL_CLIENT_ID,
             settings.PAYPAL_CLIENT_SECRET
         )
+
+        if PaymentCounter(email=service.email).amount == 1:
+            email = WelcomeEmail(destinations=[service.email])
+        else:
+            email = PaymentConfirmationEmail(destinations=[service.email])
+        email.send()
 
         return HttpResponse()
 

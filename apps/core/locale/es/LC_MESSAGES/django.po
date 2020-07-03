@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-19 16:53+0200\n"
+"POT-Creation-Date: 2020-07-03 19:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: emails.py:35
+msgid "[ERP S+] Welcome"
+msgstr "[ERP S+] Bienvenida"
+
+#: emails.py:40
+msgid "[ERP S+] Payment confirmation"
+msgstr ""
 
 #: forms.py:18
 msgid "Surname"
@@ -148,6 +156,39 @@ msgstr "Seleccione método de pago"
 #: templates/core/profile_update.html:6 templates/core/profile_update.html:10
 msgid "Update profile"
 msgstr "Actualizar el perfil"
+
+#: templates/emails/payment_confirmation.txt:3 templates/emails/welcome.txt:3
+msgid "Hello"
+msgstr "Hola"
+
+#: templates/emails/payment_confirmation.txt:5
+msgid "The membership payment for the this month has been arrived successfuly"
+msgstr "El pago de su membresía por este mes ha sido recibido satisfactoriamente."
+
+#: templates/emails/payment_confirmation.txt:7 templates/emails/welcome.txt:9
+msgid "Greetings"
+msgstr "Saludos"
+
+#: templates/emails/payment_confirmation.txt:8 templates/emails/welcome.txt:10
+msgid "S+ council"
+msgstr "Consejo S+"
+
+#: templates/emails/test.txt:2
+msgid "Test email"
+msgstr ""
+
+#: templates/emails/welcome.txt:5
+msgid ""
+"By this email we want to give you the warmest welcome to the political "
+"movement S+, this is a confirmation email."
+msgstr ""
+"Por medio del presente correo queremos darle la bienvenida a al movimiento "
+"político S+, este correo es para confirmarle que ya es miembro del "
+"movimiento."
+
+#: templates/emails/welcome.txt:7
+msgid "Welcome"
+msgstr "Bienvenido"
 
 #~ msgid "Verification code"
 #~ msgstr "Código de verificación"
