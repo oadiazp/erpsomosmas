@@ -12,4 +12,4 @@ class TestPaymentCounter:
         profile = mixer.blend('core.Profile', user=user)
         mixer.blend('core.Payment', profile=profile)
 
-        assert PaymentCounter(email='foo@test.com').count == 1
+        assert PaymentCounter(email='foo@test.com').amount == 1

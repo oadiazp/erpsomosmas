@@ -33,5 +33,5 @@ class PaymentCounter:
         self.email = email
 
     @property
-    def count(self):
+    def amount(self):
         return Payment.objects.filter(profile__user__email=self.email).count()
