@@ -23,6 +23,7 @@ class Profile(TimeStampedModel):
     country = CountryField(null=True, blank=True)
     paypal_email = models.EmailField(null=True, blank=True)
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
+    city = models.CharField(max_length=100, null=True, blank=True)
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 
@@ -65,7 +66,8 @@ class Profile(TimeStampedModel):
             'house_number',
             'zip_code',
             'state',
-            'country'
+            'country',
+            'city',
         ]
 
         all_profile_props_are_defined = self.all_properties_defined(

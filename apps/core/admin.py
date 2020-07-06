@@ -28,19 +28,12 @@ class ProfileAdmin(admin.ModelAdmin):
         'first_name',
         'last_name',
         'email',
+        'city',
         'country'
     ]
     inlines = [
         PaymentInline,
     ]
-    actions = [
-        'export_to_pdf',
-    ]
-
-    def export_to_pdf(self, request, queryset):
-        return render(request, 'core/export.html', {
-            'profiles': queryset
-        })
 
 
 @admin.register(Setting)

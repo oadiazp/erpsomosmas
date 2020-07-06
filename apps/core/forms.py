@@ -28,6 +28,7 @@ class ProfileUpdateForm(forms.ModelForm):
             'state',
             'country',
             'photo',
+            'city',
         )
 
     def save(self, commit=True):

@@ -96,7 +96,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="col-sm-4 col-md-4 col-lg-4">
             <div class="form-group">
                 <label for="id_state">{% trans 'State' %}</label>
                 {{ form.state|add_class:'form-control' }}
@@ -105,7 +105,18 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6">
+
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="id_city">{% trans 'City' %}</label>
+                {{ form.city|add_class:'form-control' }}
+                {% for error in form.city.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-sm-4 col-md-4 col-lg-4">
             <div class="form-group">
                 <label for="id_country">{% trans 'Country' %}</label>
                 {{ form.country|add_class:'form-control' }}

@@ -29,7 +29,8 @@ class TestProfile:
             house_number='1A',
             zip_code='10178',
             state='Berlin',
-            country='DE'
+            country='DE',
+            city='Berlin'
         )
 
         assert profile.is_complete
