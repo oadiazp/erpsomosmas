@@ -12,12 +12,13 @@ class TestMassMail(TestCase):
         mx_profile = mixer.blend('core.Profile', country='MX')
 
         mass_mail = mixer.blend('core.MassMail')
-        mixer.blend(
-            'core.MassMailCriteria',
+        criteria = mixer.blend(
+            'core.Criteria',
             mass_mail=mass_mail,
             field='country__in',
             value="['CU','US']"
         )
+        mass_mail.criterias.add(criteria)
 
         assert cuban_profile in mass_mail.recipients
         assert us_profile in mass_mail.recipients
@@ -36,12 +37,13 @@ class TestMassMail(TestCase):
         )
 
         mass_mail = mixer.blend('core.MassMail')
-        mixer.blend(
-            'core.MassMailCriteria',
+        criteria = mixer.blend(
+            'core.Criteria',
             mass_mail=mass_mail,
             field='user__first_name',
             value=""
         )
+        mass_mail.criterias.add(criteria)
 
         assert cuban_profile not in mass_mail.recipients
         assert us_profile in mass_mail.recipients
@@ -58,12 +60,14 @@ class TestMassMail(TestCase):
         mixer.blend('core.Payment', profile=us_profile)
 
         mass_mail = mixer.blend('core.MassMail')
-        mixer.blend(
-            'core.MassMailCriteria',
+        criteria = mixer.blend(
+            'core.Criteria',
             mass_mail=mass_mail,
             field='payment__isnull',
             value="1"
         )
+
+        mass_mail.criterias.add(criteria)
 
         assert us_profile not in mass_mail.recipients
         assert cuban_profile in mass_mail.recipients
@@ -81,12 +85,12 @@ class TestMassMail(TestCase):
         )
 
         mass_mail = mixer.blend('core.MassMail')
-        mixer.blend(
-            'core.MassMailCriteria',
-            mass_mail=mass_mail,
+        criteria = mixer.blend(
+            'core.Criteria',
             field='user__is_active',
             value="1"
         )
+        mass_mail.criterias.add(criteria)
 
         assert us_profile not in mass_mail.recipients
         assert cuban_profile in mass_mail.recipients

@@ -179,11 +179,13 @@ class MassMail(TimeStampedModel):
     subject = models.CharField(max_length=100)
     message = models.TextField()
 
+    criterias = models.ManyToManyField('Criteria')
+
     @property
     def filters(self):
         result = {}
 
-        for criteria in self.massmailcriteria_set.all():
+        for criteria in self.criterias.all():
             if 'in' in criteria.field:
                 value = literal_eval(criteria.value)
             elif criteria.value.isdigit():
@@ -213,7 +215,8 @@ class MassMail(TimeStampedModel):
             email.send()
 
 
-class MassMailCriteria(TimeStampedModel):
+class Criteria(TimeStampedModel):
+    name = models.CharField(max_length=100)
     field = models.CharField(max_length=100)
     value = models.CharField(max_length=100)
 
@@ -224,6 +227,9 @@ class MassMailCriteria(TimeStampedModel):
         return {
             self.field: self.value
         }
+
+    def __str__(self):
+        return self.name
 
 
 from .signals import *  # noqa

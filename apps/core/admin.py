@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.shortcuts import render
 
 from apps.core.models import (
     Profile,
@@ -8,7 +7,7 @@ from apps.core.models import (
     Expense,
     ExpenseKind,
     MassMail,
-    MassMailCriteria
+    Criteria
 )
 
 
@@ -57,7 +56,7 @@ class ExpenseKindAdmin(admin.ModelAdmin):
 
 
 class MassMailCriteriaInline(admin.TabularInline):
-    model = MassMailCriteria
+    model = Criteria
 
 
 @admin.register(MassMail)
@@ -77,3 +76,11 @@ class MassMailAdmin(admin.ModelAdmin):
     def send_mails(self, request, queryset):
         for mass_mail in queryset:
             mass_mail.send_message()
+
+
+@admin.register(Criteria)
+class CriteriaAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+    )
