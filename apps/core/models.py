@@ -241,7 +241,7 @@ class Club(FilterMixin, TimeStampedModel):
     members = models.ManyToManyField(Profile, related_name='club_members')
     coordinator = models.ForeignKey(
         Profile,
-        related_name = 'club_members',
+        related_name='club_coordinator',
         on_delete=models.DO_NOTHING
     )
     criterias = models.ManyToManyField(Criteria)

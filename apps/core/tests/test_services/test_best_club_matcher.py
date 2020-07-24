@@ -55,3 +55,16 @@ class TestBestClubMatcher:
         assert es_profile in es_club.members.all()
         assert madrid_profile in madrid_club.members.all()
         assert rivas_profile in rivas_club.members.all()
+
+    def test_change_club(self):
+        es_club = mixer.blend(
+            'core.Club',
+            coordinator=mixer.blend('core.Profile')
+        )
+        us_club = mixer.blend(
+            'core.Club',
+            coordinator=mixer.blend('core.Profile')
+        )
+
+        es_criteria = mixer.blend('core.Criteria', field='country', value='ES')
+        us_criteria = mixer.blend('core.Criteria', field='country', value='US')
