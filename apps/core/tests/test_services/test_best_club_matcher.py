@@ -8,9 +8,18 @@ pytestmark = pytest.mark.django_db
 
 class TestBestClubMatcher:
     def test_find_best_match_with_several_clubs(self):
-        es_club = mixer.blend('core.Club')
-        madrid_club = mixer.blend('core.Club')
-        rivas_club = mixer.blend('core.Club')
+        es_club = mixer.blend(
+            'core.Club',
+            coordinator=mixer.blend('core.Profile')
+        )
+        madrid_club = mixer.blend(
+            'core.Club',
+            coordinator=mixer.blend('core.Profile')
+        )
+        rivas_club = mixer.blend(
+            'core.Club',
+            coordinator=mixer.blend('core.Profile')
+        )
 
         es_criteria = mixer.blend('core.Criteria', field='country', value='ES')
         madrid_criteria = mixer.blend(
