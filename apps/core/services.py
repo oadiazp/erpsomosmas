@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
+from django.db.models import Count
+from apps.core.models import Profile, Payment, Club
 
-from apps.core.models import Profile, Payment
 from apps.core.payment_methods import PayPalPaymentMethod
 
 
@@ -73,3 +74,14 @@ class FakeProfileCreator:
 
         return profile
 
+
+class BestClubMatcher:
+    @staticmethod
+    def find(profile):
+        sorted_clubs = Club.objects.all().annotate(
+            amount=Count('criterias')
+        ).order_by('-amount')
+
+        for club in sorted_clubs:
+            if club.match(profile):
+                return club

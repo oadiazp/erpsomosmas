@@ -84,3 +84,7 @@ class CriteriaAdmin(admin.ModelAdmin):
         'id',
         'name',
     )
+
+
+class ClubAdmin(admin.ModelAdmin):
+    pass

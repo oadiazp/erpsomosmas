@@ -174,13 +174,7 @@ class Donation(TimeStampedModel):
     amount = models.FloatField()
 
 
-class MassMail(TimeStampedModel):
-    name = models.CharField(max_length=100)
-    subject = models.CharField(max_length=100)
-    message = models.TextField()
-
-    criterias = models.ManyToManyField('Criteria')
-
+class FilterMixin:
     @property
     def filters(self):
         result = {}
@@ -191,13 +185,22 @@ class MassMail(TimeStampedModel):
             elif criteria.value.isdigit():
                 value = int(criteria.value)
 
-                value = True if ('null' in criteria.field and value) or ('is' in criteria.field and value) else False
+                value = True if ('null' in criteria.field and value) or (
+                            'is' in criteria.field and value) else False
             else:
                 value = criteria.value
 
             result[criteria.field] = value
 
         return result
+
+
+class MassMail(FilterMixin, TimeStampedModel):
+    name = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+
+    criterias = models.ManyToManyField('Criteria')
 
     @property
     def recipients(self):
@@ -230,6 +233,21 @@ class Criteria(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+
+class Club(FilterMixin, TimeStampedModel):
+    name = models.CharField(max_length=100)
+
+    members = models.ManyToManyField(Profile, related_name='club_members')
+    coordinator = models.ForeignKey(
+        Profile,
+        related_name = 'club_members',
+        on_delete=models.DO_NOTHING
+    )
+    criterias = models.ManyToManyField(Criteria)
+
+    def match(self, profile):
+        return profile in Profile.objects.filter(**self.filters)
 
 
 from .signals import *  # noqa

@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% trans 'Hello' %}
+
+{% trans 'We want to let you know there is a S+ Club next to your area:' %}
+
+{% blocktrans with club=club%}
+Club: {{ club.name }}
+Coordinator: {{ club.coordinator }}
+E-mail: {{ club.coordinator.user.email }}
+Phone: {{ club.coordinator.phone }}
+{% endblocktrans %}
+
+{% trans 'Greetings' %}
+{% trans 'S+ council' %}

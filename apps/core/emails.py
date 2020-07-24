@@ -38,3 +38,15 @@ class WelcomeEmail(Email):
 class PaymentConfirmationEmail(Email):
     body_template = 'emails/payment_confirmation.txt'
     subject = _('[ERP S+] Payment confirmation')
+
+
+class WelcomeToClubEmail(Email):
+    body_template = 'email/welcome_to_club.txt'
+    subject = _('[ERP S+] Welcome to the club')
+
+    def __init__(self, destinations, context):
+        super().__init__(destinations)
+        self.context = context
+
+    def get_context(self):
+        return self.context

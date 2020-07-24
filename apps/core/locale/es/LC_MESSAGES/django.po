@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-06 22:00+0200\n"
+"POT-Creation-Date: 2020-07-24 21:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,12 @@ msgstr "[ERP S+] Bienvenida"
 #: emails.py:40
 msgid "[ERP S+] Payment confirmation"
 msgstr "[ERP S+] Confirmación de pago"
+
+#: emails.py:45
+#, fuzzy
+#| msgid "[ERP S+] Welcome"
+msgid "[ERP S+] Welcome to the club"
+msgstr "[ERP S+] Bienvenida"
 
 #: forms.py:18
 msgid "Surname"
@@ -46,15 +52,15 @@ msgstr "Aceptar"
 msgid "Profile pic"
 msgstr "Foto de perfil"
 
-#: templates/core/_profile_form.html:29 templates/core/export.html:14
+#: templates/core/_profile_form.html:29
 msgid "First name"
 msgstr "Primer nombre"
 
-#: templates/core/_profile_form.html:38 templates/core/export.html:15
+#: templates/core/_profile_form.html:38
 msgid "Last name"
 msgstr "Apellido"
 
-#: templates/core/_profile_form.html:50 templates/core/export.html:16
+#: templates/core/_profile_form.html:50
 msgid "E-mail"
 msgstr ""
 
@@ -82,17 +88,13 @@ msgstr "Estado"
 msgid "City"
 msgstr "Ciudad"
 
-#: templates/core/_profile_form.html:121 templates/core/export.html:17
+#: templates/core/_profile_form.html:121
 msgid "Country"
 msgstr "País"
 
 #: templates/core/_profile_form.html:132
 msgid "Photo"
 msgstr "Foto"
-
-#: templates/core/export.html:13
-msgid "User"
-msgstr "Usuario"
 
 #: templates/core/profile_detail.html:5
 msgid "General profile"
@@ -162,6 +164,7 @@ msgid "Update profile"
 msgstr "Actualizar el perfil"
 
 #: templates/emails/payment_confirmation.txt:3 templates/emails/welcome.txt:3
+#: templates/emails/welcome_to_club.txt:3
 msgid "Hello"
 msgstr "Hola"
 
@@ -171,10 +174,12 @@ msgstr ""
 "El pago de su membresía por este mes ha sido recibido satisfactoriamente."
 
 #: templates/emails/payment_confirmation.txt:7 templates/emails/welcome.txt:9
+#: templates/emails/welcome_to_club.txt:14
 msgid "Greetings"
 msgstr "Saludos"
 
 #: templates/emails/payment_confirmation.txt:8 templates/emails/welcome.txt:10
+#: templates/emails/welcome_to_club.txt:15
 msgid "S+ council"
 msgstr "Consejo S+"
 
@@ -195,5 +200,27 @@ msgstr ""
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#~ msgid "Verification code"
-#~ msgstr "Código de verificación"
+#: templates/emails/welcome_to_club.txt:5
+msgid "We want to let you know there is a S+ Club next to your area:"
+msgstr "Queremos hacerle saber que hay un club de S+ en su área"
+
+#: templates/emails/welcome_to_club.txt:7
+#, python-format
+msgid ""
+"\n"
+"Club: %(club.name)s\n"
+"Coordinator: %(club.coordinator)s\n"
+"E-mail: %(club.coordinator.user.email)s\n"
+"Phone: %(club.coordinator.phone)s\n"
+msgstr ""
+"\n"
+"Club: %(club.name)s\n"
+"Coordinador: %(club.coordinator)s\n"
+"E-mail: %(club.coordinator.user.email)s\n"
+"Teléfono: %(club.coordinator.phone)s\n"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "Verification code"
+msgstr "Código de verificación"
