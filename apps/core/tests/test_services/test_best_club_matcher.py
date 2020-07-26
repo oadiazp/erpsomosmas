@@ -65,6 +65,17 @@ class TestBestClubMatcher:
             'core.Club',
             coordinator=mixer.blend('core.Profile')
         )
-
         es_criteria = mixer.blend('core.Criteria', field='country', value='ES')
         us_criteria = mixer.blend('core.Criteria', field='country', value='US')
+        es_club.criterias.add(es_criteria)
+        us_club.criterias.add(us_criteria)
+
+        member = mixer.blend('core.Profile', country='US')
+
+        assert member in us_club.members.all()
+
+        member.country = 'ES'
+        member.save()
+
+        assert member in es_club.members.all()
+        assert member not in us_club.members.all()

@@ -14,6 +14,27 @@ from model_utils.models import TimeStampedModel
 from .querysets import ProfileQS
 
 
+class FilterMixin:
+    @property
+    def filters(self):
+        result = {}
+
+        for criteria in self.criterias.all():
+            if 'in' in criteria.field:
+                value = literal_eval(criteria.value)
+            elif criteria.value.isdigit():
+                value = int(criteria.value)
+
+                value = True if ('null' in criteria.field and value) or (
+                        'is' in criteria.field and value) else False
+            else:
+                value = criteria.value
+
+            result[criteria.field] = value
+
+        return result
+
+
 class Profile(TimeStampedModel):
     phone = models.CharField(max_length=20, null=True, blank=True)
     street = models.CharField(max_length=100, null=True, blank=True)
@@ -26,6 +47,13 @@ class Profile(TimeStampedModel):
     city = models.CharField(max_length=100, null=True, blank=True)
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    club = models.ForeignKey(
+        'Club',
+        null=True,
+        blank=True,
+        related_name='members',
+        on_delete=models.DO_NOTHING
+    )
 
     objects = ProfileQS.as_manager()
 
@@ -54,7 +82,8 @@ class Profile(TimeStampedModel):
     def all_properties_defined(cls, obj, attrs):
         return all(
             [
-                hasattr(obj, attr) and getattr(obj, attr) is not None for attr in attrs
+                hasattr(obj, attr) and getattr(obj, attr) is not None for attr
+                in attrs
             ]
         )
 
@@ -114,7 +143,7 @@ class Profile(TimeStampedModel):
     @property
     def membership_price(self):
         setting = Setting.objects.filter(
-            key=f'PAYPAL_MEMBERSHIP_PRICE_{ self.payment_region }'
+            key=f'PAYPAL_MEMBERSHIP_PRICE_{self.payment_region}'
         )
 
         if setting:
@@ -174,27 +203,6 @@ class Donation(TimeStampedModel):
     amount = models.FloatField()
 
 
-class FilterMixin:
-    @property
-    def filters(self):
-        result = {}
-
-        for criteria in self.criterias.all():
-            if 'in' in criteria.field:
-                value = literal_eval(criteria.value)
-            elif criteria.value.isdigit():
-                value = int(criteria.value)
-
-                value = True if ('null' in criteria.field and value) or (
-                            'is' in criteria.field and value) else False
-            else:
-                value = criteria.value
-
-            result[criteria.field] = value
-
-        return result
-
-
 class MassMail(FilterMixin, TimeStampedModel):
     name = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
@@ -238,10 +246,9 @@ class Criteria(TimeStampedModel):
 class Club(FilterMixin, TimeStampedModel):
     name = models.CharField(max_length=100)
 
-    members = models.ManyToManyField(Profile, related_name='club_members')
     coordinator = models.ForeignKey(
         Profile,
-        related_name='club_coordinator',
+        related_name='coordinator',
         on_delete=models.DO_NOTHING
     )
     criterias = models.ManyToManyField(Criteria)
