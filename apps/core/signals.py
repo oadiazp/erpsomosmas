@@ -17,12 +17,17 @@ def create_profile(sender, created, instance, **kwargs):
 def find_best_club(sender, created, instance, **kwargs):
     best_club = BestClubMatcher.find(instance)
 
-    if best_club:
-        best_club.members.add(instance)
-        welcome_to_club_email = WelcomeToClubEmail(
-            destinations=[instance.user.email],
-            context={
-                'club': best_club,
-            }
-        )
-        welcome_to_club_email.send()
+    if not best_club:
+        pass
+
+    if best_club == instance.club:
+        pass
+
+    best_club.members.add(instance)
+    welcome_to_club_email = WelcomeToClubEmail(
+        destinations=[instance.user.email],
+        context={
+            'club': best_club,
+        }
+    )
+    welcome_to_club_email.send()
