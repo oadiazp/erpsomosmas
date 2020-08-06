@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from pytest import set_trace
 
 from apps.core.emails import WelcomeToClubEmail
 from apps.core.models import Profile
@@ -17,11 +18,11 @@ def create_profile(sender, created, instance, **kwargs):
 def find_best_club(sender, created, instance, **kwargs):
     best_club = BestClubMatcher.find(instance)
 
-    if not best_club:
-        pass
+    if best_club is None:
+        return
 
     if best_club == instance.club:
-        pass
+        return
 
     best_club.members.add(instance)
     welcome_to_club_email = WelcomeToClubEmail(
