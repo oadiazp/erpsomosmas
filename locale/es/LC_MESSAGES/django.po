@@ -77,7 +77,7 @@ msgstr ""
 "\n"
 "¿Ha olvidado la contraseña?"
 "Pon tu correo electrónico en el formulario y le enviaremos las instrucciones para obtener la nueva. \n"
-"    "
+"  "
 
 #: registration/registration_form.html:41
 msgid "Ok"
