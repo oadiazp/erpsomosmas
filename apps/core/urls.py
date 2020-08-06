@@ -9,7 +9,7 @@ from apps.core.views import (
     PaymentView, RedirectProfileView,
     CustomResendActivationView,
     CustomPasswordResetView,
-    CustomLoginView, ResubscribeView,
+    CustomLoginView, ResubscribeView, MaintenanceView,
 )
 
 urlpatterns = [
@@ -47,5 +47,6 @@ urlpatterns = [
         'resubscribe/',
         ResubscribeView.as_view(),
         name='resubscribe'
-    )
+    ),
+    path('maintenance/', MaintenanceView.as_view(), name='maintenance'),
 ]

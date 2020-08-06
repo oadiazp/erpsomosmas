@@ -16,7 +16,7 @@ from apps.core.forms import (
     CustomResendActivationForm,
     CustomPasswordResetForm, CustomAuthenticationForm
 )
-from apps.core.models import Profile, Payment
+from apps.core.models import Profile, Payment, Setting
 from apps.core.services import ReceivePayment, PaymentCounter
 
 
@@ -178,6 +178,9 @@ class ProfileDetailView(ProfileUpdateView):
 
 class RedirectMainView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
+        if Setting.get('MAINTENANCE_MODE') == '1':
+            return reverse('maintenance')
+
         if hasattr(self.request, 'user') and self.request.user.is_authenticated:
             return reverse('accounts_redirect')
 
@@ -201,3 +204,7 @@ class ResubscribeView(PaymentView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(TemplateView, self).dispatch(request, *args, **kwargs)
+
+
+class MaintenanceView(TemplateView):
+    template_name = 'core/maintenance.html'

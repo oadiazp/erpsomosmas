@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-24 21:57+0200\n"
+"POT-Creation-Date: 2020-08-06 20:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,6 +95,16 @@ msgstr "País"
 #: templates/core/_profile_form.html:132
 msgid "Photo"
 msgstr "Foto"
+
+#: templates/core/maintenance.html:5
+msgid "Under maintenance"
+msgstr "En mantenimiento"
+
+#: templates/core/maintenance.html:7
+msgid ""
+"We're preparing a new major release that should be available soon. We'll let "
+"you know"
+msgstr "Estamos preparando una nueva versión del ERP para S+ que estará disponible pronto. Les haremos saber cuanto antes."
 
 #: templates/core/profile_detail.html:5
 msgid "General profile"
@@ -219,8 +229,8 @@ msgstr ""
 "E-mail: %(club.coordinator.user.email)s\n"
 "Teléfono: %(club.coordinator.phone)s\n"
 
-msgid "User"
-msgstr "Usuario"
+#~ msgid "User"
+#~ msgstr "Usuario"
 
-msgid "Verification code"
-msgstr "Código de verificación"
+#~ msgid "Verification code"
+#~ msgstr "Código de verificación"
