@@ -14,9 +14,9 @@ services:
       AWS_REGION: us-east-1
       AWS_S3_BUCKET_NAME: somosmas-management
       AWS_ACCESS_KEY_ID: AKIATJZEF4RNS7H4F72A
-      DB_HOST: restored001.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
+      DB_HOST: somosmas.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
       DB_USER: postgres
-      DB_NAME: management
+      DB_NAME: erp
       EMAIL_HOST: smtp.sendgrid.net
       EMAIL_HOST_USER: apikey
       EMAIL_PORT: 25
@@ -25,6 +25,7 @@ services:
       PAYPAL_CREATE_PRODUCT_URL: https://api.paypal.com/v1/catalogs/products
       PAYPAL_CREATE_PLAN_URL: https://api.paypal.com/v1/billing/plans
       REGISTRATION_DEFAULT_FROM_EMAIL: tecnologia@somosmascuba.com
+      LC_ALL: es_ES.UTF-8
     deploy:
       replicas: 2
       labels:
