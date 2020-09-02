@@ -61,9 +61,6 @@ class MassMailCriteriaInline(admin.TabularInline):
 
 @admin.register(MassMail)
 class MassMailAdmin(admin.ModelAdmin):
-    inlines = [
-        MassMailCriteriaInline,
-    ]
     list_display = [
         'name',
         'subject',

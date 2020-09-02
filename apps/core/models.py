@@ -208,7 +208,7 @@ class MassMail(FilterMixin, TimeStampedModel):
     subject = models.CharField(max_length=100)
     message = models.TextField()
 
-    criterias = models.ManyToManyField('Criteria')
+    criterias = models.ManyToManyField('Criteria', blank=True)
 
     @property
     def recipients(self):
@@ -231,7 +231,7 @@ class Criteria(TimeStampedModel):
     field = models.CharField(max_length=100)
     value = models.CharField(max_length=100)
 
-    mass_mail = models.ForeignKey(MassMail, on_delete=models.CASCADE)
+    mass_mails = models.ManyToManyField(MassMail, blank=True)
 
     @property
     def filter_dict(self):
