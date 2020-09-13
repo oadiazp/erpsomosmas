@@ -7,7 +7,7 @@ from apps.core.models import (
     Expense,
     ExpenseKind,
     MassMail,
-    Criteria
+    Criteria, Club
 )
 from apps.core.services import BestClubMatcher
 
@@ -84,6 +84,7 @@ class CriteriaAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(Club)
 class ClubAdmin(admin.ModelAdmin):
     actions = (
         'find_best_matches_to_all_members',
