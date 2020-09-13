@@ -9,6 +9,7 @@ from apps.core.models import (
     MassMail,
     Criteria
 )
+from apps.core.services import BestClubMatcher
 
 
 class PaymentInline(admin.TabularInline):
@@ -84,4 +85,11 @@ class CriteriaAdmin(admin.ModelAdmin):
 
 
 class ClubAdmin(admin.ModelAdmin):
-    pass
+    actions = (
+        'find_best_matches_to_all_members',
+    )
+
+    def find_best_matches_to_all_members(self):
+        member: Profile
+        for member in Profile.objects.members():
+            BestClubMatcher.find(member)
