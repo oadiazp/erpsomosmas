@@ -90,7 +90,7 @@ class ClubAdmin(admin.ModelAdmin):
         'find_best_matches_to_all_members',
     )
 
-    def find_best_matches_to_all_members(self):
+    def find_best_matches_to_all_members(self, request, queryset):
         member: Profile
         for member in Profile.objects.members():
             BestClubMatcher.find(member)
