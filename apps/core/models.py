@@ -250,5 +250,8 @@ class Club(FilterMixin, TimeStampedModel):
     def match(self, profile):
         return profile in Profile.objects.filter(**self.filters)
 
+    def __str__(self):
+        return self.name
+
 
 from .signals import *  # noqa
