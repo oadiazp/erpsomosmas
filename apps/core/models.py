@@ -231,8 +231,6 @@ class Criteria(TimeStampedModel):
     field = models.CharField(max_length=100)
     value = models.TextField()
 
-    mass_mails = models.ManyToManyField(MassMail, blank=True)
-
     @property
     def filter_dict(self):
         return {
