@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from apps.core.emails import WelcomeToClubEmail
+from apps.core.emails import WelcomeToClubEmail, NewClubMemberEmail
 from apps.core.models import Profile
 from apps.core.services import BestClubMatcher
 
@@ -31,3 +31,11 @@ def find_best_club(sender, created, instance, **kwargs):
         }
     )
     welcome_to_club_email.send()
+
+    new_member_email = NewClubMemberEmail(
+        destinations=[best_club.coordinator_email],
+        context={
+            'profile': instance
+        }
+    )
+    new_member_email.send()

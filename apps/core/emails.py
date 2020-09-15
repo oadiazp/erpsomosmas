@@ -8,11 +8,15 @@ class Email:
     body_template = None
     subject = None
     destinations = []
+    context = {}
 
-    def __init__(self, destinations):
+    def __init__(self, destinations, context=dict()):
         self.destinations = destinations
+        self.context = context
 
     def send(self):
+        context = self.context or self.get_context()
+
         send_mail(
             subject=self.subject,
             message=render_to_string(
@@ -44,9 +48,7 @@ class WelcomeToClubEmail(Email):
     body_template = 'emails/welcome_to_club.txt'
     subject = _('[ERP S+] Welcome to the club')
 
-    def __init__(self, destinations, context):
-        super().__init__(destinations)
-        self.context = context
 
-    def get_context(self):
-        return self.context
+class NewClubMemberEmail(Email):
+    body_template = 'emails/new_club_member.txt'
+    subject = _('[ERP S+] New member to your club')

@@ -245,12 +245,8 @@ class Criteria(TimeStampedModel):
 
 class Club(FilterMixin, TimeStampedModel):
     name = models.CharField(max_length=100)
+    coordinator_email = models.EmailField(max_length=100)
 
-    coordinator = models.ForeignKey(
-        Profile,
-        related_name='coordinator',
-        on_delete=models.DO_NOTHING
-    )
     criterias = models.ManyToManyField(Criteria)
 
     def match(self, profile):

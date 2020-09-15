@@ -77,7 +77,7 @@ class FakeProfileCreator:
 
 class BestClubMatcher:
     @staticmethod
-    def find(profile):
+    def find(profile: Profile) -> Club:
         sorted_clubs = Club.objects.all().annotate(
             amount=Count('criterias')
         ).order_by('-amount')

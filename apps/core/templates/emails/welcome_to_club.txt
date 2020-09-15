@@ -7,8 +7,7 @@
 {% blocktrans with club=club%}
 Club: {{ club.name }}
 Coordinator: {{ club.coordinator }}
-E-mail: {{ club.coordinator.user.email }}
-Phone: {{ club.coordinator.phone }}
+E-mail: {{ club.coordinator_email }}
 {% endblocktrans %}
 
 {% trans 'Greetings' %}

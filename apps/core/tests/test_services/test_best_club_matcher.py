@@ -1,5 +1,6 @@
 import pytest
 from mixer.backend.django import mixer
+from django.core import mail
 
 from apps.core.services import BestClubMatcher
 

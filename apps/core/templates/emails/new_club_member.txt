@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% trans 'Hello' %}
+
+{% trans 'We want to let you know there is a new member to your club' %}
+
+{% blocktrans with user=profile.user %}
+First name: {{ user.first_name }}
+Last name: {{ user.last_name }}
+Phone: {{ profile.phone }}
+E-mail: {{ user.email }}
+{% endblocktrans %}
+
+{% trans 'Greetings' %}
+{% trans 'S+ council' %}
