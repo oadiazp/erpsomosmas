@@ -229,7 +229,7 @@ class MassMail(FilterMixin, TimeStampedModel):
 class Criteria(TimeStampedModel):
     name = models.CharField(max_length=100)
     field = models.CharField(max_length=100)
-    value = models.CharField(max_length=100)
+    value = models.TextField()
 
     mass_mails = models.ManyToManyField(MassMail, blank=True)
 
