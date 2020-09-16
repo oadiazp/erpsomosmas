@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
 
 from apps.core.models import (
     Profile,
@@ -9,11 +10,25 @@ from apps.core.models import (
     MassMail,
     Criteria, Club
 )
-from apps.core.services import BestClubMatcher
 
 
 class PaymentInline(admin.TabularInline):
     model = Payment
+
+
+class ClubFilter(SimpleListFilter):
+    title = 'Club'
+    parameter_name = 'club'
+
+    def lookups(self, request, model_admin):
+        clubs = Club.objects.values('id', 'name')
+
+        return [(club['id'], club['name']) for club in clubs]
+
+    def queryset(self, request, queryset):
+        value = self.value()
+
+        return queryset.filter(club=value)
 
 
 @admin.register(Profile)
@@ -34,6 +49,7 @@ class ProfileAdmin(admin.ModelAdmin):
     inlines = [
         PaymentInline,
     ]
+    list_filter = [ClubFilter]
 
 
 @admin.register(Setting)
