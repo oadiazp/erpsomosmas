@@ -82,6 +82,7 @@ class BestClubMatcher:
             amount=Count('criterias')
         ).order_by('-amount')
 
+        club: Club
         for club in sorted_clubs:
             if club.match(profile):
                 return club
