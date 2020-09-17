@@ -23,7 +23,9 @@ class ClubFilter(SimpleListFilter):
     def lookups(self, request, model_admin):
         clubs = Club.objects.values('id', 'name')
 
-        return [(club['id'], club['name']) for club in clubs]
+        return [
+            (club['id'], club['name']) for club in clubs
+        ].append(('<None>', None))
 
     def queryset(self, request, queryset):
         value = self.value()
