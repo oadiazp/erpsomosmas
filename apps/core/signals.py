@@ -35,7 +35,8 @@ def find_best_club(sender, created, instance, **kwargs):
     new_member_email = NewClubMemberEmail(
         destinations=[best_club.coordinator_email],
         context={
-            'profile': instance
+            'profile': instance,
+            'user': instance.user,
         }
     )
     new_member_email.send()

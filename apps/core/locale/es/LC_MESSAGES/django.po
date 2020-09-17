@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-16 23:07+0200\n"
+"POT-Creation-Date: 2020-09-17 19:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,11 +28,11 @@ msgstr "[ERP S+] Confirmación de pago"
 
 #: emails.py:49
 msgid "[ERP S+] Welcome to the club"
-msgstr "[ERP S+] Bienvenida"
+msgstr "[ERP S+] Bienvenido al club"
 
 #: emails.py:54
 msgid "[ERP S+] New member to your club"
-msgstr "[ERP S+] Bienvenida"
+msgstr "[ERP S+] Nuevo miembro en su club"
 
 #: forms.py:18
 msgid "Surname"
@@ -184,8 +184,6 @@ msgid "Hello"
 msgstr "Hola"
 
 #: templates/emails/new_club_member.txt:5
-#, fuzzy
-#| msgid "We want to let you know there is a S+ Club next to your area:"
 msgid "We want to let you know there is a new member to your club"
 msgstr "Queremos hacerle saber que hay un club de S+ en su área"
 
@@ -193,21 +191,26 @@ msgstr "Queremos hacerle saber que hay un club de S+ en su área"
 #, python-format
 msgid ""
 "\n"
-"First name: %(user.first_name)s\n"
-"Last name: %(user.last_name)s\n"
-"Phone: %(profile.phone)s\n"
-"E-mail: %(user.email)s\n"
+"First name: %(first_name)s\n"
+"Last name: %(last_name)s\n"
+"Phone: %(phone)s\n"
+"E-mail: %(email)s\n"
 msgstr ""
+"\n"
+"Nombre: %(first_name)s\n"
+"Apellidos: %(last_name)s\n"
+"Teléfono: %(phone)s\n"
+"E-mail: %(email)s\n"
 
 #: templates/emails/new_club_member.txt:14
 #: templates/emails/payment_confirmation.txt:7 templates/emails/welcome.txt:9
-#: templates/emails/welcome_to_club.txt:13
+#: templates/emails/welcome_to_club.txt:12
 msgid "Greetings"
 msgstr "Saludos"
 
 #: templates/emails/new_club_member.txt:15
 #: templates/emails/payment_confirmation.txt:8 templates/emails/welcome.txt:10
-#: templates/emails/welcome_to_club.txt:14
+#: templates/emails/welcome_to_club.txt:13
 msgid "S+ council"
 msgstr "Consejo S+"
 
@@ -238,14 +241,12 @@ msgid "We want to let you know there is a S+ Club next to your area:"
 msgstr "Queremos hacerle saber que hay un club de S+ en su área"
 
 #: templates/emails/welcome_to_club.txt:7
+#, python-format
 msgid ""
 "\n"
-"Club: %(club.name)s\n"
-"Coordinator: %(club.coordinator)s\n"
-"E-mail: %(club.coordinator_email)s\n"
+"Club: %(club_name)s\n"
+"E-mail: %(coordinator)s\n"
 msgstr ""
 "\n"
-"Club: %(club.name)s\n"
-"Coordinador: %(club.coordinator)s\n"
-"E-mail: %(club.coordinator.user.email)s\n"
-"Teléfono: %(club.coordinator.phone)s\n"
+"Club: %(club_name)s\n"
+"E-mail: %(coordinator)s\n"

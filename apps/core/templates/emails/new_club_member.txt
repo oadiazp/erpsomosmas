@@ -4,11 +4,11 @@
 
 {% trans 'We want to let you know there is a new member to your club' %}
 
-{% blocktrans with user=profile.user %}
-First name: {{ user.first_name }}
-Last name: {{ user.last_name }}
-Phone: {{ profile.phone }}
-E-mail: {{ user.email }}
+{% blocktrans with first_name=user.first_name last_name=user.last_name email=user.email phone=profile.phone %}
+First name: {{ first_name }}
+Last name: {{ last_name }}
+Phone: {{ phone }}
+E-mail: {{ email }}
 {% endblocktrans %}
 
 {% trans 'Greetings' %}

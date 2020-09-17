@@ -25,7 +25,7 @@ class ClubFilter(SimpleListFilter):
 
         return [
             (club['id'], club['name']) for club in clubs
-        ].append(('<None>', None))
+        ]
 
     def queryset(self, request, queryset):
         value = self.value()

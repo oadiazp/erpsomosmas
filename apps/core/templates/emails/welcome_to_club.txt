@@ -4,10 +4,9 @@
 
 {% trans 'We want to let you know there is a S+ Club next to your area:' %}
 
-{% blocktrans with club=club%}
-Club: {{ club.name }}
-Coordinator: {{ club.coordinator }}
-E-mail: {{ club.coordinator_email }}
+{% blocktrans with club_name=club.name coordinator=club.coordinator_email%}
+Club: {{ club_name }}
+E-mail: {{ coordinator }}
 {% endblocktrans %}
 
 {% trans 'Greetings' %}

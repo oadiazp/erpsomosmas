@@ -21,7 +21,7 @@ class Email:
             subject=self.subject,
             message=render_to_string(
                 template_name=self.body_template,
-                context=self.get_context(),
+                context=context
             ),
             recipient_list=self.get_destinations(),
             from_email=settings.DEFAULT_FROM_EMAIL
