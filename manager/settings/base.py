@@ -94,7 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'es_US'
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),

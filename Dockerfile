@@ -15,7 +15,6 @@ ENV LANG es_US.UTF-8
 ENV LANGUAGE es_US:en
 ENV LC_ALL es_US.UTF-8
 
-
 RUN apt-get install -y  python3-dev \
     build-essential \
     apt-utils \
@@ -55,7 +54,6 @@ RUN . /home/docker/venv/bin/activate; \
       pip install -r /home/docker/src/requirements-live.txt;
 
 RUN chown www-data:www-data -R /home/docker
-
 
 CMD DJANGO_SETTINGS_MODULE=manager.settings.live /home/docker/venv/bin/python /home/docker/src/manage.py createcachetable & \
     DJANGO_SETTINGS_MODULE=manager.settings.live /home/docker/venv/bin/python /home/docker/src/manage.py compilemessages & \
