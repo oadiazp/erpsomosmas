@@ -2,6 +2,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -98,6 +99,11 @@ LANGUAGE_CODE = 'es_US'
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
+)
+
+LANGUAGES = (
+    ('es', _('Español'),),
+    ('en', _('English'),),
 )
 
 TIME_ZONE = 'UTC'
