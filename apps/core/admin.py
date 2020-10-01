@@ -48,6 +48,12 @@ class ProfileAdmin(admin.ModelAdmin):
         'city',
         'country'
     ]
+    csv_fields = [
+        'user',
+        'phone',
+        'city',
+        'country'
+    ]
     inlines = [
         PaymentInline,
     ]
