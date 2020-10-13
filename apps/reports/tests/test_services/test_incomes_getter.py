@@ -21,12 +21,12 @@ class TestIncomesGetter:
         mixer.blend('reports.Move', amount=100, date=datetime(2020, 2, 1),
                     income=True)
 
-        assert IncomesGetter().get(
+        assert IncomesGetter.get(
             start=datetime(2020, 1, 1),
             end=datetime(2020, 1, 30)
         ).count() == 3
 
-        assert IncomesGetter().total(
+        assert IncomesGetter.total(
             start=datetime(2020, 1, 1),
             end=datetime(2020, 1, 30)
-        ).total() == 300
+        ) == 300
