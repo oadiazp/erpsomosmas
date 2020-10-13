@@ -1,14 +1,13 @@
 from django.urls import path
 
-from apps.reports.views import FinancesAllView, MembersView, ContinentsView, \
-    GeoCountriesView, CountriesView
+from apps.reports.views import (
+    MembersView,
+    ContinentsView,
+    GeoCountriesView,
+    CountriesView, FinancesView
+)
 
 urlpatterns = [
-    path(
-        'finances/general',
-        FinancesAllView.as_view(),
-        name='report_general_finances'
-    ),
     path(
         'members/',
         MembersView.as_view(),
@@ -28,5 +27,15 @@ urlpatterns = [
         'json/countries',
         CountriesView.as_view(),
         name='json_countries'
+    ),
+    path(
+        'finances',
+        FinancesView.as_view(),
+        name='finances'
+    ),
+    path(
+        'finances/success',
+        FinancesView.as_view(),
+        name='finances_success'
     ),
 ]

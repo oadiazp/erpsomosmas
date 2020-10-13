@@ -5,8 +5,6 @@ from apps.core.models import (
     Profile,
     Setting,
     Payment,
-    Expense,
-    ExpenseKind,
     MassMail,
     Criteria, Club
 )
@@ -63,21 +61,6 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
     list_display = ('key', 'value',)
-
-
-@admin.register(Expense)
-class ExpenseAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'kind',
-        'amount',
-        'fixed',
-    )
-
-
-@admin.register(ExpenseKind)
-class ExpenseKindAdmin(admin.ModelAdmin):
-    pass
 
 
 class MassMailCriteriaInline(admin.TabularInline):

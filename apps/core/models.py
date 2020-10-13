@@ -180,29 +180,6 @@ class Setting(TimeStampedModel):
         return default
 
 
-class ExpenseKind(TimeStampedModel):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-
-class Expense(TimeStampedModel):
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    amount = models.FloatField()
-    fixed = models.BooleanField()
-
-    kind = models.ForeignKey(ExpenseKind, on_delete=models.DO_NOTHING)
-
-
-class Donation(TimeStampedModel):
-    name = models.CharField(max_length=200)
-    reference = models.CharField(max_length=200)
-    payer = models.EmailField()
-    amount = models.FloatField()
-
-
 class MassMail(FilterMixin, TimeStampedModel):
     name = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)

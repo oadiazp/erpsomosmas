@@ -31,8 +31,7 @@ RUN apt-get install -y  python3-dev \
     git \
     nodejs \
     python3-venv \
-    npm \
-    gettext
+    npm
 
 RUN mkdir -p /home/docker/src
 RUN python3 -m venv /home/docker/venv

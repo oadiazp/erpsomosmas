@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
-from django.db.models import Count
+from django.db.models import Count, Sum
 from apps.core.models import Profile, Payment, Club
 
 from apps.core.payment_methods import PayPalPaymentMethod
+from apps.reports.models import Move
 
 
 class ReceivePayment:
@@ -86,3 +87,39 @@ class BestClubMatcher:
         for club in sorted_clubs:
             if club.match(profile):
                 return club
+
+
+class FinancesGetter:
+    filter = {}
+
+    @classmethod
+    def get(cls, start, end):
+        cls.filter.update({
+            'date__gte': start,
+            'date__lte': end,
+        })
+
+        return Move.objects.filter(**cls.filter)
+
+    @classmethod
+    def total(cls, start, end):
+        cls.filter.update({
+            'date__gte': start,
+            'date__lte': end,
+        })
+
+        return Move.objects.filter(**cls.filter).aggregate(
+            sum=Sum('amount')
+        )['sum']
+
+
+class IncomesGetter(FinancesGetter):
+    filter = {
+        'income': True
+    }
+
+
+class ExpensesGetter(FinancesGetter):
+    filter = {
+        'income': False
+    }
