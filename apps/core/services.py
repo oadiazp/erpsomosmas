@@ -55,6 +55,7 @@ class FakeProfileCreator:
             last_name=(
                 self.billing_agreement['payer']['payer_info']['last_name']
             ),
+            email=self.billing_agreement['payer']['payer_info']['email'],
             is_active=True,
             username=self.billing_agreement['payer']['payer_info']['email'],
         )
