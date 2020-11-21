@@ -43,7 +43,7 @@ PAYPAL_CREATE_PLAN_URL = get_secret('PAYPAL_CREATE_PLAN_URL')
 AWS_DEFAULT_ACL = 'public-read'
 
 sentry_sdk.init(
-    dsn="https://d19037ae19ab4dce8371d2bc4a477304@sentry.monitoring.zczoft.com/2",
+    dsn="https://d653e0ec680640a6b0a2f52f3259b1a4@sentry.zczoft.com/3",
     integrations=[DjangoIntegration()]
 )
 
