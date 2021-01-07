@@ -1,5 +1,8 @@
+import csv
+
 from django.contrib import admin
 from django.contrib.admin import SimpleListFilter
+from django.http import HttpResponse
 
 from apps.core.models import (
     Profile,
@@ -34,7 +37,8 @@ class ClubFilter(SimpleListFilter):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     search_fields = [
-        'user__username',
+        'user__first_name',
+        'user__last_name',
         'country',
         'user__email',
     ]
@@ -47,7 +51,9 @@ class ProfileAdmin(admin.ModelAdmin):
         'country'
     ]
     csv_fields = [
-        'user',
+        'first_name',
+        'last_name',
+        'email',
         'phone',
         'city',
         'country'
@@ -56,6 +62,21 @@ class ProfileAdmin(admin.ModelAdmin):
         PaymentInline,
     ]
     list_filter = [ClubFilter]
+    actions = ('export',)
+
+    def export(self, request, queryset):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = (
+                'attachment; filename="somefilename.csv"'
+        )
+        writer = csv.writer(response)
+
+        for profile in queryset:
+            writer.writerow([
+                getattr(profile, field) for field in self.csv_fields
+            ])
+
+        return response
 
 
 @admin.register(Setting)

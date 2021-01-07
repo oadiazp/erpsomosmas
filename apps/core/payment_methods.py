@@ -1,6 +1,6 @@
 from json import dumps
 
-from paypalrestsdk import Api, Webhook, Payment, Order, BillingAgreement
+from paypalrestsdk import Api, Webhook, Payment, Order, BillingAgreement, Sale
 from requests import post
 
 
@@ -132,6 +132,22 @@ class PayPalPaymentMethod:
     ):
         return Order.find(
             resource_id=order_id,
+            api=Api({
+                'mode': paypal_mode,
+                'client_id': paypal_client_id,
+                'client_secret': paypal_client_secret
+            })
+        )
+
+    @staticmethod
+    def get_sale(
+            sale_id,
+            paypal_mode,
+            paypal_client_id,
+            paypal_client_secret
+    ):
+        return Sale.find(
+            resource_id=sale_id,
             api=Api({
                 'mode': paypal_mode,
                 'client_id': paypal_client_id,

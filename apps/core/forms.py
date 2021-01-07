@@ -14,9 +14,9 @@ from apps.core.models import Profile
 
 
 class ProfileUpdateForm(forms.ModelForm):
-    first_name = forms.CharField()
-    last_name = forms.CharField(label=_('Surname'))
-    email = forms.EmailField()
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(label=_('Surname'), required=True)
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = Profile

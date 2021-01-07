@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Count, Sum
 from apps.core.models import Profile, Payment, Club
@@ -124,3 +125,50 @@ class ExpensesGetter(FinancesGetter):
     filter = {
         'income': False
     }
+
+
+class UserRemoval:
+    @classmethod
+    def remove(cls, user):
+        first_payment = Payment.objects.filter(
+            profile__user__username=user.username
+        ).first()
+        
+        cls.cancel_paypal_billing_agreement(first_payment)
+        cls.remove_payments(user)
+        cls.remove_profile(user)
+        cls.remove_user(user)
+
+    @classmethod
+    def cancel_paypal_billing_agreement(cls, payment):
+        sale = PayPalPaymentMethod.get_sale(
+            payment.reference,
+            settings.PAYPAL_MODE,
+            settings.PAYPAL_CLIENT_ID,
+            settings.PAYPAL_CLIENT_SECRET
+        )
+        billing_agreement = PayPalPaymentMethod.get_billing_agreement(
+            sale['billing_agreement_id'],
+            settings.PAYPAL_MODE,
+            settings.PAYPAL_CLIENT_ID,
+            settings.PAYPAL_CLIENT_SECRET
+        )
+        billing_agreement.cancel()
+
+    @classmethod
+    def remove_payments(cls, user):
+        Payment.objects.filter(
+            profile__user__username=user.username
+        ).delete()
+
+    @classmethod
+    def remove_profile(cls, user):
+        Profile.objects.filter(
+            user__username=user.username
+        ).delete()
+
+    @classmethod
+    def remove_user(cls, user):
+        User.objects.filter(
+            username=user.username
+        ).delete()

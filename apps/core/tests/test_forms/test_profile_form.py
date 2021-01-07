@@ -8,7 +8,7 @@ pytestmark = pytest.mark.django_db
 
 
 class TestProfileForm:
-    def test_save_user_attrs(self):
+    def test_save_incomplete_profile(self):
         user = mixer.blend('auth.User')
         profile = mixer.blend('core.Profile', user=user)
 
@@ -21,10 +21,4 @@ class TestProfileForm:
             }
         )
 
-        form.is_valid()
-        form.save(True)
-
-        user = User.objects.first()
-        assert user.first_name == 'Foo'
-        assert user.last_name == 'Bar'
-        assert user.email == 'foo@bar.com'
+        assert not form.is_valid()

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
     <h3>{% trans 'General profile' %}</h3>
@@ -50,9 +51,13 @@
                         <button class="btn btn-dark">{% trans 'Reports' %}</button>
                     </a>
 
-                    <a href="{% url 'resubscribe' %}">
-                        <button class="btn btn-warning">{% trans 'Re-enable automatic payments' %}</button>
-                    </a>
+{#                    <a href="{% url 'resubscribe' %}">#}
+{#                        <button class="btn btn-warning">{% trans 'Re-enable automatic payments' %}</button>#}
+{#                    </a>#}
+
+
+                    <button class="btn btn-warning">{% trans 'Remove membership' %}</button>
+
 
                     <a href="{% url 'auth_logout' %}">
                         <button class="btn btn-danger">{% trans 'Log out' %}</button>
@@ -64,3 +69,7 @@
 {% endblock %}
 
 {% block title %}{% trans 'Details' %}{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/remove_membership.js' %}"></script>
+{% endblock %}

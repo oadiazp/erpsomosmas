@@ -17,7 +17,7 @@ from apps.core.forms import (
     CustomPasswordResetForm, CustomAuthenticationForm
 )
 from apps.core.models import Profile, Payment, Setting
-from apps.core.services import ReceivePayment, PaymentCounter
+from apps.core.services import ReceivePayment, PaymentCounter, UserRemoval
 
 
 class RedirectProfileView(RedirectView):
@@ -208,3 +208,10 @@ class ResubscribeView(PaymentView):
 
 class MaintenanceView(TemplateView):
     template_name = 'core/maintenance.html'
+
+
+class RemoveMembershipView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        UserRemoval.remove_user(self.request.user)
+
+        return reverse('auth_logout')

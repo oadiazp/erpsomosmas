@@ -36,15 +36,15 @@ class FilterMixin:
 
 
 class Profile(TimeStampedModel):
-    phone = models.CharField(max_length=20, null=True, blank=True)
-    street = models.CharField(max_length=100, null=True, blank=True)
-    house_number = models.CharField(max_length=5, null=True, blank=True)
-    zip_code = models.CharField(max_length=10, null=True, blank=True)
-    state = models.CharField(max_length=100, null=True, blank=True)
-    country = CountryField(null=True, blank=True)
+    phone = models.CharField(max_length=20, null=True)
+    street = models.CharField(max_length=100, null=True)
+    house_number = models.CharField(max_length=5, null=True)
+    zip_code = models.CharField(max_length=10, null=True)
+    state = models.CharField(max_length=100, null=True)
+    country = CountryField(null=True)
     paypal_email = models.EmailField(null=True, blank=True)
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
-    city = models.CharField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=100, null=True)
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     club = models.ForeignKey(
