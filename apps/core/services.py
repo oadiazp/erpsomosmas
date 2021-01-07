@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Count, Sum
+from registration.models import RegistrationProfile
+
 from apps.core.models import Profile, Payment, Club
 
 from apps.core.payment_methods import PayPalPaymentMethod
@@ -137,6 +139,7 @@ class UserRemoval:
         cls.cancel_paypal_billing_agreement(first_payment)
         cls.remove_payments(user)
         cls.remove_profile(user)
+        cls.remove_registration_profile(user)
         cls.remove_user(user)
 
     @classmethod
@@ -171,4 +174,10 @@ class UserRemoval:
     def remove_user(cls, user):
         User.objects.filter(
             username=user.username
+        ).delete()
+
+    @classmethod
+    def remove_registration_profile(cls, user):
+        RegistrationProfile.objects.filter(
+            user__username=user.username
         ).delete()
