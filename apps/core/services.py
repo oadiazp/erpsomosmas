@@ -3,6 +3,7 @@ import logging
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Count, Sum
+from django.utils.timezone import now
 from registration.models import RegistrationProfile
 
 from apps.core.models import Profile, Payment, Club
@@ -140,7 +141,7 @@ class UserRemoval:
         first_payment = Payment.objects.filter(
             profile__user__username=user.username
         ).first()
-        
+
         cls.cancel_paypal_billing_agreement(first_payment)
         cls.remove_user(user)
 
@@ -158,7 +159,8 @@ class UserRemoval:
             settings.PAYPAL_CLIENT_ID,
             settings.PAYPAL_CLIENT_SECRET
         )
-        billing_agreement.cancel()
+        _now = now().strftime('%c')
+        billing_agreement.cancel({"note": f"Canceling the agreement on {_now}"})
 
     @classmethod
     def remove_payments(cls, user):
