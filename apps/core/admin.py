@@ -32,7 +32,10 @@ class ClubFilter(SimpleListFilter):
     def queryset(self, request, queryset):
         value = self.value()
 
-        return queryset.filter(club=value)
+        if value:
+            return queryset.filter(club=value)
+
+        return queryset
 
 
 @admin.register(Profile)

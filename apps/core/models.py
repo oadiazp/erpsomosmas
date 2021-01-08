@@ -48,9 +48,7 @@ class Profile(TimeStampedModel):
 
     user = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
+        on_delete=models.CASCADE
     )
     club = models.ForeignKey(
         'Club',
