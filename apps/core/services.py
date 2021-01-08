@@ -1,3 +1,5 @@
+import logging
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Count, Sum
@@ -7,6 +9,9 @@ from apps.core.models import Profile, Payment, Club
 
 from apps.core.payment_methods import PayPalPaymentMethod
 from apps.reports.models import Move
+
+
+logger = logging.getLogger(__name__)
 
 
 class ReceivePayment:
@@ -136,11 +141,11 @@ class UserRemoval:
             profile__user__username=user.username
         ).first()
         
-        cls.cancel_paypal_billing_agreement(first_payment)
-        cls.remove_payments(user)
-        cls.remove_profile(user)
-        cls.remove_registration_profile(user)
-        cls.remove_user(user)
+        logger.debug(cls.cancel_paypal_billing_agreement(first_payment))
+        logger.debug(cls.remove_payments(user))
+        logger.debug(cls.remove_profile(user))
+        logger.debug(cls.remove_registration_profile(user))
+        logger.debug(cls.remove_user(user))
 
     @classmethod
     def cancel_paypal_billing_agreement(cls, payment):
@@ -160,24 +165,24 @@ class UserRemoval:
 
     @classmethod
     def remove_payments(cls, user):
-        Payment.objects.filter(
+        return Payment.objects.filter(
             profile__user__username=user.username
         ).delete()
 
     @classmethod
     def remove_profile(cls, user):
-        Profile.objects.filter(
+        return Profile.objects.filter(
             user__username=user.username
         ).delete()
 
     @classmethod
     def remove_user(cls, user):
-        User.objects.filter(
+        return User.objects.filter(
             username=user.username
         ).delete()
 
     @classmethod
     def remove_registration_profile(cls, user):
-        RegistrationProfile.objects.filter(
+        return RegistrationProfile.objects.filter(
             user__username=user.username
         ).delete()
