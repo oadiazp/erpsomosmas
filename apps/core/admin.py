@@ -11,6 +11,7 @@ from apps.core.models import (
     MassMail,
     Criteria, Club
 )
+from apps.core.services import UserRemoval
 
 
 class PaymentInline(admin.TabularInline):
@@ -62,12 +63,15 @@ class ProfileAdmin(admin.ModelAdmin):
         PaymentInline,
     ]
     list_filter = [ClubFilter]
-    actions = ('export',)
+    actions = ('export', 'unsuscribe')
+
+    def unsuscribe(self, request, queryset):
+        [UserRemoval.remove(profile.user) for profile in queryset]
 
     def export(self, request, queryset):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = (
-                'attachment; filename="somefilename.csv"'
+                'attachment; filename="profiles.csv"'
         )
         writer = csv.writer(response)
 
