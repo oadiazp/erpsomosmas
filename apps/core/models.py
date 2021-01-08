@@ -46,7 +46,7 @@ class Profile(TimeStampedModel):
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
     city = models.CharField(max_length=100, null=True)
 
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     club = models.ForeignKey(
         'Club',
         null=True,
@@ -158,7 +158,7 @@ class Payment(TimeStampedModel):
     amount = models.FloatField()
     reference = models.CharField(max_length=200)
 
-    profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 
 class Setting(TimeStampedModel):

@@ -141,11 +141,8 @@ class UserRemoval:
             profile__user__username=user.username
         ).first()
         
-        logger.debug(cls.cancel_paypal_billing_agreement(first_payment))
-        logger.debug(cls.remove_payments(user))
-        logger.debug(cls.remove_profile(user))
-        logger.debug(cls.remove_registration_profile(user))
-        logger.debug(cls.remove_user(user))
+        cls.cancel_paypal_billing_agreement(first_payment)
+        cls.remove_user(user)
 
     @classmethod
     def cancel_paypal_billing_agreement(cls, payment):
