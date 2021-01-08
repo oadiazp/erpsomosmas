@@ -46,7 +46,12 @@ class Profile(TimeStampedModel):
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
     city = models.CharField(max_length=100, null=True)
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
     club = models.ForeignKey(
         'Club',
         null=True,
