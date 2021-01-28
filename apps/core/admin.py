@@ -38,6 +38,28 @@ class ClubFilter(SimpleListFilter):
         return queryset
 
 
+class MemberFilter(SimpleListFilter):
+    title = 'Status'
+    parameter_name = 'status'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('members', 'Members',),
+            ('sympathizer', 'Sympathizer',),
+        ]
+
+    def queryset(self, request, queryset):
+        value = self.value()
+
+        if not value:
+            return queryset
+
+        if value == 'members':
+            return queryset.members()
+
+        return queryset.sympathizers()
+
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     search_fields = [

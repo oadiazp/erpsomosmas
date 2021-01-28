@@ -5,7 +5,7 @@ services:
     image: registry.gitlab.com/bajanda/erp:prod
     dns:
       - 8.8.8.8
-      - 9.9.9.9
+      - 8.8.9.9
     networks:
       - traefik
     environment:
@@ -14,7 +14,7 @@ services:
       AWS_REGION: us-east-1
       AWS_S3_BUCKET_NAME: somosmas-management
       AWS_ACCESS_KEY_ID: AKIATJZEF4RNS7H4F72A
-      DB_HOST: somosmas.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
+      DB_HOST: terraform-20210114152710984000000001.crxyk3xu4oxe.us-east-1.rds.amazonaws.com
       DB_USER: postgres
       DB_NAME: erp
       EMAIL_HOST: smtp.sendgrid.net
@@ -33,13 +33,13 @@ services:
         traefik.http.services.erp.loadbalancer.server.port: '80'
 
         traefik.http.routers.erp-https.tls: 'true'
-        traefik.http.routers.erp-https.rule: Host(`erp.somosmascuba.com`)
+        traefik.http.routers.erp-https.rule: Host(`erp.bajanda.live`)
         traefik.http.routers.erp-https.entrypoints: https
         traefik.http.routers.erp-https.service: erp
         traefik.http.routers.erp-https.tls.certresolver: letsencrypt
 
         traefik.http.routers.erp-http.entrypoints: http
-        traefik.http.routers.erp-http.rule: Host(`erp.somosmascuba.com`)
+        traefik.http.routers.erp-http.rule: Host(`erp.bajanda.live`)
         traefik.http.routers.erp-http.service: erp
         traefik.http.routers.erp-http.middlewares: erp-https-redirect
         traefik.http.middlewares.erp-https-redirect.redirectscheme.scheme: https

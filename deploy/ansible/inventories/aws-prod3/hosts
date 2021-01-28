@@ -1,9 +1,0 @@
-[ds-master]
-bj-p3-n01 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
-[ds-workers]
-bj-p3-n02 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
-bj-p3-n03 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
-bj-p3-n04 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
-bj-p3-n05 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
-
-    
