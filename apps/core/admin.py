@@ -38,7 +38,7 @@ class ClubFilter(SimpleListFilter):
         return queryset
 
 
-class MemberFilter(SimpleListFilter):
+class StatusFilter(SimpleListFilter):
     title = 'Status'
     parameter_name = 'status'
 
@@ -87,7 +87,7 @@ class ProfileAdmin(admin.ModelAdmin):
     inlines = [
         PaymentInline,
     ]
-    list_filter = [ClubFilter]
+    list_filter = [ClubFilter, StatusFilter]
     actions = ('export', 'unsuscribe')
 
     def unsuscribe(self, request, queryset):
