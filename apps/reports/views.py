@@ -9,6 +9,7 @@ from django.utils.timezone import now
 from django.views import View
 from django.views.generic import TemplateView, FormView
 
+from apps.core.models import Profile
 from apps.core.services import IncomesGetter, ExpensesGetter
 from apps.reports.forms import FinancesForm
 from apps.reports.services import Members
@@ -19,7 +20,7 @@ class MembersView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['amount'] = Members.amount()
+        context['amount'] = Profile.objects.members().count()
 
         return context
 
