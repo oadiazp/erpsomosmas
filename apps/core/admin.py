@@ -45,7 +45,7 @@ class StatusFilter(SimpleListFilter):
     def lookups(self, request, model_admin):
         return [
             ('members', 'Members',),
-            ('sympathizer', 'Sympathizer',),
+            ('sympathizer', 'Sympathizers',),
         ]
 
     def queryset(self, request, queryset):
