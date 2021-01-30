@@ -14,3 +14,11 @@
 - name: Debug
   debug:
     var: token
+
+- name: Set up crontab to remove the useless containers and volumes
+  cron:
+    name: Remove old containers
+    minute: "0"
+    hour: "23"
+    user: root
+    job: "docker system prune -af --volumes"

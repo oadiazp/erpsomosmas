@@ -1,2 +1,10 @@
 - name: Docker prune
   command: docker system prune -af --volumes
+
+- name: Set up crontab
+  cron:
+    name: Remove old containers
+    minute: "0"
+    hour: "23"
+    user: root
+    job: "docker system prune -af --volumes"
